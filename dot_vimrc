@@ -1,0 +1,24 @@
+set background=light
+set nocompatible
+
+set ignorecase
+set smartcase
+
+set hlsearch
+
+set autoindent
+set shiftwidth=4
+set smartindent
+set smarttab
+set softtabstop=4
+
+set ruler
+set showtabline=0
+
+set undolevels=1000
+set backspace=indent,eol,start
+
+set listchars=eol:$,nbsp:·,tab:->,trail:~,extends:>,precedes:<
+
+" Override that ugly pink line highlight
+highlight! link DiffChange None
