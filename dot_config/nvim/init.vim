@@ -3,6 +3,8 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+set nu
+
 " vim-plug
 call plug#begin(stdpath('data') . '/plugged')
 

@@ -126,8 +126,8 @@ if which tmux >/dev/null 2>&1; then
 	test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
 
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR=nvim
 
 exec fish
 
