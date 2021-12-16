@@ -4,9 +4,13 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 set nu
+set scrolloff=5
 
 " vim-plug
 call plug#begin(stdpath('data') . '/plugged')
+
+" Colorscheme
+Plug 'Mofiqul/dracula.nvim'
 
 " Syntax support
 Plug 'sheerun/vim-polyglot'
@@ -23,6 +27,9 @@ Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 Plug 'weirongxu/coc-explorer'
 Plug 'bmeneg/coc-perl', {'do': 'yarn install && yarn build'}
 Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml'
+Plug 'neoclide/coc-json'
+Plug 'iamcco/coc-diagnostic'
 
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
@@ -53,8 +60,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endi
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:airline_theme='violet'
-
-
+colorscheme dracula 
 
 "" Keybinds
 " change the leader key from "\" to "'"
