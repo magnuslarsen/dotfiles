@@ -26,7 +26,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
-Plug 'weirongxu/coc-explorer'
 Plug 'bmeneg/coc-perl', {'do': 'yarn install && yarn build'}
 Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml'
@@ -40,6 +39,8 @@ else
 endif
 
 call plug#end()
+
+let g:coc_filetype_map = {'yaml.ansible': 'ansible'}
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
