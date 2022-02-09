@@ -21,6 +21,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
