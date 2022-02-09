@@ -1,6 +1,7 @@
 {
 	"yaml.format.enable": true,
 	"yaml.customTags": ["!vault"],
+	"ansible.ansibleLint.arguments": "-x yaml",
 	"diagnostic-languageserver.filetypes": {
 		// lint `sh` (includes `bash`) files
 		"sh": "shellcheck"
