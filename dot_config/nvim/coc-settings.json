@@ -1,7 +1,12 @@
 {
 	"yaml.format.enable": true,
-	"yaml.customTags": ["!vault"],
-	"ansible.ansibleLint.arguments": "-x yaml",
+	"yaml.customTags": [
+		"!vault"
+	],
+	"yaml.schemaStore.enable": true,
+	"pylsp.builtin.enableInstallPylspMypy": false, // for now
+	"pylsp.builtin.enableInstallPylsIsort": true,
+	"pylsp.builtin.enableInstallPythonLspBlack": true,
 	"diagnostic-languageserver.filetypes": {
 		// lint `sh` (includes `bash`) files
 		"sh": "shellcheck"

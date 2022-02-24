@@ -15,9 +15,6 @@ Plug 'Mofiqul/dracula.nvim'
 " Syntax support
 Plug 'sheerun/vim-polyglot'
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -26,7 +23,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
-Plug 'bmeneg/coc-perl', {'do': 'yarn install && yarn build'}
 Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml'
 Plug 'neoclide/coc-json'
@@ -50,17 +46,6 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-
-
-" Auto start NERD tree when opening a directory
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
-
-" Auto start NERD tree if no files are specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
-
-" Let quit work as expected if after entering :q the only window left open is NERD Tree itself
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let g:airline_theme='violet'
 colorscheme dracula 
@@ -94,12 +79,27 @@ endif
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+nmap <silent>f  <Plug>(coc-format)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
@@ -117,8 +117,3 @@ command! -nargs=0 Format :call CocAction('format')
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Ctrl + space + space
-nnoremap <silent> <Space> :NERDTreeToggle<CR>
