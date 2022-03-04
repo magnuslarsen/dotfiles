@@ -9,6 +9,9 @@ set scrolloff=5
 " vim-plug
 call plug#begin(stdpath('data') . '/plugged')
 
+" GPG {de,en}crypt support
+Plug 'jamessan/vim-gnupg'
+
 " Colorscheme
 Plug 'Mofiqul/dracula.nvim'
 
@@ -27,6 +30,8 @@ Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml'
 Plug 'neoclide/coc-json'
 Plug 'iamcco/coc-diagnostic'
+Plug 'xiyaowong/coc-lightbulb-'
+
 
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
@@ -51,8 +56,8 @@ let g:airline_theme='violet'
 colorscheme dracula 
 
 "" Keybinds
-" change the leader key from "\" to "'"
-let mapleader="'"
+" change the leader key from "\" to " "
+let mapleader=" "
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -99,21 +104,17 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Formatting selected code.
-nmap <silent>f  <Plug>(coc-format)
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <silent>ff  <Plug>(coc-format)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>fa  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>fa  <Plug>(coc-fix-current)
+
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
