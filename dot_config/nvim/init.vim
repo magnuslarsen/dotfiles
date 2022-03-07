@@ -27,10 +27,11 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-yaml'
-Plug 'neoclide/coc-json'
-Plug 'iamcco/coc-diagnostic'
-Plug 'xiyaowong/coc-lightbulb-'
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'iamcco/coc-diagnostic', {'do': 'yarn install --frozen-lockfile'}
+Plug 'xiyaowong/coc-lightbulb-', {'do': 'yarn install --frozen-lockfile'}
+Plug 'weirongxu/coc-calc', {'do': 'yarn install --frozen-lockfile'}
 
 
 if has('nvim') || has('patch-8.0.902')
@@ -109,7 +110,7 @@ nmap <silent>ff  <Plug>(coc-format)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>fa  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>fa  <Plug>(coc-fix-current)
+nmap <leader>fl  <Plug>(coc-fix-current)
 
 
 " Add `:Format` command to format current buffer.
