@@ -27,6 +27,7 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
+Plug 'yaegassy/coc-pydocstring', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'iamcco/coc-diagnostic', {'do': 'yarn install --frozen-lockfile'}
@@ -41,6 +42,9 @@ else
 endif
 
 call plug#end()
+
+" Disable spell checking
+setlocal nospell
 
 let g:coc_filetype_map = {'yaml.ansible': 'ansible'}
 
@@ -109,8 +113,8 @@ nmap <silent>ff  <Plug>(coc-format)
 
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>fa  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>fl  <Plug>(coc-fix-current)
+nmap <leader>fl <Plug>(coc-codeaction-line)
+xmap <leader>fl <Plug>(coc-codeaction-selected)
 
 
 " Add `:Format` command to format current buffer.
