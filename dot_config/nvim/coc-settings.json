@@ -4,6 +4,7 @@
 		"!vault"
 	],
 	"yaml.schemaStore.enable": true,
+	"ansible.ansible.useFullyQualifiedCollectionNames": false,
 	"pylsp.builtin.enableInstallPylspMypy": false, // for now
 	"pylsp.builtin.enableInstallPylsIsort": true,
 	"pylsp.builtin.enableInstallPythonLspBlack": true,
