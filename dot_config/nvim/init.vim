@@ -25,6 +25,7 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " CoC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-ansible', {'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-pylsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'yaegassy/coc-pydocstring', {'do': 'yarn install --frozen-lockfile'}

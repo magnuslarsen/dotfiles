@@ -17,6 +17,8 @@
 		"pylint",
 		"rope"
 	],
+	"solargraph.formatting": true,
+	"solargraph.diagnostics": true,
 	"diagnostic-languageserver.enable": true,
 	"diagnostic-languageserver.mergeConfig": true,
 	"diagnostic-languageserver.filetypes": {
