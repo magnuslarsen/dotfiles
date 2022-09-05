@@ -1,7 +1,8 @@
 {
 	"yaml.format.enable": true,
 	"yaml.customTags": [
-		"!vault"
+		"!vault",
+		"!lambda"
 	],
 	"yaml.schemaStore.enable": true,
 	"ansible.ansible.useFullyQualifiedCollectionNames": false,
