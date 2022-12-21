@@ -23,6 +23,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
+" Treesitter support
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'mmarchini/bpftrace.vim'
 
 " CoC

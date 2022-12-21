@@ -23,7 +23,7 @@
 	"diagnostic-languageserver.enable": true,
 	"diagnostic-languageserver.mergeConfig": true,
 	"diagnostic-languageserver.filetypes": {
-		"sh": "shellcheck",
+		"sh": "shellcheck -x",
 		"systemd": "systemd-analyze",
 		"fish": "fish"
 	},
@@ -61,7 +61,12 @@
 			"filetypes": [
 				"haskell",
 				"lhaskell"
-			]
+			],
+			"settings": {
+				"haskell": {
+					"formattingProvider": "ormolu"
+				}
+			}
 		}
 	}
 }
