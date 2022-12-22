@@ -32,7 +32,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
 Plug 'mmarchini/bpftrace.vim'
@@ -49,12 +49,8 @@ Plug 'iamcco/coc-diagnostic', {'do': 'yarn install --frozen-lockfile'}
 Plug 'xiyaowong/coc-lightbulb-', {'do': 'yarn install --frozen-lockfile'}
 Plug 'weirongxu/coc-calc', {'do': 'yarn install --frozen-lockfile'}
 
-
-if has('nvim') || has('patch-8.0.902')
-  Plug 'mhinz/vim-signify'
-else
-  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-endif
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'mhinz/vim-signify'
 
 call plug#end()
 
@@ -152,6 +148,18 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " File explorer settings
 nmap <silent>fe :NvimTreeToggle<CR>
 
+" Gitsigns config
+lua << EOF
+require('gitsigns').setup {
+  current_line_blame = true,
+  current_line_blame_formatter = '<author> - <author_time:%Y-%m-%d> - <summary>',
+  current_line_blame_opts = {
+    virt_text_pos = 'right_align',
+  },
+  signcolumn = false,
+}
+EOF
+
 " Telescope settings
 lua << EOF
 require('telescope').setup()
@@ -189,3 +197,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end
 })
 EOF
+
