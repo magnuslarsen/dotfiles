@@ -30,6 +30,11 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
 Plug 'nvim-tree/nvim-tree.lua'
 
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.0' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+
 Plug 'mmarchini/bpftrace.vim'
 
 " CoC
@@ -146,7 +151,15 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " File explorer settings
 nmap <silent>fe :NvimTreeToggle<CR>
-xmap <silent>fe :NvimTreeToggle<CR>
+
+" Telescope settings
+lua << EOF
+require('telescope').setup()
+require('telescope').load_extension('fzf')
+EOF
+
+nnoremap <silent>fd <cmd>Telescope find_files<cr>
+nnoremap <silent>fg <cmd>Telescope live_grep<cr>
 
 lua << EOF
 -- disable netrw at the very start of your init.lua (strongly advised)
@@ -162,6 +175,10 @@ require("nvim-tree").setup({
     dotfiles = true,
 		custom = { "^.git$" }
   },
+  live_filter = {
+    prefix = "[FILTER]: ",
+    always_show_folders = false,
+  }
 })
 vim.api.nvim_create_autocmd("BufEnter", {
   nested = true,
