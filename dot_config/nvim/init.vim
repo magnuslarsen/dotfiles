@@ -145,8 +145,8 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " File explorer settings
-nmap <leader>fe :NvimTreeToggle<CR>
-xmap <leader>fe :NvimTreeToggle<CR>
+nmap <silent>fe :NvimTreeToggle<CR>
+xmap <silent>fe :NvimTreeToggle<CR>
 
 lua << EOF
 -- disable netrw at the very start of your init.lua (strongly advised)
