@@ -61,6 +61,8 @@ call plug#end()
 setlocal nospell
 
 let g:coc_filetype_map = {'yaml.ansible': 'ansible'}
+" stupid sls files not being detected
+au BufNewFile,BufRead,BufReadPost *.sls set ft=yaml
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
