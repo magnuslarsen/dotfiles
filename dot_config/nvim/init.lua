@@ -11,7 +11,7 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' }) -- newschool s
 Plug('nvim-tree/nvim-web-devicons') -- more icons
 Plug('nvim-tree/nvim-tree.lua') -- file explorer
 Plug('nvim-lua/plenary.nvim') -- nvim stuff
-Plug('nvim-telescope/telescope.nvim', { branch = '0.1.0' }) -- telescope
+Plug('nvim-telescope/telescope.nvim', { branch = '0.1.x' }) -- telescope
 Plug('nvim-telescope/telescope-fzf-native.nvim',
     { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }) -- fzf for telescope
 Plug('sindrets/diffview.nvim') -- git merge-conflicts
