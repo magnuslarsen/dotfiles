@@ -160,7 +160,7 @@ vim.api.nvim_create_autocmd("BufEnter",
             end
         end
     })
-keyset("n", "fe", ":NvimTreeToggle", { silent = true })
+keyset("n", "fe", ":NvimTreeToggle<CR>", { silent = true })
 
 -- Gitsigns
 require('gitsigns').setup {
