@@ -30,6 +30,7 @@ Plug('xiyaowong/coc-sumneko-lua', { ['do'] = 'yarn install --frozen-lockfile' })
 Plug('yaegassy/coc-ansible', { ['do'] = 'yarn install --frozen-lockfile' })
 Plug('yaegassy/coc-pydocstring', { ['do'] = 'yarn install --frozen-lockfile' })
 Plug('yaegassy/coc-pylsp', { ['do'] = 'yarn install --frozen-lockfile' })
+Plug('weirongxu/coc-calc', { ['do'] = 'yarn install --frozen-lockfile' })
 vim.call('plug#end')
 
 -- all the vim options
@@ -120,6 +121,10 @@ keyset("n", "db", "<Plug>(coc-diagnostic-prev)", { silent = true })
 
 -- Symbol renaming
 keyset("n", "<leader>rn", "<Plug>(coc-rename)", { silent = true })
+
+-- Calculator
+keyset("n", "<leader>cr", "<Plug>(coc-calc-result-replace)", { silent = true })
+keyset("n", "<leader>ca", "<Plug>(coc-calc-result-append)", { silent = true })
 
 -- Formatting code
 keyset("n", "fs", "<Plug>(coc-format-selected)", { silent = true })
