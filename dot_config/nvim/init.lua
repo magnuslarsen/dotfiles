@@ -18,6 +18,7 @@ Plug('sindrets/diffview.nvim') -- git merge-conflicts
 Plug('mmarchini/bpftrace.vim') -- bpftrace support
 Plug('lewis6991/gitsigns.nvim') -- git signs
 Plug('mhinz/vim-signify') -- more symbols
+Plug('rafamadriz/friendly-snippets') -- snippets
 
 -- CoC stuff
 Plug('iamcco/coc-diagnostic', { ['do'] = 'yarn install --frozen-lockfile' })
@@ -31,12 +32,15 @@ Plug('yaegassy/coc-ansible', { ['do'] = 'yarn install --frozen-lockfile' })
 Plug('yaegassy/coc-pydocstring', { ['do'] = 'yarn install --frozen-lockfile' })
 Plug('yaegassy/coc-pylsp', { ['do'] = 'yarn install --frozen-lockfile' })
 Plug('weirongxu/coc-calc', { ['do'] = 'yarn install --frozen-lockfile' })
+Plug('neoclide/coc-snippets', { ['do'] = 'yarn install --frozen-lockfile' })
 vim.call('plug#end')
 
 -- all the vim options
 vim.cmd [[ colorscheme dracula ]]
 vim.g.airline_theme = "violet"
 vim.g.coc_filetype_map = { ['yaml.ansible'] = 'ansible' }
+vim.g.coc_snippet_next = "<tab>"
+vim.g.coc_snippet_prev = "<s-tab>"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
@@ -78,7 +82,7 @@ keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_spa
 keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 -- Use <c-space> to trigger completion
-keyset("i", "<c-space>", "coc#refresh()", { silent = true, expr = true })
+keyset("i", "<c-space>", "coc#refresh()", opts)
 
 -- Use K to show documentation in preview window
 function _G.show_docs()
