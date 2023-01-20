@@ -186,7 +186,8 @@ require('telescope').setup()
 require('telescope').load_extension('fzf')
 local telescope = require('telescope.builtin')
 keyset("n", "fd", telescope.find_files, {})
-keyset("n", "fr", telescope.live_grep, {})
+keyset("n", "rg", telescope.live_grep, {})
+keyset("n", "gw", telescope.grep_string, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
