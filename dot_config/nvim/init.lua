@@ -3,7 +3,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 Plug('jamessan/vim-gnupg') -- gpg {en,de}crypting
 Plug('Mofiqul/dracula.nvim') -- colorscheme
-Plug('sheerun/vim-polyglot') -- oldschool syntax highlighting
+-- Plug('sheerun/vim-polyglot') -- oldschool syntax highlighting
 Plug('vim-airline/vim-airline') -- status bar
 Plug('vim-airline/vim-airline-themes')
 Plug('mg979/vim-visual-multi', { branch = 'master' }) -- multi cursor
@@ -67,6 +67,9 @@ vim.opt.softtabstop = 2
 vim.opt.undolevels = 1000
 vim.opt.writebackup = false
 vim.wo.number = true
+
+-- autocmd for .sls files (they are just yaml... for now)
+vim.cmd [[ au BufRead,BufNewFile *.sls set filetype=yaml ]]
 
 -- CoC config
 local keyset = vim.keymap.set
