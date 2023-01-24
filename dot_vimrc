@@ -4,7 +4,7 @@ set nocompatible
 set ignorecase
 set smartcase
 
-set hlsearch
+set incsearch
 
 set autoindent
 set shiftwidth=4
