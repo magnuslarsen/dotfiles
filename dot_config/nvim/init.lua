@@ -13,7 +13,7 @@ Plug('nvim-tree/nvim-tree.lua') -- file explorer
 Plug('nvim-lua/plenary.nvim') -- nvim stuff
 Plug('nvim-telescope/telescope.nvim', { branch = '0.1.x' }) -- telescope
 Plug('nvim-telescope/telescope-fzf-native.nvim',
-    { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }) -- fzf for telescope
+	{ ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }) -- fzf for telescope
 Plug('sindrets/diffview.nvim') -- git merge-conflicts
 Plug('mmarchini/bpftrace.vim') -- bpftrace support
 Plug('lewis6991/gitsigns.nvim') -- git signs
@@ -75,8 +75,8 @@ vim.cmd [[ au BufRead,BufNewFile *.sls set filetype=yaml ]]
 local keyset = vim.keymap.set
 -- Autocomplete
 function _G.check_back_space()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+	local col = vim.fn.col('.') - 1
+	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
 
 -- Use Tab for trigger completion with characters ahead and navigate, <CR> to accept
@@ -89,14 +89,14 @@ keyset("i", "<c-space>", "coc#refresh()", opts)
 
 -- Use K to show documentation in preview window
 function _G.show_docs()
-    local cw = vim.fn.expand('<cword>')
-    if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
-        vim.api.nvim_command('h ' .. cw)
-    elseif vim.api.nvim_eval('coc#rpc#ready()') then
-        vim.fn.CocActionAsync('doHover')
-    else
-        vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
-    end
+	local cw = vim.fn.expand('<cword>')
+	if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
+		vim.api.nvim_command('h ' .. cw)
+	elseif vim.api.nvim_eval('coc#rpc#ready()') then
+		vim.fn.CocActionAsync('doHover')
+	else
+		vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+	end
 end
 
 keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', { silent = true })
@@ -114,9 +114,9 @@ local opts = { silent = true, nowait = true, expr = true }
 keyset("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
 keyset("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 keyset("i", "<C-f>",
-    'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+	'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
 keyset("i", "<C-b>",
-    'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
+	'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
 keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
 keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 
@@ -145,43 +145,47 @@ keyset("n", "rl", "<Plug>(coc-codeaction-refactor)", { silent = true })
 -- Highlight the symbol and its references on a CursorHold event (cursor is idle)
 vim.api.nvim_create_augroup("CocGroup", {})
 vim.api.nvim_create_autocmd("CursorHold", {
-    group = "CocGroup",
-    command = "silent call CocActionAsync('highlight')",
-    desc = "Highlight symbol under cursor on CursorHold"
+	group = "CocGroup",
+	command = "silent call CocActionAsync('highlight')",
+	desc = "Highlight symbol under cursor on CursorHold"
 })
 
+
+-- Other keysets
+keyset("v", "Y", [["+y"]]) -- Copy to system clipboard
+keyset({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
 
 -- File explorer
 require("nvim-tree").setup({
-    sort_by = "case_sensitive",
-    filters = {
-        dotfiles = true,
-        custom = { "^.git$" }
-    },
-    live_filter = {
-        prefix = "[FILTER]: ",
-        always_show_folders = false,
-    }
+	sort_by = "case_sensitive",
+	filters = {
+		dotfiles = true,
+		custom = { "^.git$" }
+	},
+	live_filter = {
+		prefix = "[FILTER]: ",
+		always_show_folders = false,
+	}
 })
 vim.api.nvim_create_autocmd("BufEnter",
-    {
-        nested = true,
-        callback = function()
-            if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
-                vim.cmd "quit"
-            end
-        end
-    })
+	{
+		nested = true,
+		callback = function()
+			if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+				vim.cmd "quit"
+			end
+		end
+	})
 keyset("n", "fe", ":NvimTreeToggle<CR>", { silent = true })
 
 -- Gitsigns
 require('gitsigns').setup {
-    current_line_blame = true,
-    current_line_blame_formatter = '<author> - <author_time:%Y-%m-%d> - <summary>',
-    current_line_blame_opts = {
-        virt_text_pos = 'right_align',
-    },
-    signcolumn = false,
+	current_line_blame = true,
+	current_line_blame_formatter = '<author> - <author_time:%Y-%m-%d> - <summary>',
+	current_line_blame_opts = {
+		virt_text_pos = 'right_align',
+	},
+	signcolumn = false,
 }
 
 -- Telescope
@@ -194,7 +198,7 @@ keyset("n", "gw", telescope.grep_string, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'lua', 'make', 'markdown', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml', 'dockerfile',
-        'comment', 'diff', 'fish', 'regex' },
-    auto_install = true
+	ensure_installed = { 'lua', 'make', 'markdown', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml', 'dockerfile',
+		'comment', 'diff', 'fish', 'regex' },
+	auto_install = true
 }
