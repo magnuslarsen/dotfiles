@@ -3,7 +3,6 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 Plug('jamessan/vim-gnupg') -- gpg {en,de}crypting
 Plug('Mofiqul/dracula.nvim') -- colorscheme
--- Plug('sheerun/vim-polyglot') -- oldschool syntax highlighting
 Plug('vim-airline/vim-airline') -- status bar
 Plug('vim-airline/vim-airline-themes')
 Plug('mg979/vim-visual-multi', { branch = 'master' }) -- multi cursor
@@ -19,6 +18,10 @@ Plug('mmarchini/bpftrace.vim') -- bpftrace support
 Plug('lewis6991/gitsigns.nvim') -- git signs
 Plug('mhinz/vim-signify') -- more symbols
 Plug('rafamadriz/friendly-snippets') -- snippets
+
+-- Oldschool syntax highlighting where treesitter falls short
+-- Plug('sheerun/vim-polyglot') -- oldschool syntax highlighting
+Plug('blankname/vim-fish')
 
 -- CoC stuff
 Plug('iamcco/coc-diagnostic', { ['do'] = 'yarn install --frozen-lockfile' })
