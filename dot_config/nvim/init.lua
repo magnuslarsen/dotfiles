@@ -12,7 +12,8 @@ Plug('nvim-tree/nvim-tree.lua') -- file explorer
 Plug('nvim-lua/plenary.nvim') -- nvim stuff
 Plug('nvim-telescope/telescope.nvim', { branch = '0.1.x' }) -- telescope
 Plug('nvim-telescope/telescope-fzf-native.nvim',
-	{ ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }) -- fzf for telescope
+	{
+		['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }) -- fzf for telescope
 Plug('sindrets/diffview.nvim') -- git merge-conflicts
 Plug('mmarchini/bpftrace.vim') -- bpftrace support
 Plug('lewis6991/gitsigns.nvim') -- git signs
@@ -22,6 +23,7 @@ Plug('rafamadriz/friendly-snippets') -- snippets
 -- Oldschool syntax highlighting where treesitter falls short
 -- Plug('sheerun/vim-polyglot') -- oldschool syntax highlighting
 Plug('blankname/vim-fish')
+Plug('preservim/vim-markdown')
 
 -- CoC stuff
 Plug('iamcco/coc-diagnostic', { ['do'] = 'yarn install --frozen-lockfile' })
@@ -42,6 +44,7 @@ vim.call('plug#end')
 vim.cmd [[ colorscheme dracula ]]
 vim.g.airline_theme = "violet"
 vim.g.coc_filetype_map = { ['yaml.ansible'] = 'ansible' }
+vim.g.vim_markdown_folding_disabled = 1
 vim.g.coc_snippet_next = "<tab>"
 vim.g.coc_snippet_prev = "<s-tab>"
 vim.g.loaded_netrw = 1
@@ -201,7 +204,7 @@ keyset("n", "gw", telescope.grep_string, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { 'lua', 'make', 'markdown', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml', 'dockerfile',
+	ensure_installed = { 'lua', 'make', 'markdown', 'markdown_inline', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml', 'dockerfile',
 		'comment', 'diff', 'fish', 'regex' },
 	auto_install = true
 }
