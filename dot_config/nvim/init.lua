@@ -75,7 +75,21 @@ vim.opt.writebackup = false
 vim.wo.number = true
 
 -- autocmd for .sls files (they are just yaml... for now)
-vim.cmd [[ au BufRead,BufNewFile *.sls set filetype=yaml ]]
+vim.filetype.add({
+	pattern = {
+		-- Force filetype on Novozymes log files in the Debian changelog format
+		["~/zgit/adm/log/.*%.log"] = "debchangelog",
+
+		-- Set filetype to yaml.ansible for known Ansible repositories in order to run the LSP server
+		["~/zgit/sdma%-ansible/.*%.ya?ml"] = "yaml.ansible",
+
+		-- Set filetype on Glab issue notes (comments)
+		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
+
+		-- Set filtype sls (saltstack) files
+		[".*%.sls"] = "yaml"
+	}
+})
 
 -- CoC config
 local keyset = vim.keymap.set
