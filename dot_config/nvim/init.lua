@@ -220,5 +220,9 @@ keyset("n", "gw", telescope.grep_string, {})
 require('nvim-treesitter.configs').setup {
 	ensure_installed = { 'lua', 'make', 'markdown', 'markdown_inline', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml', 'dockerfile',
 		'comment', 'diff', 'fish', 'regex' },
-	auto_install = true
+	auto_install = true,
+	highlight = {
+		enable = true,
+		disable = {},
+	}
 }
