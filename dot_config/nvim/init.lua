@@ -20,11 +20,6 @@ Plug('lewis6991/gitsigns.nvim') -- git signs
 Plug('mhinz/vim-signify') -- more symbols
 Plug('rafamadriz/friendly-snippets') -- snippets
 
--- Oldschool syntax highlighting where treesitter falls short
--- Plug('sheerun/vim-polyglot') -- oldschool syntax highlighting
-Plug('blankname/vim-fish')
-Plug('preservim/vim-markdown')
-
 -- CoC stuff
 Plug('iamcco/coc-diagnostic', { ['do'] = 'yarn install --frozen-lockfile' })
 Plug('neoclide/coc-json', { ['do'] = 'yarn install --frozen-lockfile' })
@@ -44,7 +39,6 @@ vim.call('plug#end')
 vim.cmd [[ colorscheme dracula ]]
 vim.g.airline_theme = "violet"
 vim.g.coc_filetype_map = { ['yaml.ansible'] = 'ansible' }
-vim.g.vim_markdown_folding_disabled = 1
 vim.g.coc_snippet_next = "<tab>"
 vim.g.coc_snippet_prev = "<s-tab>"
 vim.g.loaded_netrw = 1
