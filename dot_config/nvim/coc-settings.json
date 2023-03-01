@@ -24,13 +24,24 @@
 	"diagnostic-languageserver.enable": true,
 	"diagnostic-languageserver.mergeConfig": true,
 	"diagnostic-languageserver.filetypes": {
-		"sh": "shellcheck -x",
+		"sh": "shellcheck",
 		"systemd": "systemd-analyze",
 		"fish": "fish"
 	},
 	"diagnostic-languageserver.formatFiletypes": {
 		"sh": "shfmt",
 		"fish": "fish_indent"
+	},
+	"diagnostic-languageserver.linters": {
+		"shellcheck": {
+			"command": "shellcheck",
+			"args": [
+				"-x",
+				"--format",
+				"json1",
+				"-"
+			]
+		}
 	},
 	"diagnostic-languageserver.formatters": {
 		// define our formatter so that we can reference it from
