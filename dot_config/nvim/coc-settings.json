@@ -10,15 +10,8 @@
 	"pylsp.builtin.enableInstallPylspMypy": false, // for now
 	"pylsp.builtin.enableInstallPylsIsort": true,
 	"pylsp.builtin.enableInstallPythonLspBlack": true,
-	"pylsp.builtin.installExtrasArgs": [
-		"flake8",
-		"mccabe",
-		"pycodestyle",
-		"pydocstyle",
-		"pyflakes",
-		"pylint",
-		"rope"
-	],
+	"pylsp.builtin.enableInstallPythonLspRuff": true,
+	"pylsp.builtin.installExtrasArgs": ["ruff"],
 	"solargraph.formatting": true,
 	"solargraph.diagnostics": true,
 	"diagnostic-languageserver.enable": true,
