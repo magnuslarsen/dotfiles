@@ -1,24 +1,24 @@
 -- vimplug install
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
-Plug('jamessan/vim-gnupg') -- gpg {en,de}crypting
-Plug('Mofiqul/dracula.nvim') -- colorscheme
-Plug('vim-airline/vim-airline') -- status bar
+Plug('jamessan/vim-gnupg')                                        -- gpg {en,de}crypting
+Plug('Mofiqul/dracula.nvim')                                      -- colorscheme
+Plug('vim-airline/vim-airline')                                   -- status bar
 Plug('vim-airline/vim-airline-themes')
-Plug('mg979/vim-visual-multi', { branch = 'master' }) -- multi cursor
+Plug('mg979/vim-visual-multi', { branch = 'master' })             -- multi cursor
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' }) -- newschool syntax
-Plug('nvim-tree/nvim-web-devicons') -- more icons
-Plug('nvim-tree/nvim-tree.lua') -- file explorer
-Plug('nvim-lua/plenary.nvim') -- nvim stuff
-Plug('nvim-telescope/telescope.nvim', { branch = '0.1.x' }) -- telescope
+Plug('nvim-tree/nvim-web-devicons')                               -- more icons
+Plug('nvim-tree/nvim-tree.lua')                                   -- file explorer
+Plug('nvim-lua/plenary.nvim')                                     -- nvim stuff
+Plug('nvim-telescope/telescope.nvim', { branch = '0.1.x' })       -- telescope
 Plug('nvim-telescope/telescope-fzf-native.nvim',
 	{
 		['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }) -- fzf for telescope
-Plug('sindrets/diffview.nvim') -- git merge-conflicts
-Plug('mmarchini/bpftrace.vim') -- bpftrace support
-Plug('lewis6991/gitsigns.nvim') -- git signs
-Plug('mhinz/vim-signify') -- more symbols
-Plug('rafamadriz/friendly-snippets') -- snippets
+Plug('sindrets/diffview.nvim')                                                                                                               -- git merge-conflicts
+Plug('mmarchini/bpftrace.vim')                                                                                                               -- bpftrace support
+Plug('lewis6991/gitsigns.nvim')                                                                                                              -- git signs
+Plug('mhinz/vim-signify')                                                                                                                    -- more symbols
+Plug('rafamadriz/friendly-snippets')                                                                                                         -- snippets
 
 -- CoC stuff
 Plug('iamcco/coc-diagnostic', { ['do'] = 'yarn install --frozen-lockfile' })
@@ -68,20 +68,20 @@ vim.opt.undolevels = 1000
 vim.opt.writebackup = false
 vim.wo.number = true
 
--- autocmd for .sls files (they are just yaml... for now)
 vim.filetype.add({
+	filename = {
+		-- Set filetype to yaml for gitlab-ci files
+		[".gitlab-ci.yml"] = { "yaml", { priority = 10 } }
+	},
 	pattern = {
 		-- Force filetype on Novozymes log files in the Debian changelog format
 		["~/zgit/adm/log/.*%.log"] = "debchangelog",
-
 		-- Set filetype to yaml.ansible for known Ansible repositories in order to run the LSP server
-		["~/zgit/sdma%-ansible/.*%.ya?ml"] = "yaml.ansible",
-
+		["~/zgit/sdma%-ansible/.*%.ya?ml"] = { "yaml.ansible", { priority = 0 } },
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
-
 		-- Set filtype sls (saltstack) files
-		[".*%.sls"] = "yaml"
+		[".*%.sls"] = "yaml",
 	}
 })
 
@@ -166,7 +166,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 
 
 -- Other keysets
-keyset("v", "Y", [["+y"]]) -- Copy to system clipboard
+keyset("v", "Y", [["+y"]])             -- Copy to system clipboard
 keyset({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
 
 -- File explorer
@@ -212,7 +212,8 @@ keyset("n", "gw", telescope.grep_string, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { 'lua', 'make', 'markdown', 'markdown_inline', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml', 'dockerfile',
+	ensure_installed = { 'lua', 'make', 'markdown', 'markdown_inline', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml',
+		'dockerfile',
 		'comment', 'diff', 'fish', 'regex' },
 	auto_install = true,
 	highlight = {
