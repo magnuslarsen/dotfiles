@@ -11,7 +11,10 @@
 	"pylsp.builtin.enableInstallPylsIsort": true,
 	"pylsp.builtin.enableInstallPythonLspBlack": true,
 	"pylsp.builtin.enableInstallPythonLspRuff": true,
-	"pylsp.builtin.installExtrasArgs": ["ruff"],
+	"pylsp.builtin.installExtrasArgs": [
+		"ruff"
+	],
+	"pylsp.plugins.ruff.extendSelect": ["A"],
 	"solargraph.formatting": true,
 	"solargraph.diagnostics": true,
 	"diagnostic-languageserver.enable": true,
