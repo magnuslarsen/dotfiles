@@ -12,9 +12,13 @@
 	"pylsp.builtin.enableInstallPythonLspBlack": true,
 	"pylsp.builtin.enableInstallPythonLspRuff": true,
 	"pylsp.builtin.installExtrasArgs": [
-		"ruff"
+		"ruff",
+		"click",
+		"requests"
 	],
-	"pylsp.plugins.ruff.extendSelect": ["A"],
+	"pylsp.plugins.ruff.extendSelect": [
+		"A"
+	],
 	"solargraph.formatting": true,
 	"solargraph.diagnostics": true,
 	"diagnostic-languageserver.enable": true,
@@ -77,5 +81,5 @@
 			}
 		}
 	},
-	"Lua.telemetry.enable": false
+	"snippets.ultisnips.pythonPrompt": false
 }
