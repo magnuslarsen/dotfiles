@@ -154,6 +154,7 @@ vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
 
 -- Code actions
 keyset("n", "fl", "<Plug>(coc-codeaction-cursor)", { silent = true })
+keyset("n", "fa", "<Plug>(coc-codeaction-source)", { silent = true })
 keyset("n", "rl", "<Plug>(coc-codeaction-refactor)", { silent = true })
 
 -- Highlight the symbol and its references on a CursorHold event (cursor is idle)
@@ -218,6 +219,7 @@ require('nvim-treesitter.configs').setup {
 	auto_install = true,
 	highlight = {
 		enable = true,
+		additional_vim_regex_highlighting = false,
 		disable = {},
 	}
 }
