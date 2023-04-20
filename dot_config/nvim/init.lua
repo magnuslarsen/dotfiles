@@ -205,11 +205,34 @@ require('gitsigns').setup {
 }
 
 -- Telescope
-require('telescope').setup()
+function vim.telescope_proper_opts()
+	local function is_ansible_repo()
+		local current_path = vim.fn.expand("%:p")
+		return string.match(current_path, "ansible")
+	end
+	local function get_ansible_role_path()
+		local current_path = vim.fn.expand("%:p")
+		if string.match(current_path, "role") then
+			return string.gsub(current_path, "^(.*/roles/[%a%-%_]*)/.*", "%1")
+		elseif string.match(current_path, "playbook") then
+			return string.gsub(current_path, "^(.*/playbooks/).*", "%1")
+		else
+			return ""
+		end
+	end
+	if is_ansible_repo() then
+		return { cwd = get_ansible_role_path() }
+	end
+
+	return {}
+end
+
 require('telescope').load_extension('fzf')
 local telescope = require('telescope.builtin')
-keyset("n", "fd", telescope.find_files, {})
-keyset("n", "rg", telescope.live_grep, {})
+keyset("n", "fd", function() telescope.find_files(vim.telescope_proper_opts()) end, {})
+keyset("n", "<leader>fd", telescope.find_files, {})
+keyset("n", "rg", function() telescope.live_grep(vim.telescope_proper_opts()) end, {})
+keyset("n", "<leader>rg", telescope.live_grep, {})
 keyset("n", "gw", telescope.grep_string, {})
 
 -- Treesitter
