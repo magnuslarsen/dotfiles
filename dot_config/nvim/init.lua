@@ -213,7 +213,7 @@ function vim.telescope_proper_opts()
 	local function get_ansible_role_path()
 		local current_path = vim.fn.expand("%:p")
 		if string.match(current_path, "role") then
-			return string.gsub(current_path, "^(.*/roles/[%a%-%_]*)/.*", "%1")
+			return string.gsub(current_path, "^(.*/roles/[%a%-%_%.]*)/.*", "%1")
 		elseif string.match(current_path, "playbook") then
 			return string.gsub(current_path, "^(.*/playbooks/).*", "%1")
 		else
