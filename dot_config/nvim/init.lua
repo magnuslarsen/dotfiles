@@ -172,8 +172,37 @@ keyset("v", "Y", [["+y"]])             -- Copy to system clipboard
 keyset({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
 
 -- File explorer
+local HEIGHT_RATIO = 0.8
+local WIDTH_RATIO = 0.5
 require("nvim-tree").setup({
 	sort_by = "case_sensitive",
+	view = {
+		float = {
+			enable = true,
+			open_win_config = function()
+				local screen_w = vim.opt.columns:get()
+				local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+				local window_w = screen_w * WIDTH_RATIO
+				local window_h = screen_h * HEIGHT_RATIO
+				local window_w_int = math.floor(window_w)
+				local window_h_int = math.floor(window_h)
+				local center_x = (screen_w - window_w) / 2
+				local center_y = ((vim.opt.lines:get() - window_h) / 2)
+						- vim.opt.cmdheight:get()
+				return {
+					border = 'rounded',
+					relative = 'editor',
+					row = center_y,
+					col = center_x,
+					width = window_w_int,
+					height = window_h_int,
+				}
+			end,
+		},
+		width = function()
+			return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
+		end,
+	},
 	filters = {
 		dotfiles = true,
 		custom = { "^.git$" }
@@ -181,17 +210,8 @@ require("nvim-tree").setup({
 	live_filter = {
 		prefix = "[FILTER]: ",
 		always_show_folders = false,
-	}
+	},
 })
-vim.api.nvim_create_autocmd("BufEnter",
-	{
-		nested = true,
-		callback = function()
-			if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
-				vim.cmd "quit"
-			end
-		end
-	})
 keyset("n", "fe", ":NvimTreeToggle<CR>", { silent = true })
 
 -- Gitsigns
@@ -233,7 +253,8 @@ keyset("n", "fd", function() telescope.find_files(vim.telescope_proper_opts()) e
 keyset("n", "<leader>fd", telescope.find_files, {})
 keyset("n", "rg", function() telescope.live_grep(vim.telescope_proper_opts()) end, {})
 keyset("n", "<leader>rg", telescope.live_grep, {})
-keyset("n", "gw", telescope.grep_string, {})
+keyset("n", "gw", function() telescope.grep_string(vim.telescope_proper_opts()) end, {})
+keyset("n", "<leader>gw", telescope.grep_string, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
