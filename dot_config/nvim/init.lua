@@ -212,7 +212,7 @@ require("nvim-tree").setup({
 		always_show_folders = false,
 	},
 })
-keyset("n", "fe", ":NvimTreeToggle<CR>", { silent = true })
+keyset("n", "fe", ":NvimTreeFindFile<CR>", { silent = true })
 
 -- Gitsigns
 require('gitsigns').setup {
