@@ -35,6 +35,9 @@ require('lazy').setup({
 
 			-- jsonSchema supports for certain lsp's
 			'b0o/schemastore.nvim',
+
+			-- pretty icons
+			'onsails/lspkind.nvim'
 		},
 	},
 	{
@@ -327,35 +330,9 @@ mason_lspconfig.setup_handlers {
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
-local kind_icons = {
-	Text = "",
-	Method = "",
-	Function = "",
-	Constructor = "",
-	Field = "ﰠ",
-	Variable = "",
-	Class = "ﴯ",
-	Interface = "",
-	Module = "",
-	Property = "ﰠ",
-	Unit = "塞",
-	Value = "",
-	Enum = "",
-	Keyword = "",
-	Snippet = "",
-	Color = "",
-	File = "",
-	Reference = "",
-	Folder = "",
-	EnumMember = "",
-	Constant = "",
-	Struct = "",
-	Event = "",
-	Operator = "",
-	TypeParameter = "",
-}
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+local lspkind = require('lspkind')
 
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
@@ -408,19 +385,7 @@ cmp.setup {
 		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
-		format = function(entry, vim_item)
-			-- Kind icons
-			vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-			-- Source
-			vim_item.menu = ({
-				buffer = "",
-				nvim_lsp = "",
-				luasnip = "",
-				nvim_lua = "",
-				latex_symbols = "",
-			})[entry.source.name]
-			return vim_item
-		end
+		format = lspkind.cmp_format()
 	},
 
 }
