@@ -32,6 +32,9 @@ require('lazy').setup({
 
 			-- Additional lua configuration, makes nvim stuff amazing!
 			'folke/neodev.nvim',
+
+			-- jsonSchema supports for certain lsp's
+			'b0o/schemastore.nvim',
 		},
 	},
 	{
@@ -282,8 +285,31 @@ local servers = {
 			pylint = { enabled = false },
 			ruff = { enabled = true, extendSelect = { "I", "A" } }
 		}
+	},
+	jsonls = {
+		json = {
+			schemas = require('schemastore').json.schemas(),
+			validate = { enable = true },
+		}
+	},
+	yamlls = {
+		schemaStore = {
+			enable = false,
+		},
+		schemas = require('schemastore').yaml.schemas(),
+		customTags = { "!vault", "!lamda" },
 	}
 }
+
+-- Make some pretty borders as well
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+	vim.lsp.handlers.hover,
+	{ border = 'rounded' }
+)
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+	vim.lsp.handlers.signature_help,
+	{ border = 'rounded' }
+)
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -355,7 +381,13 @@ cmp.setup {
 	}, {
 		{ name = 'path' },
 		{ name = 'buffer' },
-	})
+	}),
+	-- Add borders around the popup window
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+
 }
 -- Use buffer source for `/`
 cmp.setup.cmdline('/', {
