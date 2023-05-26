@@ -10,7 +10,7 @@ pager = "delta"
 diffFilter = "delta --color-only"
 
 [merge]
-conflictstyle = "diff3"
+conflictstyle = "zdiff3"
 
 [diff]
 colorMoved = "default"
