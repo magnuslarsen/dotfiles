@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 local HEIGHT_RATIO = 0.8
 local WIDTH_RATIO = 0.5
 
@@ -169,8 +172,6 @@ require('lazy').setup({
 
 
 -- all the vim options
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.g.nospell = true
 vim.o.completeopt = 'menuone,noselect'
 vim.o.hlsearch = false
