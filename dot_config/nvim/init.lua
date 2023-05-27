@@ -188,7 +188,7 @@ vim.opt.backup = false
 vim.opt.listchars = { eol = "$", nbsp = "·", tab = "->", trail = "~", extends = ">", precedes = "<" }
 vim.opt.scrolloff = 5
 vim.opt.shiftwidth = 2
-vim.opt.signcolumn = "number"
+vim.opt.signcolumn = "yes"
 vim.opt.smartindent = true
 vim.opt.smarttab = true
 vim.opt.softtabstop = 2
