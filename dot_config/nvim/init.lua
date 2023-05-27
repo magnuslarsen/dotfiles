@@ -467,3 +467,6 @@ require('nvim-treesitter.configs').setup {
 
 -- Setup neovim lua configuration
 require('neodev').setup()
+
+-- Make the bulb use a nerdfont icon instead of emoji
+vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
