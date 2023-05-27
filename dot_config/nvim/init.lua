@@ -164,6 +164,7 @@ require('lazy').setup({
 		}
 	},
 	{ 'jamessan/vim-gnupg' },
+	{ 'sQVe/sort.nvim',    opts = {} }
 })
 
 
