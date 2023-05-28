@@ -291,11 +291,12 @@ local servers = {
 			autopep8 = { enabled = false },
 			flake8 = { enabled = false },
 			mccabe = { enabled = false },
-			pycodestyle = { enabled = true, ignore = { 'E501' } },
+			pycodestyle = { enabled = false },
 			pydocstyle = { enabled = false },
 			pyflakes = { enabled = false },
 			pylint = { enabled = false },
-			ruff = { enabled = true, extendSelect = { "I", "A" } }
+			ruff = { enabled = true, extendSelect = { "A", "C", "E", "I" } },
+			black = { enabled = true },
 		}
 	},
 	jsonls = {
