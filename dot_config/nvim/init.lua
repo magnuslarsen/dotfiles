@@ -30,7 +30,6 @@ require('lazy').setup({
 			'williamboman/mason-lspconfig.nvim',
 
 			-- Useful status updates for LSP
-			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 			{ 'j-hui/fidget.nvim',       opts = {} },
 
 			-- Additional lua configuration, makes nvim stuff amazing!
@@ -42,6 +41,20 @@ require('lazy').setup({
 			-- pretty icons
 			'onsails/lspkind.nvim'
 		},
+	},
+	{
+		-- Also be able to install Formatters & linters
+		'jay-babu/mason-null-ls.nvim',
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"jose-elias-alvarez/null-ls.nvim",
+		},
+		opts = {
+			automatic_setup = true,
+			automatic_installation = false,
+			handlers = {},
+		}
 	},
 	{
 		-- Autocompletion
@@ -94,7 +107,7 @@ require('lazy').setup({
 		'nvim-lualine/lualine.nvim',
 		opts = {
 			options = {
-				icons_enabled = false,
+				icons_enabled = true,
 				theme = 'dracula',
 				component_separators = '|',
 				section_separators = '',
@@ -220,6 +233,8 @@ local keyset = vim.keymap.set
 -- Use `df` and `db` to navigate diagnostics
 keyset('n', 'df', vim.diagnostic.goto_next)
 keyset('n', 'db', vim.diagnostic.goto_prev)
+keyset('n', 'ff', vim.lsp.buf.format)
+keyset('n', 'fl', vim.lsp.buf.code_action)
 
 keyset({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 keyset("v", "Y", [["+y"]])             -- Copy to system clipboard
@@ -238,7 +253,6 @@ local on_attach = function(_, bufnr)
 	end
 
 	nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-	nmap('fl', vim.lsp.buf.code_action, 'Code Action')
 
 	nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 	nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -251,7 +265,6 @@ local on_attach = function(_, bufnr)
 	nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
 	nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-	nmap('ff', vim.lsp.buf.format, "Format Document")
 end
 
 -- Enable the following language servers
@@ -297,7 +310,8 @@ local servers = {
 		},
 		schemas = require('schemastore').yaml.schemas(),
 		customTags = { "!vault", "!lamda" },
-	}
+	},
+	taplo = {},
 }
 
 -- Make some pretty borders as well
@@ -315,13 +329,13 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+local mason_lspconfig = require('mason-lspconfig')
 
-mason_lspconfig.setup {
+mason_lspconfig.setup({
 	ensure_installed = vim.tbl_keys(servers),
-}
+})
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
 	function(server_name)
 		require('lspconfig')[server_name].setup {
 			capabilities = capabilities,
@@ -329,18 +343,29 @@ mason_lspconfig.setup_handlers {
 			settings = servers[server_name],
 		}
 	end,
-}
+})
+
+-- Configure formatters and linters in null-ls
+local null_ls = require('null-ls')
+null_ls.setup({
+	-- Sources which are not available in :Mason
+	sources = {
+		null_ls.builtins.formatting.fish_indent,
+		null_ls.builtins.diagnostics.fish,
+	},
+})
+
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 local lspkind = require('lspkind')
 
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
-cmp.setup {
+cmp.setup({
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -391,7 +416,7 @@ cmp.setup {
 		format = lspkind.cmp_format()
 	},
 
-}
+})
 -- Use buffer source for `/`
 cmp.setup.cmdline('/', {
 	mapping = cmp.mapping.preset.cmdline({}),
