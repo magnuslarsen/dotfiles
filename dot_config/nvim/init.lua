@@ -54,6 +54,7 @@ require('lazy').setup({
 			automatic_setup = true,
 			automatic_installation = false,
 			handlers = {},
+			ensure_installed = { "yamlfix" },
 		}
 	},
 	{
@@ -306,11 +307,16 @@ local servers = {
 		}
 	},
 	yamlls = {
-		schemaStore = {
-			enable = false,
+		redhat = { telemetry = { enabled = false } },
+		yaml = {
+			schemaStore = {
+				enable = false,
+			},
+			schemas = require('schemastore').yaml.schemas(),
+			customTags = { "!vault", "!lamda" },
+			-- we use yamlfix for formatting
+			format = { enabled = false },
 		},
-		schemas = require('schemastore').yaml.schemas(),
-		customTags = { "!vault", "!lamda" },
 	},
 	taplo = {},
 }
