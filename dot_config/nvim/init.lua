@@ -187,6 +187,7 @@ require('lazy').setup({
 		}
 	},
 	{ 'jamessan/vim-gnupg' },
+	{ 'tpope/vim-sleuth' },
 	{ 'sQVe/sort.nvim',          opts = {} },
 	{ 'kosayoda/nvim-lightbulb', opts = { autocmd = { enabled = true } } },
 })
