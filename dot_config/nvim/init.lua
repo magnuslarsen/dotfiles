@@ -53,8 +53,14 @@ require('lazy').setup({
 		opts = {
 			automatic_setup = true,
 			automatic_installation = false,
-			handlers = {},
 			ensure_installed = { "yamlfix" },
+			handlers = {
+				yamlfix = function(source_name, methods)
+					require('null-ls').register(require('null-ls').builtins.formatting.yamlfix.with({
+						env = { YAMLFIX_WHITELINES = 1 }
+					}))
+				end
+			},
 		}
 	},
 	{
