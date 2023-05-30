@@ -4,7 +4,7 @@ This is mine, it probably doesn't fit your desires :-)
 # Required packages
 on Arch, simply run:
 ```
-yay -S bat exa fd fish fzf git git-delta go jq kitty neovim python-pip ripgrep tmux ttf-fira-code yay yq
+yay -S bat exa fd fish fzf git git-delta go jq kitty neovim npm python-pip ripgrep tmux ttf-fira-code yarn yay yq
 ```
 On Ubuntu, good luck :-)
 
