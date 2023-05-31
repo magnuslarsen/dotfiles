@@ -225,6 +225,7 @@ vim.filetype.add({
 		["~/zgit/adm/log/.*%.log"] = "debchangelog",
 		-- Set filetype to yaml.ansible for known Ansible repositories in order to run the LSP server
 		["~/zgit/sdma%-ansible/.*/.*%.ya?ml"] = { "yaml.ansible", { priority = 0 } },
+		["~/zgit/sdma%-ansible/inventory/.*%.ya?ml"] = { "yaml", { priority = 10 } },
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
 		-- Set filtype sls (saltstack) files
