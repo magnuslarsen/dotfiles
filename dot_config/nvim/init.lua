@@ -220,15 +220,11 @@ vim.opt.writebackup = false
 vim.wo.number = true
 
 vim.filetype.add({
-	filename = {
-		-- Set filetype to yaml for gitlab-ci files
-		[".gitlab-ci.yml"] = { "yaml", { priority = 10 } }
-	},
 	pattern = {
 		-- Force filetype on Novozymes log files in the Debian changelog format
 		["~/zgit/adm/log/.*%.log"] = "debchangelog",
 		-- Set filetype to yaml.ansible for known Ansible repositories in order to run the LSP server
-		["~/zgit/sdma%-ansible/.*%.ya?ml"] = { "yaml.ansible", { priority = 0 } },
+		["~/zgit/sdma%-ansible/.*/.*%.ya?ml"] = { "yaml.ansible", { priority = 0 } },
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
 		-- Set filtype sls (saltstack) files
@@ -279,12 +275,6 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-	-- clangd = {},
-	-- gopls = {},
-	-- pyright = {},
-	-- rust_analyzer = {},
-	-- tsserver = {},
-
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
@@ -326,6 +316,13 @@ local servers = {
 		},
 	},
 	taplo = {},
+	ansiblels = {
+		ansible = {
+			ansible = {
+				useFullyQualifiedCollectionNames = false
+			}
+		}
+	},
 }
 
 -- Make some pretty borders as well
