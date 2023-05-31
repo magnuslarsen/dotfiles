@@ -161,7 +161,7 @@ require('lazy').setup({
 						local window_h_int = math.floor(window_h)
 						local center_x = (screen_w - window_w) / 2
 						local center_y = ((vim.opt.lines:get() - window_h) / 2)
-								- vim.opt.cmdheight:get()
+						    - vim.opt.cmdheight:get()
 						return {
 							border = 'rounded',
 							relative = 'editor',
@@ -316,11 +316,11 @@ local servers = {
 	yamlls = {
 		redhat = { telemetry = { enabled = false } },
 		yaml = {
-			schemaStore = {
-				enable = false,
-			},
+			schemaStore = { enable = false },
 			schemas = require('schemastore').yaml.schemas(),
 			customTags = { "!vault", "!lamda" },
+			validate = true,
+			completion = true,
 			-- we use yamlfix for formatting
 			format = { enabled = false },
 		},
@@ -493,7 +493,8 @@ keyset('n', '<leader>rf', telescope.oldfiles, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { 'lua', 'make', 'markdown', 'markdown_inline', 'python', 'ruby', 'toml', 'bash', 'json', 'yaml',
+	ensure_installed = { 'lua', 'make', 'markdown', 'markdown_inline', 'python', 'ruby', 'toml', 'bash', 'json',
+		'yaml',
 		'dockerfile',
 		'comment', 'diff', 'fish', 'regex' },
 	auto_install = true,
