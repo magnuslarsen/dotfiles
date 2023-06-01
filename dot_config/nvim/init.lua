@@ -55,11 +55,11 @@ require('lazy').setup({
 			automatic_installation = false,
 			ensure_installed = { "shellcheck", "shfmt", "yamlfix" },
 			handlers = {
-				yamlfix = function(source_name, methods)
+				yamlfix = function()
 					require('null-ls').register(require('null-ls').builtins.formatting.yamlfix.with({
 						env = { YAMLFIX_WHITELINES = 1 }
 					}))
-				end
+				end,
 			},
 		}
 	},
