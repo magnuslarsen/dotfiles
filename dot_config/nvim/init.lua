@@ -74,7 +74,11 @@ require('lazy').setup({
 			-- Adds LSP completion capabilities
 			'hrsh7th/cmp-nvim-lsp',
 
+			-- A neat little calculater
+			'hrsh7th/cmp-calc',
+
 			-- More sources
+			'hrsh7th/cmp-nvim-lua',
 			'hrsh7th/cmp-cmdline',
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-buffer',
@@ -377,6 +381,13 @@ local lspkind = require('lspkind')
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+-- OR https://github.com/saadparwaiz1/cmp_luasnip/pull/45
+keyset("i", "<c-l>", function()
+	if luasnip.choice_active() then
+		luasnip.change_choice(1)
+	end
+end)
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -416,7 +427,7 @@ cmp.setup({
 		{ name = 'nvim_lsp' },
 		{ name = 'nvim_lua' },
 		{ name = 'luasnip' },
-	}, {
+		{ name = 'calc' },
 		{ name = 'path' },
 		{ name = 'buffer' },
 	}),
@@ -427,7 +438,17 @@ cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format()
 	},
-
+	enabled = function()
+		-- disable completion in comments
+		local context = require 'cmp.config.context'
+		-- keep command mode completion enabled when cursor is in a comment
+		if vim.api.nvim_get_mode().mode == 'c' then
+			return true
+		else
+			return not context.in_treesitter_capture("comment")
+			    and not context.in_syntax_group("Comment")
+		end
+	end
 })
 -- Use buffer source for `/`
 cmp.setup.cmdline('/', {
@@ -442,7 +463,6 @@ cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline({}),
 	sources = cmp.config.sources({
 		{ name = 'path' },
-	}, {
 		{ name = 'cmdline' }
 	})
 })
@@ -491,10 +511,23 @@ keyset('n', '<leader>rf', telescope.oldfiles, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { 'lua', 'make', 'markdown', 'markdown_inline', 'python', 'ruby', 'toml', 'bash', 'json',
-		'yaml',
+	ensure_installed = {
+		'bash',
+		'comment',
+		'diff',
 		'dockerfile',
-		'comment', 'diff', 'fish', 'regex' },
+		'fish',
+		'json',
+		'lua',
+		'make',
+		'markdown',
+		'markdown_inline',
+		'python',
+		'regex',
+		'ruby',
+		'toml',
+		'yaml',
+	},
 	auto_install = true,
 	highlight = {
 		enable = true,
