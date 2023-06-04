@@ -245,9 +245,12 @@ keyset('n', 'db', vim.diagnostic.goto_prev)
 keyset('n', 'ff', vim.lsp.buf.format)
 keyset('n', 'fl', vim.lsp.buf.code_action)
 
+-- Neat keybindings
 keyset({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 keyset("v", "Y", [["+y"]])             -- Copy to system clipboard
 keyset({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
+keyset("v", "J", ":m '>+1<CR>gv=gv") -- move visual block up
+keyset("v", "K", ":m '<-2<CR>gv=gv") -- move visual block odwn
 
 
 -- [[ Configure LSP ]]
