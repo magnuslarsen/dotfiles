@@ -2,8 +2,8 @@ local run_formatter = function(text)
 	local split = vim.split(text, "\n")
 	local result = table.concat(vim.list_slice(split, 2, #split - 1), "\n")
 
-	-- Finds sql-format-via-python somewhere in your nvim config path
-	local bin = vim.api.nvim_get_runtime_file("bin/python-sql-format.py", false)[1]
+	-- Finds sql-format.py somewhere in your nvim config path
+	local bin = vim.api.nvim_get_runtime_file("bin/sql-format.py", false)[1]
 
 	local j = require("plenary.job"):new {
 		command = "python",
@@ -59,7 +59,7 @@ local format_sql = function(bufnr)
 			-- Run the formatter, based on the node text
 			local formatted = run_formatter(vim.treesitter.get_node_text(node, bufnr))
 
-			-- Add some indentation (can be anything you like!)
+			-- Add some indentation
 			for idx, line in ipairs(formatted) do
 				formatted[idx] = indentation .. line
 			end
