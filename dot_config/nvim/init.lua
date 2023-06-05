@@ -142,6 +142,7 @@ require('lazy').setup({
 		dependencies = {
 			'nvim-treesitter/nvim-treesitter-textobjects',
 			'nvim-treesitter/nvim-treesitter-context',
+			'nvim-treesitter/playground',
 		},
 		build = ':TSUpdate',
 	},
