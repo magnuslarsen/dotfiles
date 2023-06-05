@@ -141,6 +141,7 @@ require('lazy').setup({
 		'nvim-treesitter/nvim-treesitter',
 		dependencies = {
 			'nvim-treesitter/nvim-treesitter-textobjects',
+			'nvim-treesitter/nvim-treesitter-context',
 		},
 		build = ':TSUpdate',
 	},
@@ -249,8 +250,8 @@ keyset('n', 'fl', vim.lsp.buf.code_action)
 keyset({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 keyset("v", "Y", [["+y"]])             -- Copy to system clipboard
 keyset({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
-keyset("v", "J", ":m '>+1<CR>gv=gv") -- move visual block up
-keyset("v", "K", ":m '<-2<CR>gv=gv") -- move visual block odwn
+keyset("v", "J", ":m '>+1<CR>gv=gv")   -- move visual block up
+keyset("v", "K", ":m '<-2<CR>gv=gv")   -- move visual block odwn
 
 
 -- [[ Configure LSP ]]
@@ -382,8 +383,16 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
 
+-- luasnip configuration
 require('luasnip.loaders.from_vscode').lazy_load()
-luasnip.config.setup {}
+require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/snippets/" })
+luasnip.config.setup({})
+luasnip.config.set_config({
+	history = true,
+	updateevents = "TextChanged,TextChangedI",
+	autosnippets = false,
+	ft_func = require("luasnip.extras.filetype_functions").from_cursor
+})
 
 -- OR https://github.com/saadparwaiz1/cmp_luasnip/pull/45
 keyset("i", "<c-l>", function()
