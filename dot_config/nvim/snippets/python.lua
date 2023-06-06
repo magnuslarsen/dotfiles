@@ -16,8 +16,8 @@ local rep = require("luasnip.extras").rep
 
 local snippets, autosnippets = {}, {}
 
-local group = vim.api.nvim_create_augroup("Lua Snippets", { clear = true })
-local file_pattern = "*.lua"
+local group = vim.api.nvim_create_augroup("Python Snippets", { clear = true })
+local file_pattern = "*.py"
 
 local function cs(trigger, nodes, opts)
 	local snippet = s(trigger, nodes)
@@ -76,7 +76,7 @@ cs(
 	"ifmain",
 	fmt([[
 def {}():
-        {}{}
+	{}{}
 
 if __name__ == '__main__':
 	{}()

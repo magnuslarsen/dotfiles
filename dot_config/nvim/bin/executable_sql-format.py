@@ -3,6 +3,9 @@ import sqlparse
 import sys
 
 
+# TODO: Python: capture whole string (with `"`, format it to use """?
+#       That would also fix the one-line sql issue
+
 def main():
     content = sys.stdin.read()
     print(sqlparse.format(
