@@ -452,6 +452,9 @@ cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format()
 	},
+	experimental = {
+		ghost_text = true
+	},
 	enabled = function()
 		-- disable completion in comments
 		local context = require 'cmp.config.context'
@@ -537,8 +540,10 @@ require('nvim-treesitter.configs').setup {
 		'markdown',
 		'markdown_inline',
 		'python',
+		'query',
 		'regex',
 		'ruby',
+		'sql',
 		'toml',
 		'yaml',
 	},
