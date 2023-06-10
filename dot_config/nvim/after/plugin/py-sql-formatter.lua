@@ -2,12 +2,9 @@ local run_formatter = function(text)
 	local split = vim.split(text, "\n")
 	local result = table.concat(vim.list_slice(split, 2, #split - 1), "\n")
 
-	-- Finds sql-format.py somewhere in your nvim config path
-	local bin = vim.api.nvim_get_runtime_file("bin/sql-format.py", false)[1]
-
 	local j = require("plenary.job"):new {
-		command = "python",
-		args = { bin },
+		command = vim.fn.expand(".local/share/nvim/mason/bin/sql-formatter"),
+		args = { "-c", vim.fn.expand("~/.config/sql_formatter.json") },
 		writer = { result },
 	}
 	return j:sync()
@@ -19,7 +16,7 @@ local embedded_sql = vim.treesitter.query.parse(
 (expression_statement
   (call
     (attribute
-      attribute: (identifier) @_attribute (#match? @_attribute "^(execute|executemany)$")
+      attribute: (identifier) @_attribute (#match? @_attribute "^(execute|executemany|executescript)$")
     )
 
     (argument_list
