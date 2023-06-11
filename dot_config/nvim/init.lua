@@ -207,7 +207,7 @@ require('lazy').setup({
 	-- Block split-/joining
 	{
 		'Wansmer/treesj',
-		keys = { '<space>m', '<space>j', '<space>s' },
+		keys = { '<leader>j', '<leader>m', '<leader>s' },
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
 		config = function()
 			require('treesj').setup({})
