@@ -61,9 +61,11 @@ require('lazy').setup({
 					}))
 				end,
 				sql_formatter = function()
-					require('null-ls').register(require('null-ls').builtins.formatting.sql_formatter.with({
-						extra_args = { "-c", vim.fn.expand("~/.config/sql_formatter.json") }
-					}))
+					require('null-ls').register(require('null-ls').builtins.formatting.sql_formatter
+						.with({
+							extra_args = { "-c",
+								vim.fn.expand("~/.config/sql_formatter.json") }
+						}))
 				end,
 			},
 		}
@@ -154,6 +156,7 @@ require('lazy').setup({
 	{
 		-- File explorer
 		'nvim-tree/nvim-tree.lua',
+		keys = { 'fe' },
 		dependencies = {
 			-- Icons
 			'nvim-tree/nvim-web-devicons',
@@ -197,10 +200,19 @@ require('lazy').setup({
 			},
 		}
 	},
-	{ 'jamessan/vim-gnupg' },
-	{ 'tpope/vim-sleuth' },
-	{ 'sQVe/sort.nvim',          opts = {} },
-	{ 'kosayoda/nvim-lightbulb', opts = { autocmd = { enabled = true } } },
+	{ 'jamessan/vim-gnupg' },                                        -- PGP support
+	{ 'tpope/vim-sleuth' },                                          -- Autodetect spacing
+	{ 'sQVe/sort.nvim',          opts = {} },                        -- Better Sorting
+	{ 'kosayoda/nvim-lightbulb', opts = { autocmd = { enabled = true } } }, -- Lightbulb for Code Actions
+	-- Block split-/joining
+	{
+		'Wansmer/treesj',
+		keys = { '<space>m', '<space>j', '<space>s' },
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		config = function()
+			require('treesj').setup({})
+		end,
+	}
 })
 
 
@@ -494,8 +506,13 @@ cmp.setup.cmdline(':', {
 require("gitsigns")
 
 -- File explorer
-require("nvim-tree")
-keyset("n", "fe", ":NvimTreeFindFile<CR>", { silent = true })
+keyset("n", "fe", function()
+	require('nvim-tree.api').tree.find_file({
+		open = true,
+		focus = true,
+		update_root = false,
+	})
+end, { silent = true })
 
 
 -- Telescope
