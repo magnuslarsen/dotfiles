@@ -3,7 +3,7 @@ local run_formatter = function(text)
 	local result = table.concat(vim.list_slice(split, 2, #split - 1), "\n")
 
 	local j = require("plenary.job"):new {
-		command = vim.fn.expand(".local/share/nvim/mason/bin/sql-formatter"),
+		command = vim.fn.expand("~/.local/share/nvim/mason/bin/sql-formatter"),
 		args = { "-c", vim.fn.expand("~/.config/sql_formatter.json") },
 		writer = { result },
 	}
