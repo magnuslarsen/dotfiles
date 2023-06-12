@@ -156,7 +156,16 @@ require('lazy').setup({
 	{
 		-- File explorer
 		'nvim-tree/nvim-tree.lua',
-		keys = { 'fe' },
+		keys = {
+			{ '<leader>fe', function()
+				require('nvim-tree.api').tree.find_file({
+					open = true,
+					focus = true,
+					update_root = false,
+				})
+			end
+			},
+		},
 		dependencies = {
 			-- Icons
 			'nvim-tree/nvim-web-devicons',
@@ -212,7 +221,36 @@ require('lazy').setup({
 		config = function()
 			require('treesj').setup({})
 		end,
-	}
+	},
+	-- Leap + Flit, kindly taken from LazyVim <3
+	{
+		"ggandor/flit.nvim",
+		keys = function()
+			local ret = {}
+			for _, key in ipairs({ "f", "F", "t", "T" }) do
+				ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+			end
+			return ret
+		end,
+		opts = { labeled_modes = "nx" },
+	},
+	{
+		"ggandor/leap.nvim",
+		keys = {
+			{ "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+			{ "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
+			{ "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+		},
+		config = function(_, opts)
+			local leap = require("leap")
+			for k, v in pairs(opts) do
+				leap.opts[k] = v
+			end
+			leap.add_default_mappings(true)
+			vim.keymap.del({ "x", "o" }, "x")
+			vim.keymap.del({ "x", "o" }, "X")
+		end,
+	},
 })
 
 
@@ -261,8 +299,8 @@ local keyset = vim.keymap.set
 -- Use `df` and `db` to navigate diagnostics
 keyset('n', 'df', vim.diagnostic.goto_next)
 keyset('n', 'db', vim.diagnostic.goto_prev)
-keyset('n', 'ff', vim.lsp.buf.format)
-keyset('n', 'fl', vim.lsp.buf.code_action)
+keyset('n', '<leader>ff', vim.lsp.buf.format)
+keyset('n', '<leader>fl', vim.lsp.buf.code_action)
 
 -- Neat keybindings
 keyset({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -504,16 +542,6 @@ cmp.setup.cmdline(':', {
 
 -- gitsigns
 require("gitsigns")
-
--- File explorer
-keyset("n", "fe", function()
-	require('nvim-tree.api').tree.find_file({
-		open = true,
-		focus = true,
-		update_root = false,
-	})
-end, { silent = true })
-
 
 -- Telescope
 function vim.telescope_proper_opts()
