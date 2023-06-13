@@ -544,7 +544,7 @@ cmp.setup.cmdline(':', {
 require("gitsigns")
 
 -- Telescope
-function vim.telescope_proper_opts()
+local function telescope_project_opts()
 	local function is_ansible_repo()
 		local current_path = vim.fn.expand("%:p")
 		return string.match(current_path, "ansible")
@@ -568,13 +568,15 @@ end
 
 require('telescope').load_extension('fzf')
 local telescope = require('telescope.builtin')
-keyset("n", "fd", function() telescope.find_files(vim.telescope_proper_opts()) end, {})
+keyset("n", "fd", function() telescope.find_files(telescope_project_opts()) end, {})
 keyset("n", "<leader>fd", telescope.find_files, {})
-keyset("n", "rg", function() telescope.live_grep(vim.telescope_proper_opts()) end, {})
+keyset("n", "rg", function() telescope.live_grep(telescope_project_opts()) end, {})
 keyset("n", "<leader>rg", telescope.live_grep, {})
-keyset("n", "gw", function() telescope.grep_string(vim.telescope_proper_opts()) end, {})
+keyset("n", "gw", function() telescope.grep_string(telescope_project_opts()) end, {})
 keyset("n", "<leader>gw", telescope.grep_string, {})
-keyset('n', '<leader>rf', telescope.oldfiles, {})
+keyset("n", '<leader>rf', telescope.oldfiles, {})
+keyset("n", '<leader>ht', telescope.help_tags, {})
+keyset("n", '<leader>ss', telescope.spell_suggest, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
