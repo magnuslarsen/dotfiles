@@ -106,6 +106,7 @@ require('lazy').setup({
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		'lewis6991/gitsigns.nvim',
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			current_line_blame = true,
 			current_line_blame_formatter = '<author> - <author_time:%Y-%m-%d> - <summary>',
@@ -570,9 +571,6 @@ cmp.setup.cmdline(':', {
 	})
 })
 
-
--- gitsigns
-require("gitsigns")
 
 -- Telescope
 function Telescope_project_opts()
