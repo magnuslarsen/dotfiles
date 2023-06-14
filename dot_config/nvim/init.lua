@@ -142,7 +142,11 @@ require('lazy').setup({
 		},
 	},
 	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim',                       opts = {} },
+	{
+		'numToStr/Comment.nvim',
+		opts = {},
+		keys = { "gc" }
+	},
 	-- Fuzzy Finder (files, lsp, etc)
 	{
 		'nvim-telescope/telescope.nvim',
@@ -621,6 +625,3 @@ require('nvim-treesitter.configs').setup {
 		disable = {},
 	}
 }
-
--- Make the bulb use a nerdfont icon instead of emoji
-vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
