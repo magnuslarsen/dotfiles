@@ -33,13 +33,23 @@ require('lazy').setup({
 			{ 'j-hui/fidget.nvim',       opts = {} },
 
 			-- Additional lua configuration, makes nvim stuff amazing!
-			'folke/neodev.nvim',
+			{ 'folke/neodev.nvim',       opts = {} },
 
 			-- jsonSchema supports for certain lsp's
 			'b0o/schemastore.nvim',
 
 			-- pretty icons
-			'onsails/lspkind.nvim'
+			'onsails/lspkind.nvim',
+
+			-- Lightbulb for Code Actions
+			{
+				'kosayoda/nvim-lightbulb',
+				opts = { autocmd = { enabled = true } },
+				config = function()
+					-- Make the bulb use a nerdfont icon instead of emoji
+					vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
+				end
+			},
 		},
 	},
 	{
@@ -47,7 +57,6 @@ require('lazy').setup({
 		'jay-babu/mason-null-ls.nvim',
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"williamboman/mason.nvim",
 			"jose-elias-alvarez/null-ls.nvim",
 		},
 		opts = {
@@ -133,26 +142,38 @@ require('lazy').setup({
 		},
 	},
 	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim',         opts = {} },
+	{ 'numToStr/Comment.nvim',                       opts = {} },
 	-- Fuzzy Finder (files, lsp, etc)
-	{ 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
 	{
-		'nvim-telescope/telescope-fzf-native.nvim',
-		build = 'make',
-		cond = function()
-			return vim.fn.executable 'make' == 1
-		end,
-	},
-	{
-		-- Highlight, edit, and navigate code
-		'nvim-treesitter/nvim-treesitter',
+		'nvim-telescope/telescope.nvim',
+		branch = '0.1.x',
 		dependencies = {
-			'nvim-treesitter/nvim-treesitter-textobjects',
-			'nvim-treesitter/nvim-treesitter-context',
-			'nvim-treesitter/playground',
+			'nvim-lua/plenary.nvim',
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				build = 'make',
+				config = function()
+					require('telescope').load_extension("fzf")
+				end
+			},
 		},
-		build = ':TSUpdate',
+		keys = {
+			{ "fd",         function() require("telescope.builtin").find_files(Telescope_project_opts()) end },
+			{ "<leader>fd", function() require("telescope.builtin").find_files() end },
+			{ "rg",         function() require("telescope.builtin").live_grep(Telescope_project_opts()) end },
+			{ "<leader>rg", function() require("telescope.builtin").live_grep() end },
+			{ "gw",         function() require("telescope.builtin").grep_string(Telescope_project_opts()) end },
+			{ "<leader>gw", function() require("telescope.builtin").grep_string() end },
+			{ "<leader>rf", function() require("telescope.builtin").oldfiles() end },
+			{ "<leader>ht", function() require("telescope.builtin").help_tags() end },
+			{ "<leader>ss", function() require("telescope.builtin").spell_suggest() end },
+		}
 	},
+	-- Highlight, edit, and navigate code
+	{ 'nvim-treesitter/nvim-treesitter-textobjects', event = { "BufReadPre", "BufNewFile" } },
+	{ 'nvim-treesitter/nvim-treesitter-context',     event = { "BufReadPre", "BufNewFile" } },
+	{ 'nvim-treesitter/playground',                  cmd = { "TSPlaygroundToggle" } },
+	{ 'nvim-treesitter/nvim-treesitter',             build = ':TSUpdate' },
 	{
 		-- File explorer
 		'nvim-tree/nvim-tree.lua',
@@ -209,11 +230,18 @@ require('lazy').setup({
 			},
 		}
 	},
-	{ 'jamessan/vim-gnupg' },                                        -- PGP support
-	{ 'tpope/vim-sleuth' },                                          -- Autodetect spacing
-	{ 'sQVe/sort.nvim',          opts = {} },                        -- Better Sorting
-	{ 'kosayoda/nvim-lightbulb', opts = { autocmd = { enabled = true } } }, -- Lightbulb for Code Actions
-	-- Block split-/joining
+	-- PGP support
+	{ 'jamessan/vim-gnupg' },
+	-- Autodetect spacing
+	{
+		'tpope/vim-sleuth',
+		event = { "BufReadPre", "BufNewFile" },
+	}, -- Better Sorting
+	{
+		'sQVe/sort.nvim',
+		opts = {},
+		cmd = { "Sort" },
+	}, -- Block split-/joining
 	{
 		'Wansmer/treesj',
 		keys = { '<leader>j', '<leader>m', '<leader>s' },
@@ -225,6 +253,7 @@ require('lazy').setup({
 	-- Leap + Flit, kindly taken from LazyVim <3
 	{
 		"ggandor/flit.nvim",
+		---@diagnostic disable-next-line: assign-type-mismatch
 		keys = function()
 			local ret = {}
 			for _, key in ipairs({ "f", "F", "t", "T" }) do
@@ -294,20 +323,18 @@ vim.filetype.add({
 	}
 })
 
-local keyset = vim.keymap.set
-
 -- Use `df` and `db` to navigate diagnostics
-keyset('n', 'df', vim.diagnostic.goto_next)
-keyset('n', 'db', vim.diagnostic.goto_prev)
-keyset('n', '<leader>ff', vim.lsp.buf.format)
-keyset('n', '<leader>fl', vim.lsp.buf.code_action)
+vim.keymap.set('n', 'df', vim.diagnostic.goto_next)
+vim.keymap.set('n', 'db', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>fl', vim.lsp.buf.code_action)
 
 -- Neat keybindings
-keyset({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-keyset("v", "Y", [["+y"]])             -- Copy to system clipboard
-keyset({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
-keyset("v", "J", ":m '>+1<CR>gv=gv")   -- move visual block up
-keyset("v", "K", ":m '<-2<CR>gv=gv")   -- move visual block odwn
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set("v", "Y", [["+y"]])             -- Copy to system clipboard
+vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")   -- move visual block up
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")   -- move visual block odwn
 
 
 -- [[ Configure LSP ]]
@@ -318,7 +345,7 @@ local on_attach = function(_, bufnr)
 			desc = 'LSP: ' .. desc
 		end
 
-		keyset('n', keys, func, { buffer = bufnr, desc = desc })
+		vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
 	end
 	local telescope = require('telescope.builtin')
 
@@ -451,7 +478,7 @@ luasnip.config.set_config({
 })
 
 -- OR https://github.com/saadparwaiz1/cmp_luasnip/pull/45
-keyset("i", "<c-l>", function()
+vim.keymap.set("i", "<c-l>", function()
 	if luasnip.choice_active() then
 		luasnip.change_choice(1)
 	end
@@ -544,7 +571,7 @@ cmp.setup.cmdline(':', {
 require("gitsigns")
 
 -- Telescope
-local function telescope_project_opts()
+function Telescope_project_opts()
 	local function is_ansible_repo()
 		local current_path = vim.fn.expand("%:p")
 		return string.match(current_path, "ansible")
@@ -565,18 +592,6 @@ local function telescope_project_opts()
 
 	return {}
 end
-
-require('telescope').load_extension('fzf')
-local telescope = require('telescope.builtin')
-keyset("n", "fd", function() telescope.find_files(telescope_project_opts()) end, {})
-keyset("n", "<leader>fd", telescope.find_files, {})
-keyset("n", "rg", function() telescope.live_grep(telescope_project_opts()) end, {})
-keyset("n", "<leader>rg", telescope.live_grep, {})
-keyset("n", "gw", function() telescope.grep_string(telescope_project_opts()) end, {})
-keyset("n", "<leader>gw", telescope.grep_string, {})
-keyset("n", '<leader>rf', telescope.oldfiles, {})
-keyset("n", '<leader>ht', telescope.help_tags, {})
-keyset("n", '<leader>ss', telescope.spell_suggest, {})
 
 -- Treesitter
 require('nvim-treesitter.configs').setup {
@@ -606,9 +621,6 @@ require('nvim-treesitter.configs').setup {
 		disable = {},
 	}
 }
-
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- Make the bulb use a nerdfont icon instead of emoji
 vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
