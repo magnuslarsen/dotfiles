@@ -145,7 +145,7 @@ require('lazy').setup({
 	{
 		'numToStr/Comment.nvim',
 		opts = {},
-		keys = { "gc" }
+		keys = { "gc", "gb" }
 	},
 	-- Fuzzy Finder (files, lsp, etc)
 	{
