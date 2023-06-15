@@ -2,11 +2,25 @@
 This is mine, it probably doesn't fit your desires :-)
 
 # Required packages
+## Arch
 on Arch, simply run:
 ```sh
-yay -S bat exa fd fish fzf git git-delta go jq kitty neovim npm python-pip ripgrep tmux ttf-fira-code yarn yay yq
+yay -S bat exa fd fish fzf git git-delta go jq kitty neovim nodejs npm python-pip ripgrep tmux ttf-fira-code yay yq
 ```
-On Ubuntu, good luck :-)
+
+## Ubuntu
+Canonical being a pain in the ass, you have to do this:
+```sh
+sudo add-apt-repository ppa:fish-shell/release-3
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo add-apt-repository ppa:git-core/ppa
+sudo add-apt-repository ppa:longsleep/golang-backports
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - # Gotta love nodesource
+
+sudo apt install fish fonts-firacode git golang-go jq kitty neovim nodejs npm python3-pip ripgrep tmux
+python3 -m pip install pynvim yq
+```
+`bat`, `exa`, `fd`, `fzf`, `git-delta`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
 
 # Fish (fisherman)
 Simply run:
