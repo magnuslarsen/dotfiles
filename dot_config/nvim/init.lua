@@ -31,38 +31,38 @@ require('lazy').setup({
 
 			-- pretty icons
 			'onsails/lspkind.nvim',
-
-			-- Useful status updates for LSP
-			{
-				'j-hui/fidget.nvim',
-				opts = {},
-				event = { "LspAttach" },
-			},
-
-			-- Additional lua configuration, makes nvim stuff amazing!
-			{
-				'folke/neodev.nvim',
-				opts = {},
-				ft = { "lua" },
-			},
-
-			-- jsonSchema supports for certain lsp's
-			{
-				'b0o/schemastore.nvim',
-				ft = { "json", "yaml" },
-			},
-
-			-- Lightbulb for Code Actions
-			{
-				'kosayoda/nvim-lightbulb',
-				opts = { autocmd = { enabled = true } },
-				event = { "LspAttach" },
-				init = function()
-					-- Make the bulb use a nerdfont icon instead of emoji
-					vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
-				end
-			},
 		},
+	},
+	-- Useful status updates for LSP
+	{
+		'j-hui/fidget.nvim',
+		tag = "legacy",
+		opts = {},
+		event = { "LspAttach" },
+	},
+
+	-- Additional lua configuration, makes nvim stuff amazing!
+	{
+		'folke/neodev.nvim',
+		opts = {},
+		ft = { "lua" },
+	},
+
+	-- jsonSchema supports for certain lsp's
+	{
+		'b0o/schemastore.nvim',
+		ft = { "json", "yaml" },
+	},
+
+	-- Lightbulb for Code Actions
+	{
+		'kosayoda/nvim-lightbulb',
+		opts = { autocmd = { enabled = true } },
+		event = { "LspAttach" },
+		init = function()
+			-- Make the bulb use a nerdfont icon instead of emoji
+			vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
+		end
 	},
 	{
 		-- Also be able to install Formatters & linters
