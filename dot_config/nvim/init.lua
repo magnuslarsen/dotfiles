@@ -45,7 +45,7 @@ require('lazy').setup({
 			{
 				'kosayoda/nvim-lightbulb',
 				opts = { autocmd = { enabled = true } },
-				config = function()
+				init = function()
 					-- Make the bulb use a nerdfont icon instead of emoji
 					vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
 				end
@@ -146,7 +146,10 @@ require('lazy').setup({
 	{
 		'numToStr/Comment.nvim',
 		opts = {},
-		keys = { "gc", "gb" }
+		keys = {
+			{ "gc", mode = { "n", "v" } },
+			{ "gb", mode = { "n", "v" } },
+		}
 	},
 	-- Fuzzy Finder (files, lsp, etc)
 	{
@@ -262,7 +265,7 @@ require('lazy').setup({
 		keys = function()
 			local ret = {}
 			for _, key in ipairs({ "f", "F", "t", "T" }) do
-				ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+				ret[#ret + 1] = { key, mode = { "n", "v", "x", "o" }, desc = key }
 			end
 			return ret
 		end,
@@ -271,9 +274,9 @@ require('lazy').setup({
 	{
 		"ggandor/leap.nvim",
 		keys = {
-			{ "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
-			{ "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
-			{ "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+			{ "s",  mode = { "n", "v", "x", "o" }, desc = "Leap forward to" },
+			{ "S",  mode = { "n", "v", "x", "o" }, desc = "Leap backward to" },
+			{ "gs", mode = { "n", "v", "x", "o" }, desc = "Leap from windows" },
 		},
 		config = function(_, opts)
 			local leap = require("leap")
