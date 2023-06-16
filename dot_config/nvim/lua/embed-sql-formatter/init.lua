@@ -1,3 +1,5 @@
+local M = {}
+
 local run_formatter = function(text)
 	local split = vim.split(text, "\n")
 	local result = table.concat(vim.list_slice(split, 2, #split - 1), "\n")
@@ -35,7 +37,7 @@ local get_root = function(bufnr)
 	return tree:root()
 end
 
-local format_sql = function(bufnr)
+M.format_sql = function(bufnr)
 	bufnr = bufnr or vim.api.nvim_get_current_buf()
 
 	if vim.bo[bufnr].filetype ~= "python" then
@@ -79,6 +81,8 @@ local format_sql = function(bufnr)
 	end
 end
 
-vim.api.nvim_create_user_command("FormatSQL", function()
-	format_sql()
-end, {})
+-- vim.api.nvim_create_user_command("FormatSQL", function()
+-- 	format_sql()
+-- end, {})
+
+return M
