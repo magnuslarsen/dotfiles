@@ -29,22 +29,34 @@ require('lazy').setup({
 			{ 'williamboman/mason.nvim', config = true, build = ":MasonUpdate" },
 			'williamboman/mason-lspconfig.nvim',
 
-			-- Useful status updates for LSP
-			{ 'j-hui/fidget.nvim',       opts = {} },
-
-			-- Additional lua configuration, makes nvim stuff amazing!
-			{ 'folke/neodev.nvim',       opts = {} },
-
-			-- jsonSchema supports for certain lsp's
-			'b0o/schemastore.nvim',
-
 			-- pretty icons
 			'onsails/lspkind.nvim',
+
+			-- Useful status updates for LSP
+			{
+				'j-hui/fidget.nvim',
+				opts = {},
+				event = { "LspAttach" },
+			},
+
+			-- Additional lua configuration, makes nvim stuff amazing!
+			{
+				'folke/neodev.nvim',
+				opts = {},
+				ft = { "lua" },
+			},
+
+			-- jsonSchema supports for certain lsp's
+			{
+				'b0o/schemastore.nvim',
+				ft = { "json", "yaml" },
+			},
 
 			-- Lightbulb for Code Actions
 			{
 				'kosayoda/nvim-lightbulb',
 				opts = { autocmd = { enabled = true } },
+				event = { "LspAttach" },
 				init = function()
 					-- Make the bulb use a nerdfont icon instead of emoji
 					vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
@@ -88,13 +100,19 @@ require('lazy').setup({
 			'saadparwaiz1/cmp_luasnip',
 
 			-- Adds LSP completion capabilities
-			'hrsh7th/cmp-nvim-lsp',
+			{
+				'hrsh7th/cmp-nvim-lsp',
+				event = { "LspAttach" },
+			},
 
 			-- A neat little calculater
 			'hrsh7th/cmp-calc',
 
 			-- More sources
-			'hrsh7th/cmp-nvim-lua',
+			{
+				'hrsh7th/cmp-nvim-lua',
+				ft = { "lua" },
+			},
 			'hrsh7th/cmp-cmdline',
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-buffer',
@@ -181,7 +199,11 @@ require('lazy').setup({
 	{ 'nvim-treesitter/nvim-treesitter-textobjects', event = { "BufReadPre", "BufNewFile" } },
 	{ 'nvim-treesitter/nvim-treesitter-context',     event = { "BufReadPre", "BufNewFile" } },
 	{ 'nvim-treesitter/playground',                  cmd = { "TSPlaygroundToggle" } },
-	{ 'nvim-treesitter/nvim-treesitter',             build = ':TSUpdate' },
+	{
+		'nvim-treesitter/nvim-treesitter',
+		build = ':TSUpdate',
+		event = { "BufReadPre", "BufNewFile" },
+	},
 	{
 		-- File explorer
 		'nvim-tree/nvim-tree.lua',
