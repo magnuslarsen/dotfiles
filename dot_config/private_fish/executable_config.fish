@@ -15,6 +15,7 @@ set -U fzf_preview_dir_cmd fzf_preview_dir_cmd_fun
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 
 # Aliases
-if type -q bat
+if command --query bat
     alias cat="bat -p"
+    set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 end
