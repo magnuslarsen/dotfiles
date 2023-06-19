@@ -69,7 +69,18 @@ require('lazy').setup({
 		'jay-babu/mason-null-ls.nvim',
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"jose-elias-alvarez/null-ls.nvim",
+			{
+				"jose-elias-alvarez/null-ls.nvim",
+				event = { "BufReadPre", "BufNewFile" },
+				opts = function()
+					return {
+						sources = {
+							require('null-ls').builtins.formatting.fish_indent,
+							require('null-ls').builtins.diagnostics.fish,
+						}
+					}
+				end
+			},
 		},
 		opts = {
 			automatic_setup = true,
@@ -203,6 +214,36 @@ require('lazy').setup({
 		'nvim-treesitter/nvim-treesitter',
 		build = ':TSUpdate',
 		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			ensure_installed = {
+				'bash',
+				'comment',
+				'diff',
+				'dockerfile',
+				'fish',
+				'json',
+				'lua',
+				'make',
+				'markdown',
+				'markdown_inline',
+				'python',
+				'query',
+				'regex',
+				'ruby',
+				'sql',
+				'toml',
+				'yaml',
+			},
+			auto_install = true,
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+				disable = {},
+			}
+		},
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end
 	},
 	{
 		-- File explorer
@@ -483,17 +524,6 @@ mason_lspconfig.setup_handlers({
 	end,
 })
 
--- Configure formatters and linters in null-ls
-local null_ls = require('null-ls')
-null_ls.setup({
-	-- Sources which are not available in :Mason
-	sources = {
-		null_ls.builtins.formatting.fish_indent,
-		null_ls.builtins.diagnostics.fish,
-	},
-})
-
-
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require('cmp')
@@ -623,32 +653,3 @@ function Telescope_project_opts()
 
 	return {}
 end
-
--- Treesitter
-require('nvim-treesitter.configs').setup {
-	ensure_installed = {
-		'bash',
-		'comment',
-		'diff',
-		'dockerfile',
-		'fish',
-		'json',
-		'lua',
-		'make',
-		'markdown',
-		'markdown_inline',
-		'python',
-		'query',
-		'regex',
-		'ruby',
-		'sql',
-		'toml',
-		'yaml',
-	},
-	auto_install = true,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-		disable = {},
-	}
-}
