@@ -231,6 +231,7 @@ require('lazy').setup({
 				'ruby',
 				'sql',
 				'toml',
+				'vimdoc',
 				'yaml',
 			},
 			auto_install = true,
