@@ -19,3 +19,8 @@ if command --query bat
     alias cat="bat -p"
     set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 end
+
+# And prefer nvim if it is here
+if command --query nvim
+    set -gx MANPAGER "nvim +Man!"
+end
