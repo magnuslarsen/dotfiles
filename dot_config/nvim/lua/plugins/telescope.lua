@@ -1,3 +1,25 @@
+function Telescope_project_opts()
+	local function is_ansible_repo()
+		local current_path = vim.fn.expand("%:p")
+		return string.match(current_path, "ansible")
+	end
+	local function get_ansible_role_path()
+		local current_path = vim.fn.expand("%:p")
+		if string.match(current_path, "role") then
+			return string.gsub(current_path, "^(.*/roles/[%a%-%_%.]*)/.*", "%1")
+		elseif string.match(current_path, "playbook") then
+			return string.gsub(current_path, "^(.*/playbooks/).*", "%1")
+		else
+			return ""
+		end
+	end
+	if is_ansible_repo() then
+		return { cwd = get_ansible_role_path() }
+	end
+
+	return {}
+end
+
 return {
 	{
 		'nvim-telescope/telescope.nvim',
