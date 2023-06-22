@@ -38,7 +38,12 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
-			{ 'williamboman/mason.nvim', config = true, build = ":MasonUpdate" },
+			{
+				'williamboman/mason.nvim',
+				cmd = { "Mason" },
+				config = true,
+				build = ":MasonUpdate",
+			},
 
 			-- pretty icons
 			'onsails/lspkind.nvim',
