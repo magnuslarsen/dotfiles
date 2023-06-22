@@ -19,7 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup("plugins")
 
-
 -- all the vim options
 vim.g.nospell = true
 vim.o.completeopt = 'menuone,noselect'
