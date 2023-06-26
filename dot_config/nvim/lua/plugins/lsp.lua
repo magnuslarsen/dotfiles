@@ -196,6 +196,10 @@ return {
 							require('null-ls').builtins.diagnostics.fish,
 						}
 					}
+				end,
+				config = function(_, opts)
+					require('null-ls').setup(opts)
+					require('null-ls').register(require('null-ls-whitespace').null_ls_whitespace)
 				end
 			},
 		},
