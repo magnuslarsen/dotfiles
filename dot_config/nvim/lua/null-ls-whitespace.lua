@@ -45,7 +45,7 @@ end
 
 M.null_ls_whitespace = {
 	method = null_ls.methods.DIAGNOSTICS,
-	filetypes = { "python" }, -- for now; should be all files
+	filetypes = {}, -- all file types
 	generator = {
 		fn = function(params)
 			local diagnostics = {}
