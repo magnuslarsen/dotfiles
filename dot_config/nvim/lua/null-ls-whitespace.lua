@@ -57,6 +57,7 @@ local find_all_whitespace = function(line)
 end
 
 M.diagnostics = {
+	name = "null-ls-whitespace",
 	method = null_ls.methods.DIAGNOSTICS,
 	filetypes = {}, -- all file types
 	generator = {
