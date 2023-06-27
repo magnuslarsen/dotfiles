@@ -199,7 +199,7 @@ return {
 				end,
 				config = function(_, opts)
 					require('null-ls').setup(opts)
-					require('null-ls').register(require('null-ls-whitespace').null_ls_whitespace)
+					require('null-ls').register(require('null-ls-whitespace').diagnostics)
 				end
 			},
 		},
