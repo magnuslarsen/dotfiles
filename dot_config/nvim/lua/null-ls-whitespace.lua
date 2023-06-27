@@ -33,14 +33,27 @@ local invalid_whitespaces = {
 	"\u{3164}",
 }
 
-local find_keys_in_s = function(line)
+local find_keys_in_s = function(s, next)
 	for _, element in ipairs(invalid_whitespaces) do
-		local col, end_col = line:find(element)
+		local col, end_col = s:find(element, next or 0)
 		if col and end_col then
 			return col, end_col
 		end
 	end
 	return nil
+end
+
+local find_all_whitespace = function(line)
+	local locations = {}
+	local next = 0
+	while true do
+		local first, last = find_keys_in_s(line, next)
+		if first == nil then break end
+		table.insert(locations, { first, last })
+		next = last + 1
+	end
+
+	return locations
 end
 
 M.diagnostics = {
@@ -49,19 +62,21 @@ M.diagnostics = {
 	generator = {
 		fn = function(params)
 			local diagnostics = {}
-			-- sources have access to a params object
-			-- containing info about the current file and editor state
+
 			for i, line in ipairs(params.content) do
-				local col, end_col = find_keys_in_s(line)
-				if col and end_col then
-					table.insert(diagnostics, {
-						row = i,
-						col = col,
-						end_col = end_col + 1,
-						source = "null-ls-whitespace",
-						message = "Invalid whitespace found!",
-						severity = vim.diagnostic.severity.ERROR,
-					})
+				for _, location in ipairs(find_all_whitespace(line)) do
+					---@diagnostic disable-next-line: deprecated
+					local col, end_col = unpack(location)
+					if col and end_col then
+						table.insert(diagnostics, {
+							row = i,
+							col = col,
+							end_col = end_col + 1,
+							source = "null-ls-whitespace",
+							message = "Invalid whitespace found!",
+							severity = vim.diagnostic.severity.ERROR,
+						})
+					end
 				end
 			end
 			return diagnostics
