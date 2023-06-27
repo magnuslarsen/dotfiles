@@ -43,7 +43,7 @@ local find_keys_in_s = function(line)
 	return nil
 end
 
-M.null_ls_whitespace = {
+M.diagnostics = {
 	method = null_ls.methods.DIAGNOSTICS,
 	filetypes = {}, -- all file types
 	generator = {
