@@ -1,4 +1,5 @@
 local M = {}
+local plugin_name = "null-ls-whitespace"
 
 local null_ls = require('null-ls')
 
@@ -57,30 +58,73 @@ local find_all_whitespace = function(line)
 end
 
 M.diagnostics = {
-	name = "null-ls-whitespace",
+	name = plugin_name,
 	method = null_ls.methods.DIAGNOSTICS,
 	filetypes = {}, -- all file types
 	generator = {
 		fn = function(params)
 			local diagnostics = {}
 
-			for i, line in ipairs(params.content) do
+			for row, line in ipairs(params.content) do
 				for _, location in ipairs(find_all_whitespace(line)) do
 					---@diagnostic disable-next-line: deprecated
 					local col, end_col = unpack(location)
 					if col and end_col then
 						table.insert(diagnostics, {
-							row = i,
+							row = row,
 							col = col,
 							end_col = end_col + 1,
-							source = "null-ls-whitespace",
-							message = "Invalid whitespace found!",
-							severity = vim.diagnostic.severity.ERROR,
+							source = plugin_name,
+							message = "Unusual whitespace found!",
+							severity = vim.diagnostic.severity.WARN,
 						})
 					end
 				end
 			end
 			return diagnostics
+		end
+	}
+}
+
+local whitespace_diagnostics = function(bufnr, lnum, cursor_col)
+	local diagnostics = {}
+	for _, diagnostic in ipairs(vim.diagnostic.get(bufnr, { lnum = lnum, source = plugin_name })) do
+		if cursor_col >= diagnostic.col and cursor_col < diagnostic.end_col then
+			table.insert(diagnostics, diagnostic)
+		end
+	end
+	return diagnostics
+end
+
+M.code_actions = {
+	name = plugin_name,
+	method = null_ls.methods.CODE_ACTION,
+	filetypes = {}, -- all file types
+	generator = {
+		fn = function(params)
+			local actions = {}
+			local diagnostics = whitespace_diagnostics(params.bufnr, params.row - 1, params.col)
+			if vim.tbl_isempty(diagnostics) then
+				return nil
+			end
+
+			for _, d in ipairs(diagnostics) do
+				table.insert(actions, {
+					title = "Replace unusual whitespace with a proper one",
+					action = function()
+						vim.api.nvim_buf_set_text(
+							d.bufnr,
+							d.lnum,
+							d.col,
+							d.end_lnum,
+							d.end_col,
+							{ " " }
+						)
+					end
+				})
+			end
+
+			return actions
 		end
 	}
 }
