@@ -118,7 +118,7 @@ if ! shopt -oq posix; then
 fi
 
 if type tmux >/dev/null 2>&1; then
-	test -z "$TMUX" && (tmux attach || tmux new-session)
+	test -z "$TMUX" && tmux new-session -s main
 fi
 
 export VISUAL=nvim
