@@ -110,7 +110,7 @@ M.code_actions = {
 
 			for _, d in ipairs(diagnostics) do
 				table.insert(actions, {
-					title = "Replace unusual whitespace with a proper one",
+					title = "Replace this unusual whitespace with a proper one",
 					action = function()
 						vim.api.nvim_buf_set_text(
 							d.bufnr,
