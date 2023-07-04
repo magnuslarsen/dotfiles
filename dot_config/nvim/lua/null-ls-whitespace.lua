@@ -97,7 +97,14 @@ local whitespace_col_diagnostics = function(all_diagnostics, lnum, cursor_col)
 end
 
 local whitespace_diagnostics = function(bufnr)
-	return vim.diagnostic.get(bufnr, { source = plugin_name })
+	local diagnostics = {}
+	for _, d in ipairs(vim.diagnostic.get(bufnr)) do
+		if d.source == plugin_name then
+			table.insert(diagnostics, d)
+		end
+	end
+
+	return diagnostics
 end
 
 M.code_actions = {
