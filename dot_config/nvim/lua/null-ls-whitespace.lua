@@ -86,14 +86,18 @@ M.diagnostics = {
 	}
 }
 
-local whitespace_diagnostics = function(bufnr, lnum, cursor_col)
+local whitespace_col_diagnostics = function(all_diagnostics, lnum, cursor_col)
 	local diagnostics = {}
-	for _, diagnostic in ipairs(vim.diagnostic.get(bufnr, { lnum = lnum, source = plugin_name })) do
-		if cursor_col >= diagnostic.col and cursor_col < diagnostic.end_col then
-			table.insert(diagnostics, diagnostic)
+	for _, d in ipairs(all_diagnostics) do
+		if lnum == d.lnum and cursor_col >= d.col and cursor_col < d.end_col then
+			table.insert(diagnostics, d)
 		end
 	end
 	return diagnostics
+end
+
+local whitespace_diagnostics = function(bufnr)
+	return vim.diagnostic.get(bufnr, { source = plugin_name })
 end
 
 M.code_actions = {
@@ -103,12 +107,36 @@ M.code_actions = {
 	generator = {
 		fn = function(params)
 			local actions = {}
-			local diagnostics = whitespace_diagnostics(params.bufnr, params.row - 1, params.col)
+
+			-- replace all whitespace
+			local diagnostics = whitespace_diagnostics(params.bufnr)
 			if vim.tbl_isempty(diagnostics) then
 				return nil
 			end
+			table.insert(actions, {
+				title = "Replace all unsual whitespace with proper ones",
+				action = function()
+					-- we need to reverse replace, in case multiple whitespaces are replaced on one line
+					local replacements = {}
+					for _, d in ipairs(diagnostics) do
+						table.insert(replacements, 1, d)
+					end
 
-			for _, d in ipairs(diagnostics) do
+					for _, d in ipairs(replacements) do
+						vim.api.nvim_buf_set_text(
+							d.bufnr,
+							d.lnum,
+							d.col,
+							d.end_lnum,
+							d.end_col,
+							{ "\u{0020}" }
+						)
+					end
+				end
+			})
+
+			-- replace individual whitespace
+			for _, d in ipairs(whitespace_col_diagnostics(diagnostics, params.row - 1, params.col)) do
 				table.insert(actions, {
 					title = "Replace this unusual whitespace with a proper one",
 					action = function()
@@ -118,7 +146,7 @@ M.code_actions = {
 							d.col,
 							d.end_lnum,
 							d.end_col,
-							{ " " }
+							{ "\u{0020}" }
 						)
 					end
 				})
