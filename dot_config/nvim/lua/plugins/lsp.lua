@@ -47,32 +47,6 @@ return {
 
 			-- pretty icons
 			'onsails/lspkind.nvim',
-
-			-- SchemaStore support for yaml+json
-			{
-				"b0o/SchemaStore.nvim",
-				config = function(_, _)
-					lsp_servers = vim.tbl_extend("force", lsp_servers, {
-						yamlls = {
-							redhat = { telemetry = { enabled = false } },
-							yaml = {
-								schemaStore = { enable = false, url = "" },
-								schemas = require("schemastore").yaml.schemas(),
-								customTags = { "!vault", "!lambda" },
-								validate = true,
-								completion = true,
-								format = { enabled = false }, -- we use yamlfix for formatting
-							},
-						},
-						jsonls = {
-							json = {
-								schemas = require("schemastore").json.schemas(),
-								validate = { enable = true },
-							},
-						},
-					})
-				end,
-			},
 		},
 		init = function()
 			-- disable lsp watcher. Too slow on linux
@@ -83,14 +57,39 @@ return {
 				end
 			end
 		end,
-		setup = {},
 	},
 	{
 		'williamboman/mason-lspconfig.nvim',
 		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			ensure_installed = vim.tbl_keys(lsp_servers),
+		dependencies = {
+			-- SchemaStore support for yaml+json
+			{ "b0o/SchemaStore.nvim" },
 		},
+		opts = function()
+			local o = {}
+			lsp_servers = vim.tbl_extend("force", lsp_servers, {
+				yamlls = {
+					redhat = { telemetry = { enabled = false } },
+					yaml = {
+						schemaStore = { enable = false, url = "" },
+						schemas = require("schemastore").yaml.schemas(),
+						customTags = { "!vault", "!lambda" },
+						validate = true,
+						completion = true,
+						format = { enabled = false }, -- we use yamlfix for formatting
+					},
+				},
+				jsonls = {
+					json = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+				},
+			})
+			o.ensure_installed = vim.tbl_keys(lsp_servers)
+
+			return o
+		end,
 		config = function(_, opts)
 			require("mason-lspconfig").setup(opts)
 
@@ -147,7 +146,7 @@ return {
 								"force",
 								require("lspconfig.server_configurations.yamlls")
 								.default_config.filetypes,
-								{ "yaml.ansible" }
+								{ "yaml", "yaml.ansible" }
 							),
 						})
 					end

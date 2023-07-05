@@ -31,6 +31,7 @@ vim.o.undofile = true
 vim.o.updatetime = 250
 vim.o.timeout = true
 vim.o.timeoutlen = 300
+vim.o.foldlevelstart = 99
 vim.opt.autoindent = true
 vim.opt.backspace = { 'indent', 'eol', 'start' }
 vim.opt.backup = false
