@@ -1,4 +1,5 @@
-set fish_greeting
+set -gx fish_greeting
+
 set -gx GPG_TTY (tty)
 fish_ssh_agent
 
