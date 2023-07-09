@@ -67,8 +67,13 @@ vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>fl', vim.lsp.buf.code_action)
 
 -- Neat keybindings
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set("v", "Y", [["+y"]])             -- Copy to system clipboard
-vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")   -- move visual block up
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")   -- move visual block odwn
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- remap space (due to now beingleader key)
+vim.keymap.set("v", "Y", [["+y"]])                                  -- copy to system clipboard
+vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>")                      -- remap CTRL+C to Esc
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })     -- move visual line up
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })     -- move visual line down
+vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv", { silent = true })     -- move visual block up
+vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })     -- move visual block down
+vim.keymap.set("v", "<", "<gv^", { silent = true })                 -- stay in visual mode when indenting in
+vim.keymap.set("v", ">", ">gv^", { silent = true })                 -- stay in visual mode when indenting out
+vim.keymap.set("v", "p", '"_dP', { silent = true })                 -- keep copied text in buffer when pasting over stuff
