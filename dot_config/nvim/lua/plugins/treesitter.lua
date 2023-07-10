@@ -23,6 +23,13 @@ return {
 								["ip"] = "@parameter.inner",
 								["ap"] = "@parameter.outer",
 							},
+						},
+						lsp_interop = {
+							enable = true,
+							border = 'rounded',
+							peek_definition_code = {
+								["<leader>gd"] = "@function.outer"
+							}
 						}
 					}
 				},
@@ -35,7 +42,7 @@ return {
 				opts = {
 					textsubjects = {
 						enable = true,
-						prev_seletion = ",",
+						prev_selection = ",",
 						keymaps = {
 							["."] = 'textsubjects-smart'
 						},
