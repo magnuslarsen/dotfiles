@@ -13,15 +13,13 @@ return {
 					textobjects = {
 						select = {
 							enable = true,
-							lookahead = true,
+							lookahead = false,
 							include_surrounding_whitespace = true,
 							keymaps = {
 								["af"] = "@function.outer",
 								["if"] = "@function.inner",
 								["ac"] = "@class.outer",
 								["ic"] = "@class.inner",
-								["ip"] = "@parameter.inner",
-								["ap"] = "@parameter.outer",
 							},
 						},
 						lsp_interop = {
