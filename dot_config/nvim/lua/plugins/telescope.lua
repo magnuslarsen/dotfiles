@@ -44,6 +44,7 @@ return {
 			{ "<leader>rf", function() require("telescope.builtin").oldfiles() end },
 			{ "<leader>ht", function() require("telescope.builtin").help_tags() end },
 			{ "<leader>ss", function() require("telescope.builtin").spell_suggest() end },
+			{ "fb", function() require("telescope.builtin").buffers() end },
 		}
 	},
 }
