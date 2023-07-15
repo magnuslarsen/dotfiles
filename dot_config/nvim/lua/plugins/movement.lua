@@ -1,32 +1,19 @@
 return {
-	-- Leap + Flit, kindly taken from LazyVim <3
 	{
-		"ggandor/flit.nvim",
-		---@diagnostic disable-next-line: assign-type-mismatch
-		keys = function()
-			local ret = {}
-			for _, key in ipairs({ "f", "F", "t", "T" }) do
-				ret[#ret + 1] = { key, mode = { "n", "v", "x", "o" }, desc = key }
-			end
-			return ret
-		end,
-		opts = { labeled_modes = "nx" },
-	},
-	{
-		"ggandor/leap.nvim",
-		keys = {
-			{ "s",  mode = { "n", "v", "x", "o" }, desc = "Leap forward to" },
-			{ "S",  mode = { "n", "v", "x", "o" }, desc = "Leap backward to" },
-			{ "gs", mode = { "n", "v", "x", "o" }, desc = "Leap from windows" },
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {
+			modes = {
+				char = {
+					jump_labels = true
+				}
+			}
 		},
-		config = function(_, opts)
-			local leap = require("leap")
-			for k, v in pairs(opts) do
-				leap.opts[k] = v
-			end
-			leap.add_default_mappings(true)
-			vim.keymap.del({ "x", "o" }, "x")
-			vim.keymap.del({ "x", "o" }, "X")
-		end,
-	},
+		keys = {
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end },
+			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, },
+			{ "r", mode = "o",               function() require("flash").remote() end },
+			{ "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end },
+		},
+	}
 }
