@@ -28,6 +28,14 @@ return {
 			require('treesj').setup({})
 		end,
 	},
+	-- Surround text with chars easily
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({})
+		end
+	},
 	{
 		dir = "~/.config/nvim/lua/embed-sql-formatter",
 		keys = { { "<leader>fs", function() require('embed-sql-formatter').format_sql() end } }
