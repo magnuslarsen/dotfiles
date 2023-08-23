@@ -20,7 +20,7 @@ curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - # Gotta love n
 sudo apt install fish fonts-firacode git golang-go jq kitty neovim nodejs python3-pip ripgrep tmux
 python3 -m pip install pynvim yq
 ```
-`bat`, `exa`, `fd`, `fzf`, `git-delta`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
+`bat`, `exa`, `fd`, `fzf`, `riff`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
 
 # Chezmoi
 Chezmoi is managing all of these configs, initialize it like so:

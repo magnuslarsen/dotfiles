@@ -4,22 +4,16 @@ path = "~/.gitconfig_user"
 
 [core]
 editor = "nvim"
-pager = "delta"
+pager = "riff"
 
 [interactive]
-diffFilter = "delta --color-only"
+diffFilter = "riff"
 
 [merge]
 conflictstyle = "zdiff3"
 
 [diff]
 colorMoved = "default"
-
-[delta]
-navigate = true
-light = false
-line-numbers = true
-syntax-theme = "Dracula"
 
 [alias]
 mwps = "push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds"

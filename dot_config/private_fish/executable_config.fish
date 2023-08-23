@@ -16,6 +16,7 @@ set -U fzf_preview_file_cmd preview
 set -U fzf_preview_dir_cmd fzf_preview_dir_cmd_fun
 set fzf_history_time_format %d-%m-%y
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
+set fzf_diff_highlighter riff
 
 # Bat stuff
 if command --query bat
