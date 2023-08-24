@@ -64,7 +64,6 @@ vim.filetype.add({
 vim.keymap.set('n', 'df', vim.diagnostic.goto_next)
 vim.keymap.set('n', 'db', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format)
-vim.keymap.set('n', '<leader>fl', vim.lsp.buf.code_action)
 
 -- Neat keybindings
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- remap space (due to now beingleader key)

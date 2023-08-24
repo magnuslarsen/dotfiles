@@ -180,6 +180,32 @@ return {
 			vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
 		end
 	},
+	-- Pretty previewer for Code Actions
+	{
+		'aznhe21/actions-preview.nvim',
+		keys = {
+			{
+				"<leader>fl",
+				function() require("actions-preview").code_actions() end,
+				mode = { "n", "v" },
+			},
+		},
+		opts = {
+			telescope = {
+				sorting_strategy = "ascending",
+				layout_strategy = "vertical",
+				layout_config = {
+					width = 0.8,
+					height = 0.9,
+					prompt_position = "top",
+					preview_cutoff = 20,
+					preview_height = function(_, _, max_lines)
+						return max_lines - 15
+					end,
+				},
+			},
+		}
+	},
 	{
 		-- Also be able to install Formatters & linters
 		'jay-babu/mason-null-ls.nvim',
