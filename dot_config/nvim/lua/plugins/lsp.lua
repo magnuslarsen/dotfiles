@@ -107,10 +107,10 @@ return {
 
 				nmap('da', telescope.diagnostics, '[D]iagnists List [A]ll')
 
-				nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+				nmap('gd', telescope.lsp_definitions, '[G]oto [D]efinition')
 				nmap('gr', telescope.lsp_references, '[G]oto [R]eferences')
-				nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-				nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype Definition')
+				nmap('gi', telescope.lsp_implementations, '[G]oto [I]mplementation')
+				nmap('gt', telescope.lsp_type_definitions, '[G]oto [T]ype Definition')
 
 				nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
 				nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
