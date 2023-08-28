@@ -36,6 +36,14 @@ return {
 			require("nvim-surround").setup({})
 		end
 	},
+	-- Fix scrolloff at EOF
+	{
+		'Aasim-A/scrollEOF.nvim',
+		event = "VeryLazy",
+		config = function()
+			require('scrollEOF').setup()
+		end
+	},
 	{
 		dir = "~/.config/nvim/lua/embed-sql-formatter",
 		keys = { { "<leader>fs", function() require('embed-sql-formatter').format_sql() end } }
