@@ -17,8 +17,10 @@ local lsp_servers = {
 			pydocstyle = { enabled = false },
 			pyflakes = { enabled = false },
 			pylint = { enabled = false },
+			-- Enabled plugins for more features
 			ruff = { enabled = true, extendSelect = { "A", "C", "E", "I" } },
 			black = { enabled = true },
+			rope_autoimport = { enabled = true },
 		}
 	},
 	taplo = {},

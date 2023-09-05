@@ -50,7 +50,7 @@ mkdir -p ~/.local/share/fonts && wget -q "https://github.com/ryanoasis/nerd-font
 # PyLSP
 For PyLSP, additional tools needs to be installed, which is not done by Mason:
 ```vim
-:PylspInstall python-lsp-ruff python-lsp-black
+:PylspInstall python-lsp-ruff python-lsp-black rope
 ```
 You also might want to enable system installed packages:
 ```sh
