@@ -56,7 +56,6 @@ return {
 				'comment',
 				'diff',
 				'fish',
-				'help',
 				'json',
 				'lua',
 				'make',
