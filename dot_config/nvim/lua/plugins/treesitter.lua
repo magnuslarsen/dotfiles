@@ -35,20 +35,12 @@ return {
 				end
 			},
 			{
-				'RRethy/nvim-treesitter-textsubjects',
-				opts = {
-					textsubjects = {
-						enable = true,
-						prev_selection = ",",
-						keymaps = {
-							["."] = 'textsubjects-smart'
-						},
-					}
-				},
-				config = function(_, opts)
-					require("nvim-treesitter.configs").setup(opts)
-				end
-			},
+				"sustech-data/wildfire.nvim",
+				event = "VeryLazy",
+				config = function()
+					require("wildfire").setup()
+				end,
+			}
 		},
 		opts = {
 			ensure_installed = {
