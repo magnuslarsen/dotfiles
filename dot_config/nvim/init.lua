@@ -63,7 +63,7 @@ vim.filetype.add({
 -- Some keybinds are useful even without lsp_config activated (read: null-ls)
 vim.keymap.set('n', 'df', vim.diagnostic.goto_next)
 vim.keymap.set('n', 'db', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>ff', vim.lsp.buf.format)
+vim.keymap.set({ 'n', 'v' }, '<leader>ff', function() require("conform").format({ lsp_fallback = "always" }) end)
 
 -- Neat keybindings
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true }) -- remap space (due to now beingleader key)
