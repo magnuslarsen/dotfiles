@@ -209,46 +209,43 @@ return {
 		}
 	},
 	{
-		-- Also be able to install Formatters & linters
-		'jay-babu/mason-null-ls.nvim',
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			{
-				"jose-elias-alvarez/null-ls.nvim",
-				event = { "BufReadPre", "BufNewFile" },
-				opts = function()
-					return {
-						sources = {
-							require('null-ls').builtins.formatting.fish_indent,
-							require('null-ls').builtins.diagnostics.fish,
-						}
-					}
+		'stevearc/conform.nvim',
+		opts = function()
+			return {
+				formatters_by_ft = {
+					fish = { "fish_indent" },
+					sh = { "shfmt" },
+					sql = { "sql_formatter" },
+					yaml = { "yamlfix" },
+
+				}
+			}
+		end,
+		config = function(_, opts)
+			require("conform").setup(opts)
+			require("conform.formatters.yamlfix").env = {
+				YAMLFIX_WHITELINES = 1
+			}
+			require("conform.formatters.sql_formatter").args = {
+				"-c",
+				vim.fn.expand("~/.config/sql_formatter.json")
+			}
+		end
+	},
+	{
+		'mfussenegger/nvim-lint',
+		config = function()
+			require("lint").linters_by_ft = {
+				fish = { "fish" },
+				go = { "golangcilint" },
+				sh = { "shellcheck" },
+			}
+
+			vim.api.nvim_create_autocmd({ "BufWritePost", "TextChanged" }, {
+				callback = function()
+					require("lint").try_lint()
 				end,
-				config = function(_, opts)
-					require('null-ls').setup(opts)
-					require('null-ls').register(require('null-ls-whitespace').diagnostics)
-					require('null-ls').register(require('null-ls-whitespace').code_actions)
-				end
-			},
-		},
-		opts = {
-			automatic_setup = true,
-			automatic_installation = false,
-			ensure_installed = { "shellcheck", "shfmt", "sql_formatter", "yamlfix" },
-			handlers = {
-				yamlfix = function()
-					require('null-ls').register(require('null-ls').builtins.formatting.yamlfix.with({
-						env = { YAMLFIX_WHITELINES = 1 }
-					}))
-				end,
-				sql_formatter = function()
-					require('null-ls').register(require('null-ls').builtins.formatting.sql_formatter
-						.with({
-							extra_args = { "-c",
-								vim.fn.expand("~/.config/sql_formatter.json") }
-						}))
-				end,
-			},
-		}
+			})
+		end
 	},
 }
