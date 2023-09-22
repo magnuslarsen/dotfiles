@@ -6,7 +6,9 @@ local lsp_servers = {
 			}
 		}
 	},
-	gopls = {},
+	gopls = {
+		gofumpt = true,
+	},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
@@ -242,7 +244,7 @@ return {
 				sh = { "shellcheck" },
 			}
 
-			vim.api.nvim_create_autocmd({ "BufWritePost", "TextChanged" }, {
+			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged" }, {
 				callback = function()
 					require("lint").try_lint()
 				end,
