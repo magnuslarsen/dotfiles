@@ -28,3 +28,6 @@ end
 if command --query nvim
     set -gx MANPAGER "nvim +Man!"
 end
+
+# Include (nvim) Mason installed binaries
+fish_add_path ~/.local/share/nvim/mason/bin
