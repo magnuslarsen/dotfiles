@@ -1,4 +1,12 @@
 local lsp_servers = {
+	ansiblels = {
+		ansible = {
+			ansible = {
+				useFullyQualifiedCollectionNames = false
+			}
+		}
+	},
+	gopls = {},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
@@ -24,13 +32,6 @@ local lsp_servers = {
 		}
 	},
 	taplo = {},
-	ansiblels = {
-		ansible = {
-			ansible = {
-				useFullyQualifiedCollectionNames = false
-			}
-		}
-	},
 }
 
 
@@ -248,4 +249,17 @@ return {
 			})
 		end
 	},
+	{
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
+		opts = {
+			auto_update = true,
+			ensure_installed = {
+				'golangci-lint',
+				'shellcheck',
+				'shfmt',
+				'sql-formatter',
+				'yamlfix'
+			}
+		},
+	}
 }
