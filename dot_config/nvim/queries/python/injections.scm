@@ -6,8 +6,10 @@
 
     (argument_list
       (string
-	(string_content) @sql
+	(string_content) @injection.content
+	(#set! injection.language "sql")
       )
     )
   )
 )
+
