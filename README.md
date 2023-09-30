@@ -5,7 +5,7 @@ This is mine, it probably doesn't fit your desires :-)
 ## Arch
 on Arch, simply run:
 ```sh
-yay -S bat exa fd fish fzf git git-delta go jq kitty neovim nodejs npm python-pip ripgrep tmux ttf-fira-code yay yq
+yay -S bat exa fd fish fzf git git-delta go jq kitty neovim nodejs npm python-pip riffdiff ripgrep tmux ttf-fira-code yay yq
 ```
 
 ## Ubuntu
