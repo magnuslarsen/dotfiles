@@ -7,6 +7,7 @@ return {
 			-- Snippet Engine & its associated nvim-cmp source
 			'L3MON4D3/LuaSnip',
 			'saadparwaiz1/cmp_luasnip',
+			'L3MON4D3/cmp-luasnip-choice', -- choice-node autocomplete
 
 			-- Adds LSP completion capabilities
 			'hrsh7th/cmp-nvim-lsp',
@@ -15,12 +16,9 @@ return {
 			'hrsh7th/cmp-calc',
 
 			-- More sources
-			{
-				'hrsh7th/cmp-nvim-lua',
-				ft = { "lua" },
-			},
+			'hrsh7th/cmp-nvim-lua',
 			'hrsh7th/cmp-cmdline',
-			'hrsh7th/cmp-path',
+			'FelipeLema/cmp-async-path',
 			'hrsh7th/cmp-buffer',
 
 			-- Adds a number of user-friendly snippets
@@ -30,6 +28,7 @@ return {
 			local cmp = require('cmp')
 			local luasnip = require('luasnip')
 			local lspkind = require('lspkind')
+			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 			-- luasnip configuration
 			require('luasnip.loaders.from_vscode').lazy_load()
@@ -41,13 +40,6 @@ return {
 				autosnippets = false,
 				ft_func = require("luasnip.extras.filetype_functions").from_cursor
 			})
-
-			-- OR https://github.com/saadparwaiz1/cmp_luasnip/pull/45
-			vim.keymap.set("i", "<c-l>", function()
-				if luasnip.choice_active() then
-					luasnip.change_choice(1)
-				end
-			end)
 
 			cmp.setup({
 				snippet = {
@@ -88,8 +80,9 @@ return {
 					{ name = 'nvim_lsp' },
 					{ name = 'nvim_lua' },
 					{ name = 'luasnip' },
+					{ name = 'luasnip_choice' },
 					{ name = 'calc' },
-					{ name = 'path' },
+					{ name = 'async_path' },
 					{ name = 'buffer' },
 				}),
 				window = {
@@ -116,6 +109,11 @@ return {
 					end
 				end
 			})
+
+			-- Include extended doc snippets
+			require("luasnip").filetype_extend("sh", { "shelldoc" })
+			require("luasnip").filetype_extend("python", { "pydoc" })
+
 			-- Use buffer source for `/`
 			cmp.setup.cmdline('/', {
 				mapping = cmp.mapping.preset.cmdline({}),
@@ -132,6 +130,17 @@ return {
 					{ name = 'cmdline' }
 				})
 			})
+
+			-- autopairs
+			cmp.event:on(
+				'confirm_done',
+				cmp_autopairs.on_confirm_done()
+			)
 		end
 	},
+	{
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		opts = {},
+	}
 }
