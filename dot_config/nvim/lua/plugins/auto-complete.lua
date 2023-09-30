@@ -112,7 +112,6 @@ return {
 
 			-- Include extended doc snippets
 			require("luasnip").filetype_extend("sh", { "shelldoc" })
-			require("luasnip").filetype_extend("python", { "pydoc" })
 
 			-- Use buffer source for `/`
 			cmp.setup.cmdline('/', {
