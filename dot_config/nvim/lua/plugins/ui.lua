@@ -19,6 +19,12 @@ return {
 		},
 	},
 	{
+		'akinsho/git-conflict.nvim',
+		opts = {
+			disable_diagnostics = true,
+		}
+	},
+	{
 		-- Dark theme
 		'Mofiqul/dracula.nvim',
 		priority = 1000,
