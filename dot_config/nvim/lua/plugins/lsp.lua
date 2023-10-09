@@ -238,10 +238,30 @@ return {
 	{
 		'mfussenegger/nvim-lint',
 		config = function()
+			require("lint").linters.systemd_analyze = {
+				cmd = "systemd-analyze",
+				args = { "verify" },
+				append_fname = true,
+				stdin = false,
+				stream = "both",
+				ignore_exitcode = true,
+				parser = require("lint.parser").from_pattern(
+					"(.+):(%d+):%s(.*)", -- pattern
+					{ "file", "lnum", "message" }, -- matching groups
+					{}, -- severity mapping
+					-- default options
+					{
+						["source"] = "systemd-anaylze",
+						["severity"] = vim.diagnostic.severity.WARN,
+					},
+					{} -- additional options
+				)
+			}
 			require("lint").linters_by_ft = {
 				fish = { "fish" },
 				go = { "golangcilint" },
 				sh = { "shellcheck" },
+				systemd = { "systemd_analyze" }
 			}
 
 			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged" }, {
