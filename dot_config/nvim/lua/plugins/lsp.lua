@@ -277,11 +277,12 @@ return {
 		opts = {
 			auto_update = true,
 			ensure_installed = {
+				'fixjson',
 				'golangci-lint',
 				'shellcheck',
 				'shfmt',
 				'sql-formatter',
-				'yamlfix'
+				'yamlfix',
 			}
 		},
 	}
