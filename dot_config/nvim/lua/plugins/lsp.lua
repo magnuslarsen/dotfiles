@@ -220,7 +220,8 @@ return {
 					sh = { "shfmt" },
 					sql = { "sql_formatter" },
 					yaml = { "yamlfix" },
-
+					json = { "jq" },
+					["*"] = { "injected" }
 				}
 			}
 		end,
