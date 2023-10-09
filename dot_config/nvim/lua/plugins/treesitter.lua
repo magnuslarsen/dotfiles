@@ -43,13 +43,6 @@ return {
 					require("nvim-treesitter.configs").setup(opts)
 				end
 			},
-			{
-				"sustech-data/wildfire.nvim",
-				event = "VeryLazy",
-				config = function()
-					require("wildfire").setup()
-				end,
-			}
 		},
 		opts = {
 			ensure_installed = {
