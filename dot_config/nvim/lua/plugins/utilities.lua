@@ -44,8 +44,4 @@ return {
 			require('scrollEOF').setup()
 		end
 	},
-	{
-		dir = "~/.config/nvim/lua/embed-sql-formatter",
-		keys = { { "<leader>fs", function() require('embed-sql-formatter').format_sql() end } }
-	}
 }
