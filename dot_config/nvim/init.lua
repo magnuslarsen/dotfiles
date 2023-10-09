@@ -53,6 +53,8 @@ vim.filetype.add({
 		-- Set filetype to yaml.ansible for known Ansible repositories in order to run the LSP server
 		["~/zgit/sdma%-ansible/.*/.*%.ya?ml"] = { "yaml.ansible", { priority = 0 } },
 		["~/zgit/sdma%-ansible/inventory/.*%.ya?ml"] = { "yaml", { priority = 10 } },
+		-- Set systemd filetype for systemd files in yaml.ansible files
+		["~/zgit/sdma%-ansible/.*%.service"] = "systemd",
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
 		-- Set filtype sls (saltstack) files
@@ -76,3 +78,5 @@ vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv", { silent = true })     -- move visu
 vim.keymap.set("v", "<", "<gv^", { silent = true })                 -- stay in visual mode when indenting in
 vim.keymap.set("v", ">", ">gv^", { silent = true })                 -- stay in visual mode when indenting out
 vim.keymap.set("v", "p", '"_dP', { silent = true })                 -- keep copied text in buffer when pasting over stuff
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true })          -- stay centered
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true })          -- stay centered
