@@ -44,4 +44,11 @@ return {
 			require('scrollEOF').setup()
 		end
 	},
+	{
+		"sustech-data/wildfire.nvim",
+		keys = "<CR>",
+		config = function()
+			require("wildfire").setup()
+		end,
+	}
 }
