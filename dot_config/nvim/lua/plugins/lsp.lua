@@ -29,8 +29,11 @@ local lsp_servers = {
 			pylint = { enabled = false },
 			-- Enabled plugins for more features
 			ruff = { enabled = true, extendSelect = { "A", "C", "E", "I" } },
-			black = { enabled = true },
+			black = { enabled = true, preview = true },
+			-- Rope auto-completer
 			rope_autoimport = { enabled = true },
+			-- rope_completion = { enabled = true },
+			-- jedi_completion = { enabled = false },
 		}
 	},
 	taplo = {},
