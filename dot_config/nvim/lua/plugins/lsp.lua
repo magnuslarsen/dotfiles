@@ -28,7 +28,11 @@ local lsp_servers = {
 			pyflakes = { enabled = false },
 			pylint = { enabled = false },
 			-- Enabled plugins for more features
-			ruff = { enabled = true, extendSelect = { "A", "C", "E", "I" } },
+			ruff = {
+				enabled = true,
+				extendSelect = { "A", "C", "E", "I" },
+				unsafeFixes = true,
+			},
 			black = { enabled = true, preview = true },
 			-- Rope auto-completer
 			rope_autoimport = { enabled = true },
