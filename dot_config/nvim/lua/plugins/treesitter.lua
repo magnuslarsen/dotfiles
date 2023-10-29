@@ -43,6 +43,25 @@ return {
 					require("nvim-treesitter.configs").setup(opts)
 				end
 			},
+			{
+				'nvim-treesitter/nvim-treesitter-refactor',
+				opts = {
+					refactor = {
+						highlight_definitions = {
+							enabled = true,
+						},
+						smart_rename = {
+							enabled = true,
+							keymaps = {
+								smart_rename = '<leader>rn'
+							}
+						}
+					}
+				},
+				config = function(_, opts)
+					require("nvim-treesitter.configs").setup(opts)
+				end
+			}
 		},
 		opts = {
 			ensure_installed = {
