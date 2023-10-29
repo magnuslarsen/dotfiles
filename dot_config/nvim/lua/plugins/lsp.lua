@@ -115,8 +115,6 @@ return {
 				end
 				local telescope = require('telescope.builtin')
 
-				nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-
 				nmap('da', telescope.diagnostics, '[D]iagnists List [A]ll')
 
 				nmap('gd', telescope.lsp_definitions, '[G]oto [D]efinition')
@@ -164,6 +162,15 @@ return {
 					end
 					require('lspconfig')[server_name].setup(ls_config)
 				end,
+			})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local caps = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
+					if caps.renameProvider then
+						vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = true })
+					end
+				end
 			})
 		end
 	},
