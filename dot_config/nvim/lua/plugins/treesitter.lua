@@ -77,6 +77,7 @@ return {
 				'python',
 				'query',
 				'ruby',
+				'rust',
 				'sql',
 				'toml',
 				'vimdoc',
