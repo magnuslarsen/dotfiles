@@ -41,6 +41,7 @@ local lsp_servers = {
 		}
 	},
 	taplo = {},
+	rust_analyzer = {},
 }
 
 
@@ -122,7 +123,6 @@ return {
 				nmap('gi', telescope.lsp_implementations, '[G]oto [I]mplementation')
 				nmap('gt', telescope.lsp_type_definitions, '[G]oto [T]ype Definition')
 
-				nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
 				nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
 				nmap('gD', vim.lsp.buf.declaration, '[G]oto [^D]eclaration')
@@ -160,7 +160,12 @@ return {
 							),
 						})
 					end
-					require('lspconfig')[server_name].setup(ls_config)
+
+					if server_name == "rust_analyzer" then
+						-- We use rustaceanvim for this
+					else
+						require('lspconfig')[server_name].setup(ls_config)
+					end
 				end,
 			})
 
@@ -299,5 +304,5 @@ return {
 				'yamlfix',
 			}
 		},
-	}
+	},
 }
