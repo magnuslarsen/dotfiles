@@ -48,10 +48,10 @@ return {
 				opts = {
 					refactor = {
 						highlight_definitions = {
-							enabled = true,
+							enable = true,
 						},
 						smart_rename = {
-							enabled = true,
+							enable = true,
 							keymaps = {
 								smart_rename = '<leader>rn'
 							}
