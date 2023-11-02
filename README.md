@@ -5,7 +5,7 @@ This is mine, it probably doesn't fit your desires :-)
 ## Arch
 on Arch, simply run:
 ```sh
-yay -S bat exa fd fish fzf git git-delta go jq kitty neovim nodejs npm python-pip riffdiff ripgrep tmux ttf-fira-code yay yq
+yay -S bat exa fd fish fzf git git-delta go jq kitty neovim nodejs npm python-pip riffdiff ripgrep starship tmux ttf-fira-code yay yq
 ```
 
 ## Ubuntu
@@ -20,7 +20,7 @@ curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - # Gotta love n
 sudo apt install fish fonts-firacode git golang-go jq kitty neovim nodejs python3-pip ripgrep tmux
 python3 -m pip install pynvim yq
 ```
-`bat`, `exa`, `fd`, `fzf`, `riff`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
+`bat`, `exa`, `fd`, `fzf`, `riff`, `starship`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
 
 # Chezmoi
 Chezmoi is managing all of these configs, initialize it like so:
