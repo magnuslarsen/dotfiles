@@ -32,7 +32,7 @@ vim.treesitter.query.set(
 -- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
 local transform = function(text, info)
 	if text == "int" then
-		return t "0"
+		return t("0")
 	elseif text == "error" then
 		if info then
 			info.index = info.index + 1
@@ -48,14 +48,14 @@ local transform = function(text, info)
 				t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
 			})
 		else
-			return t "err"
+			return t("err")
 		end
 	elseif text == "bool" then
-		return t "false"
+		return t("false")
 	elseif text == "string" then
-		return t '""'
+		return t('""')
 	elseif string.find(text, "*", 1, true) then
-		return t "nil"
+		return t("nil")
 	end
 
 	return t(text)
@@ -68,7 +68,7 @@ local handlers = {
 		for idx = 0, count - 1 do
 			table.insert(result, transform(get_node_text(node:named_child(idx), 0), info))
 			if idx ~= count - 1 then
-				table.insert(result, t { ", " })
+				table.insert(result, t({ ", " }))
 			end
 		end
 
@@ -88,11 +88,7 @@ local function go_result_type(info)
 	local function_node
 
 	for _, v in ipairs(scope) do
-		if
-		    v:type() == "function_declaration"
-		    or v:type() == "method_declaration"
-		    or v:type() == "func_literal"
-		then
+		if v:type() == "function_declaration" or v:type() == "method_declaration" or v:type() == "func_literal" then
 			function_node = v
 			break
 		end
@@ -106,18 +102,18 @@ local function go_result_type(info)
 		end
 	end
 
-	return { t "nil" }
+	return { t("nil") }
 end
 
 -- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
 local go_ret_vals = function(args)
 	return snippet_from_nodes(
 		nil,
-		go_result_type {
+		go_result_type({
 			index = 0,
 			err_name = args[1][1],
 			func_name = args[2][1],
-		}
+		})
 	)
 end
 
@@ -125,18 +121,18 @@ return {
 	-- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
 	s("iferr", {
 		i(1, { "val" }),
-		t ", ",
+		t(", "),
 		i(2, { "err" }),
-		t " := ",
+		t(" := "),
 		i(3, { "f" }),
-		t "(",
+		t("("),
 		i(4),
-		t ")",
-		t { "", "if " },
+		t(")"),
+		t({ "", "if " }),
 		same(2),
-		t { " != nil {", "\treturn " },
+		t({ " != nil {", "\treturn " }),
 		d(5, go_ret_vals, { 2, 3 }),
-		t { "", "}" },
+		t({ "", "}" }),
 		i(0),
 	}),
 }

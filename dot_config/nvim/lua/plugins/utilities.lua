@@ -1,31 +1,31 @@
 return {
 	-- Better comments
 	{
-		'numToStr/Comment.nvim',
+		"numToStr/Comment.nvim",
 		opts = {},
 		keys = {
 			{ "gc", mode = { "n", "v" } },
 			{ "gb", mode = { "n", "v" } },
-		}
+		},
 	},
 	-- PGP support
-	{ 'jamessan/vim-gnupg' },
+	{ "jamessan/vim-gnupg" },
 	-- Autodetect spacing
 	{
-		'tpope/vim-sleuth',
+		"tpope/vim-sleuth",
 		event = { "BufReadPre", "BufNewFile" },
 	}, -- Better Sorting
 	{
-		'sQVe/sort.nvim',
+		"sQVe/sort.nvim",
 		opts = {},
 		cmd = { "Sort" },
 	}, -- Block split-/joining
 	{
-		'Wansmer/treesj',
-		keys = { '<leader>j', '<leader>m', '<leader>s' },
-		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		"Wansmer/treesj",
+		keys = { "<leader>j", "<leader>m", "<leader>s" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
-			require('treesj').setup({})
+			require("treesj").setup({})
 		end,
 	},
 	-- Surround text with chars easily
@@ -34,15 +34,15 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("nvim-surround").setup({})
-		end
+		end,
 	},
 	-- Fix scrolloff at EOF
 	{
-		'Aasim-A/scrollEOF.nvim',
+		"Aasim-A/scrollEOF.nvim",
 		event = "VeryLazy",
 		config = function()
-			require('scrollEOF').setup()
-		end
+			require("scrollEOF").setup()
+		end,
 	},
 	{
 		"sustech-data/wildfire.nvim",
@@ -50,5 +50,5 @@ return {
 		config = function()
 			require("wildfire").setup()
 		end,
-	}
+	},
 }
