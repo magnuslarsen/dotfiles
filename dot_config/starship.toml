@@ -11,7 +11,7 @@ right_format = "$cmd_duration$time"
 [time]
 disabled = false
 format = "[$time]($style)"
-style = "bold bright-black"
+style = "bright-black"
 
 [line_break]
 disabled = true
@@ -19,12 +19,12 @@ disabled = true
 [hostname]
 ssh_only = false
 format = "[$hostname]($style)"
-style = "bold #bd93f9"
+style = "#bd93f9"
 
 [username]
 show_always = true
 format = "[$user]($style)"
-style_user = "bold #8be9fd"
+style_user = "#8be9fd"
 
 [status]
 disabled = false
@@ -33,15 +33,15 @@ format = '[\[$status\]]($style)'
 [directory]
 truncate_to_repo = false
 truncation_length = 80
-style = "bold #50fa7b"
+style = "#50fa7b"
 
 [git_branch]
 format = '[\($branch(:$remote_branch)\)]($style) '
-style = "bold #ff79c6"
+style = "#ffffff"
 
 [cmd_duration]
-style = "bold #f1fa8c"
+style = "#f1fa8c"
 
 [character]
-error_symbol = "[❯](bold #ff5555)"
-success_symbol = "[❯](bold #50fa7b)"
+error_symbol = "[❯](#ff5555)"
+success_symbol = "[❯](#50fa7b)"
