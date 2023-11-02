@@ -2,9 +2,9 @@ local lsp_servers = {
 	ansiblels = {
 		ansible = {
 			ansible = {
-				useFullyQualifiedCollectionNames = false
-			}
-		}
+				useFullyQualifiedCollectionNames = false,
+			},
+		},
 	},
 	gopls = {
 		gofumpt = true,
@@ -13,8 +13,8 @@ local lsp_servers = {
 		Lua = {
 			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
 			telemetry = { enable = false },
-			diagnostics = { globals = { "vim" } }
-
+			diagnostics = { globals = { "vim" } },
+			format = { enable = false },
 		},
 	},
 	pylsp = {
@@ -38,28 +38,27 @@ local lsp_servers = {
 			rope_autoimport = { enabled = true },
 			-- rope_completion = { enabled = true },
 			-- jedi_completion = { enabled = false },
-		}
+		},
 	},
 	taplo = {},
 	rust_analyzer = {},
 }
 
-
 return {
 	{
-		'neovim/nvim-lspconfig',
+		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			-- Automatically install LSPs to stdpath for neovim
 			{
-				'williamboman/mason.nvim',
+				"williamboman/mason.nvim",
 				cmd = { "Mason" },
 				config = true,
 				build = ":MasonUpdate",
 			},
 
 			-- pretty icons
-			'onsails/lspkind.nvim',
+			"onsails/lspkind.nvim",
 		},
 		init = function()
 			-- disable lsp watcher. Too slow on linux
@@ -72,12 +71,12 @@ return {
 		end,
 	},
 	{
-		'williamboman/mason-lspconfig.nvim',
+		"williamboman/mason-lspconfig.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			-- SchemaStore support for yaml+json
 			{ "b0o/SchemaStore.nvim" },
-			{ 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 		},
 		opts = function()
 			local o = {}
@@ -103,16 +102,16 @@ return {
 
 			local installerable_tools = vim.tbl_keys(lsp_servers)
 			installerable_tools = vim.list_extend(installerable_tools, {
-					'fixjson',
-					'golangci-lint',
-					'shellcheck',
-					'shfmt',
-					'sql-formatter',
-					'yamlfix',
+				"fixjson",
+				"golangci-lint",
+				"shellcheck",
+				"shfmt",
+				"sql-formatter",
+				"yamlfix",
 			})
-			require('mason-tool-installer').setup({
+			require("mason-tool-installer").setup({
 				auto_update = true,
-				ensure_installed = installerable_tools
+				ensure_installed = installerable_tools,
 			})
 
 			return o
@@ -123,41 +122,36 @@ return {
 			local on_attach = function(_, bufnr)
 				local nmap = function(keys, func, desc)
 					if desc then
-						desc = 'LSP: ' .. desc
+						desc = "LSP: " .. desc
 					end
 
-					vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 				end
-				local telescope = require('telescope.builtin')
+				local telescope = require("telescope.builtin")
 
-				nmap('da', telescope.diagnostics, '[D]iagnists List [A]ll')
+				nmap("da", telescope.diagnostics, "[D]iagnists List [A]ll")
 
-				nmap('gd', telescope.lsp_definitions, '[G]oto [D]efinition')
-				nmap('gr', telescope.lsp_references, '[G]oto [R]eferences')
-				nmap('gi', telescope.lsp_implementations, '[G]oto [I]mplementation')
-				nmap('gt', telescope.lsp_type_definitions, '[G]oto [T]ype Definition')
+				nmap("gd", telescope.lsp_definitions, "[G]oto [D]efinition")
+				nmap("gr", telescope.lsp_references, "[G]oto [R]eferences")
+				nmap("gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
+				nmap("gt", telescope.lsp_type_definitions, "[G]oto [T]ype Definition")
 
-				nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+				nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-				nmap('gD', vim.lsp.buf.declaration, '[G]oto [^D]eclaration')
+				nmap("gD", vim.lsp.buf.declaration, "[G]oto [^D]eclaration")
 			end
 
 			-- Make some pretty borders as well
-			vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-				vim.lsp.handlers.hover,
-				{ border = 'rounded' }
-			)
-			vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-				vim.lsp.handlers.signature_help,
-				{ border = 'rounded' }
-			)
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+			vim.lsp.handlers["textDocument/signatureHelp"] =
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			-- Ensure the servers above are installed
-			require('mason-lspconfig').setup_handlers({
+			require("mason-lspconfig").setup_handlers({
 				function(server_name)
 					local ls_config = {
 						capabilities = capabilities,
@@ -168,8 +162,7 @@ return {
 						ls_config = vim.tbl_deep_extend("force", ls_config, {
 							filetypes = vim.tbl_deep_extend(
 								"force",
-								require("lspconfig.server_configurations.yamlls")
-								.default_config.filetypes,
+								require("lspconfig.server_configurations.yamlls").default_config.filetypes,
 								{ "yaml", "yaml.ansible" }
 							),
 						})
@@ -178,7 +171,7 @@ return {
 					if server_name == "rust_analyzer" then
 						-- We use rustaceanvim for this
 					else
-						require('lspconfig')[server_name].setup(ls_config)
+						require("lspconfig")[server_name].setup(ls_config)
 					end
 				end,
 			})
@@ -189,13 +182,13 @@ return {
 					if caps.renameProvider then
 						vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = true })
 					end
-				end
+				end,
 			})
-		end
+		end,
 	},
 	-- Useful status updates for LSP
 	{
-		'j-hui/fidget.nvim',
+		"j-hui/fidget.nvim",
 		tag = "legacy",
 		opts = {},
 		event = { "LspAttach" },
@@ -203,28 +196,30 @@ return {
 
 	-- Additional lua configuration, makes nvim stuff amazing!
 	{
-		'folke/neodev.nvim',
+		"folke/neodev.nvim",
 		opts = {},
 		ft = { "lua" },
 	},
 
 	-- Lightbulb for Code Actions
 	{
-		'kosayoda/nvim-lightbulb',
+		"kosayoda/nvim-lightbulb",
 		opts = { autocmd = { enabled = true } },
 		event = { "LspAttach" },
 		init = function()
 			-- Make the bulb use a nerdfont icon instead of emoji
-			vim.fn.sign_define('LightBulbSign', { text = "󰌵" })
-		end
+			vim.fn.sign_define("LightBulbSign", { text = "󰌵" })
+		end,
 	},
 	-- Pretty previewer for Code Actions
 	{
-		'aznhe21/actions-preview.nvim',
+		"aznhe21/actions-preview.nvim",
 		keys = {
 			{
 				"<leader>fl",
-				function() require("actions-preview").code_actions() end,
+				function()
+					require("actions-preview").code_actions()
+				end,
 				mode = { "n", "v" },
 			},
 		},
@@ -242,10 +237,10 @@ return {
 					end,
 				},
 			},
-		}
+		},
 	},
 	{
-		'stevearc/conform.nvim',
+		"stevearc/conform.nvim",
 		opts = function()
 			return {
 				formatters_by_ft = {
@@ -254,23 +249,24 @@ return {
 					sql = { "sql_formatter" },
 					yaml = { "yamlfix" },
 					json = { "fixjson" },
-					["*"] = { "injected" }
-				}
+					lua = { "stylua" },
+					["*"] = { "injected" },
+				},
 			}
 		end,
 		config = function(_, opts)
 			require("conform").setup(opts)
 			require("conform.formatters.yamlfix").env = {
-				YAMLFIX_WHITELINES = 1
+				YAMLFIX_WHITELINES = 1,
 			}
 			require("conform.formatters.sql_formatter").args = {
 				"-c",
-				vim.fn.expand("~/.config/sql_formatter.json")
+				vim.fn.expand("~/.config/sql_formatter.json"),
 			}
-		end
+		end,
 	},
 	{
-		'mfussenegger/nvim-lint',
+		"mfussenegger/nvim-lint",
 		config = function()
 			require("lint").linters.systemd_analyze = {
 				cmd = "systemd-analyze",
@@ -289,13 +285,13 @@ return {
 						["severity"] = vim.diagnostic.severity.WARN,
 					},
 					{} -- additional options
-				)
+				),
 			}
 			require("lint").linters_by_ft = {
 				fish = { "fish" },
 				go = { "golangcilint" },
 				sh = { "shellcheck" },
-				systemd = { "systemd_analyze" }
+				systemd = { "systemd_analyze" },
 			}
 
 			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged" }, {
@@ -303,6 +299,6 @@ return {
 					require("lint").try_lint()
 				end,
 			})
-		end
+		end,
 	},
 }

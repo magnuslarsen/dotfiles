@@ -1,25 +1,25 @@
 return {
 	{
-		'mrcjkb/rustaceanvim',
-		ft = { 'rust' },
+		"mrcjkb/rustaceanvim",
+		ft = { "rust" },
 	},
 	{
-		'saecki/crates.nvim',
+		"saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
 		config = function()
-			require('crates').setup({
+			require("crates").setup({
 				src = {
-					cmp = { enabled = true }
-				}
+					cmp = { enabled = true },
+				},
 			})
 
 			vim.api.nvim_create_autocmd("BufRead", {
 				group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
 				pattern = "Cargo.toml",
 				callback = function()
-					require('cmp').setup.buffer({ sources = { { name = "crates" } } })
+					require("cmp").setup.buffer({ sources = { { name = "crates" } } })
 				end,
 			})
 		end,
-	}
+	},
 }

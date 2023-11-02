@@ -1,7 +1,7 @@
 local M = {}
 local plugin_name = "null-ls-whitespace"
 
-local null_ls = require('null-ls')
+local null_ls = require("null-ls")
 
 -- source: https://unicode-explorer.com/articles/space-characters
 local invalid_whitespaces = {
@@ -49,7 +49,9 @@ local find_all_whitespace = function(line)
 	local next = 0
 	while true do
 		local first, last = find_keys_in_s(line, next)
-		if first == nil then break end
+		if first == nil then
+			break
+		end
 		table.insert(locations, { first, last })
 		next = last + 1
 	end
@@ -82,8 +84,8 @@ M.diagnostics = {
 				end
 			end
 			return diagnostics
-		end
-	}
+		end,
+	},
 }
 
 local whitespace_col_diagnostics = function(all_diagnostics, lnum, cursor_col)
@@ -130,16 +132,9 @@ M.code_actions = {
 					end
 
 					for _, d in ipairs(replacements) do
-						vim.api.nvim_buf_set_text(
-							d.bufnr,
-							d.lnum,
-							d.col,
-							d.end_lnum,
-							d.end_col,
-							{ "\u{0020}" }
-						)
+						vim.api.nvim_buf_set_text(d.bufnr, d.lnum, d.col, d.end_lnum, d.end_col, { "\u{0020}" })
 					end
-				end
+				end,
 			})
 
 			-- replace individual whitespace
@@ -147,21 +142,14 @@ M.code_actions = {
 				table.insert(actions, {
 					title = "Replace this unusual whitespace with a proper one",
 					action = function()
-						vim.api.nvim_buf_set_text(
-							d.bufnr,
-							d.lnum,
-							d.col,
-							d.end_lnum,
-							d.end_col,
-							{ "\u{0020}" }
-						)
-					end
+						vim.api.nvim_buf_set_text(d.bufnr, d.lnum, d.col, d.end_lnum, d.end_col, { "\u{0020}" })
+					end,
 				})
 			end
 
 			return actions
-		end
-	}
+		end,
+	},
 }
 
 return M

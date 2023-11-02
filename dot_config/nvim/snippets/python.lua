@@ -18,17 +18,20 @@ local rep = require("luasnip.extras").rep
 return {
 	s(
 		"ifmain",
-		fmt([[
+		fmt(
+			[[
 def {}():
 	{}{}
 
 if __name__ == '__main__':
 	{}()
-	]], {
-			i(1, "main"),
-			i(2, "pass"),
-			i(0),
-			rep(1),
-		})
+	]],
+			{
+				i(1, "main"),
+				i(2, "pass"),
+				i(0),
+				rep(1),
+			}
+		)
 	),
 }

@@ -4,20 +4,22 @@ local WIDTH_RATIO = 0.5
 return {
 	{
 		-- File explorer
-		'nvim-tree/nvim-tree.lua',
+		"nvim-tree/nvim-tree.lua",
 		keys = {
-			{ '<leader>fe', function()
-				require('nvim-tree.api').tree.find_file({
-					open = true,
-					focus = true,
-					update_root = false,
-				})
-			end
+			{
+				"<leader>fe",
+				function()
+					require("nvim-tree.api").tree.find_file({
+						open = true,
+						focus = true,
+						update_root = false,
+					})
+				end,
 			},
 		},
 		dependencies = {
 			-- Icons
-			'nvim-tree/nvim-web-devicons',
+			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {
 			sort_by = "case_sensitive",
@@ -32,11 +34,10 @@ return {
 						local window_w_int = math.floor(window_w)
 						local window_h_int = math.floor(window_h)
 						local center_x = (screen_w - window_w) / 2
-						local center_y = ((vim.opt.lines:get() - window_h) / 2)
-						    - vim.opt.cmdheight:get()
+						local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
 						return {
-							border = 'rounded',
-							relative = 'editor',
+							border = "rounded",
+							relative = "editor",
 							row = center_y,
 							col = center_x,
 							width = window_w_int,
@@ -50,12 +51,12 @@ return {
 			},
 			filters = {
 				dotfiles = true,
-				custom = { "^.git$" }
+				custom = { "^.git$" },
 			},
 			live_filter = {
 				prefix = "[FILTER]: ",
 				always_show_folders = false,
 			},
-		}
+		},
 	},
 }
