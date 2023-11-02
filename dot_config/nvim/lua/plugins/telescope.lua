@@ -17,6 +17,11 @@ local function telescope_project_opts()
 		return { cwd = get_ansible_role_path() }
 	end
 
+	local root_dir = vim.lsp.buf.list_workspace_folders()[1]
+	if root_dir then
+		return { cwd = root_dir }
+	end
+
 	return {}
 end
 
@@ -44,7 +49,7 @@ return {
 			{ "<leader>rf", function() require("telescope.builtin").oldfiles() end },
 			{ "<leader>ht", function() require("telescope.builtin").help_tags() end },
 			{ "<leader>ss", function() require("telescope.builtin").spell_suggest() end },
-			{ "fb", function() require("telescope.builtin").buffers() end },
+			{ "fb",         function() require("telescope.builtin").buffers() end },
 		}
 	},
 }
