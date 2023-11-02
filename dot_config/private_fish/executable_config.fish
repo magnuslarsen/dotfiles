@@ -31,3 +31,5 @@ end
 
 # Include (nvim) Mason installed binaries
 fish_add_path ~/.local/share/nvim/mason/bin
+
+starship init fish | source

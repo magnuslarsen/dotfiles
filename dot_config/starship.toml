@@ -1,0 +1,47 @@
+format = """
+$username@$hostname \
+$directory\
+$git_branch\
+$status\
+$character
+"""
+
+right_format = "$cmd_duration$time"
+
+[time]
+disabled = false
+format = "[$time]($style)"
+style = "bold bright-black"
+
+[line_break]
+disabled = true
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+style = "bold #bd93f9"
+
+[username]
+show_always = true
+format = "[$user]($style)"
+style_user = "bold #8be9fd"
+
+[status]
+disabled = false
+format = '[\[$status\]]($style)'
+
+[directory]
+truncate_to_repo = false
+truncation_length = 80
+style = "bold #50fa7b"
+
+[git_branch]
+format = '[\($branch(:$remote_branch)\)]($style) '
+style = "bold #ff79c6"
+
+[cmd_duration]
+style = "bold #f1fa8c"
+
+[character]
+error_symbol = "[❯](bold #ff5555)"
+success_symbol = "[❯](bold #50fa7b)"
