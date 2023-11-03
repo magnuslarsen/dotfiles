@@ -109,6 +109,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				"sql-formatter",
+				"stylua",
 				"yamlfix",
 			})
 			require("mason-tool-installer").setup({

@@ -98,3 +98,11 @@ vim.keymap.set("v", ">", ">gv^", { silent = true }) -- stay in visual mode when 
 vim.keymap.set("v", "p", '"_dP', { silent = true }) -- keep copied text in buffer when pasting over stuff
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true }) -- stay centered
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true }) -- stay centered
+
+vim.keymap.set("n", "i", function()
+	if #vim.fn.getline(".") == 0 then
+		return [["_cc]]
+	else
+		return "i"
+	end
+end, { expr = true })
