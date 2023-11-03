@@ -11,10 +11,8 @@ return {
 	-- PGP support
 	{ "jamessan/vim-gnupg" },
 	-- Autodetect spacing
-	{
-		"tpope/vim-sleuth",
-		event = { "BufReadPre", "BufNewFile" },
-	}, -- Better Sorting
+	{ "Darazaki/indent-o-matic" },
+	-- Better Sorting
 	{
 		"sQVe/sort.nvim",
 		opts = {},
