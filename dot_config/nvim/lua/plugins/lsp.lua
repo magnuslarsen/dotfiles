@@ -76,6 +76,7 @@ return {
 		dependencies = {
 			-- SchemaStore support for yaml+json
 			{ "b0o/SchemaStore.nvim" },
+			-- Automatic tool installation
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 		},
 		opts = function()
@@ -100,8 +101,8 @@ return {
 				},
 			})
 
-			local installerable_tools = vim.tbl_keys(lsp_servers)
-			installerable_tools = vim.list_extend(installerable_tools, {
+			local installable_tools = vim.tbl_keys(lsp_servers)
+			installable_tools = vim.list_extend(installable_tools, {
 				"fixjson",
 				"golangci-lint",
 				"shellcheck",
@@ -111,7 +112,7 @@ return {
 			})
 			require("mason-tool-installer").setup({
 				auto_update = true,
-				ensure_installed = installerable_tools,
+				ensure_installed = installable_tools,
 			})
 
 			return o
