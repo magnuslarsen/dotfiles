@@ -105,6 +105,7 @@ return {
 			installable_tools = vim.list_extend(installable_tools, {
 				"fixjson",
 				"golangci-lint",
+				"markdownlint",
 				"shellcheck",
 				"shfmt",
 				"sql-formatter",
@@ -246,11 +247,12 @@ return {
 			return {
 				formatters_by_ft = {
 					fish = { "fish_indent" },
+					json = { "fixjson" },
+					lua = { "stylua" },
+					markdown = { "markdownlint" },
 					sh = { "shfmt" },
 					sql = { "sql_formatter" },
 					yaml = { "yamlfix" },
-					json = { "fixjson" },
-					lua = { "stylua" },
 					["*"] = { "injected" },
 				},
 			}
@@ -291,6 +293,7 @@ return {
 			require("lint").linters_by_ft = {
 				fish = { "fish" },
 				go = { "golangcilint" },
+				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
 				systemd = { "systemd_analyze" },
 			}
