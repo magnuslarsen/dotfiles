@@ -84,6 +84,7 @@ return {
 					{ name = "calc" },
 					{ name = "async_path" },
 					{ name = "buffer" },
+					{ name = "crates" }
 				}),
 				window = {
 					completion = cmp.config.window.bordered(),

@@ -32,4 +32,6 @@ end
 # Include (nvim) Mason installed binaries
 fish_add_path ~/.local/share/nvim/mason/bin
 
-starship init fish | source
+if command --query starship
+    starship init fish | source
+end

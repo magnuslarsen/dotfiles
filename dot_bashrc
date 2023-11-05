@@ -124,7 +124,7 @@ fi
 export VISUAL=nvim
 export EDITOR=nvim
 
-. "$HOME/.cargo/env"
+[[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
 
 export BAT_THEME=Dracula
 
