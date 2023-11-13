@@ -30,7 +30,7 @@ local lsp_servers = {
 			-- Enabled plugins for more features
 			ruff = {
 				enabled = true,
-				extendSelect = { "A", "C", "E", "I" },
+				extendSelect = { "A", "E", "I", "S" },
 				unsafeFixes = true,
 			},
 			black = { enabled = true, preview = true },
@@ -192,7 +192,6 @@ return {
 	-- Useful status updates for LSP
 	{
 		"j-hui/fidget.nvim",
-		tag = "legacy",
 		opts = {},
 		event = { "LspAttach" },
 	},
