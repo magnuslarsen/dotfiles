@@ -30,7 +30,7 @@ local lsp_servers = {
 			-- Enabled plugins for more features
 			ruff = {
 				enabled = true,
-				extendSelect = { "A", "E", "I", "S" },
+				extendSelect = { "I", "S", "FIX" },
 				unsafeFixes = true,
 			},
 			black = { enabled = true, preview = true },
