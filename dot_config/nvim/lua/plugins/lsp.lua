@@ -262,9 +262,11 @@ return {
 			require("conform.formatters.yamlfix").env = {
 				YAMLFIX_WHITELINES = 1,
 			}
-			require("conform.formatters.sql_formatter").args = {
-				"-c",
-				vim.fn.expand("~/.config/sql_formatter.json"),
+			require("conform").formatters.sql_formatter = {
+				prepend_args = { "-c", vim.fn.expand("~/.config/sql_formatter.json") },
+			}
+			require("conform").formatters.markdownlint = {
+				prepend_args = { "-c", vim.fn.expand("~/.config/markdownlint.json") },
 			}
 		end,
 	},
@@ -296,6 +298,10 @@ return {
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
 				systemd = { "systemd_analyze" },
+			}
+			require("lint").linters.markdownlint.args = {
+				"-c",
+				vim.fn.expand("~/.config/markdownlint.json"),
 			}
 
 			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged" }, {
