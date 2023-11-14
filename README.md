@@ -60,7 +60,7 @@ Some of this config, besides the original FiraCode, requires FireCode NerdFont t
 
 ```sh
 mkdir -p ~/.local/share/fonts && \
-wget -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FireCode.tar.xz" -O - |\
+wget -q "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.tar.xz" -O - |\
 tar --wildcards -xJC ~/.local/share/fonts/ "*.ttf" && \
 fc-cache -f && echo "Finished downloading Nerd Font"
 ```
