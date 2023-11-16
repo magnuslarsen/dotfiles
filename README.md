@@ -72,10 +72,3 @@ For PyLSP, additional tools needs to be installed, which is not done by Mason:
 ```vim
 :PylspInstall python-lsp-ruff python-lsp-black rope
 ```
-
-You also might want to enable system installed packages:
-
-```sh
-grep include-system-site-packages ~/.local/share/nvim/mason/packages/python-lsp-server/venv/pyvenv.cfg
-include-system-site-packages = true
-```
