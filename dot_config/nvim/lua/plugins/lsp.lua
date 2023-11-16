@@ -34,6 +34,7 @@ local lsp_servers = {
 				unsafeFixes = true,
 			},
 			black = { enabled = true, preview = true },
+			jedi = { environment = "/usr/bin/python3" },
 			-- Rope auto-completer
 			rope_autoimport = { enabled = true },
 			-- rope_completion = { enabled = true },
@@ -49,12 +50,11 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			-- Automatically install LSPs to stdpath for neovim
 			{
 				"williamboman/mason.nvim",
 				cmd = { "Mason" },
-				config = true,
 				build = ":MasonUpdate",
+				config = true,
 			},
 
 			-- pretty icons
