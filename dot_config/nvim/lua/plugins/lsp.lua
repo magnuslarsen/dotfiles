@@ -276,28 +276,32 @@ return {
 			require("lint").linters.systemd_analyze = {
 				cmd = "systemd-analyze",
 				args = { "verify" },
-				append_fname = true,
 				stdin = false,
-				stream = "both",
+				stream = "stderr",
 				ignore_exitcode = true,
-				parser = require("lint.parser").from_pattern(
-					"(.+):(%d+):%s(.*)", -- pattern
-					{ "file", "lnum", "message" }, -- matching groups
-					{}, -- severity mapping
-					-- default options
-					{
-						["source"] = "systemd-anaylze",
-						["severity"] = vim.diagnostic.severity.WARN,
-					},
-					{} -- additional options
-				),
+				parser = require("lint.parser").from_errorformat("%f:%l: %m", {
+					source = "systemd_analyze",
+					severity = vim.diagnostic.severity.WARN,
+				}),
 			}
+			require("lint").linters.visudo = {
+				cmd = "visudo",
+				args = { "-cf", "-" },
+				stdin = true,
+				stream = "stderr",
+				ignore_exitcode = true,
+				parser = require("lint.parser").from_errorformat("%tarning: %f:%l:%c: %m, %f:%l:%c: %m", {
+					source = "visudo",
+				}),
+			}
+
 			require("lint").linters_by_ft = {
 				fish = { "fish" },
 				go = { "golangcilint" },
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
 				systemd = { "systemd_analyze" },
+				sudoers = { "visudo" },
 			}
 			require("lint").linters.markdownlint.args = {
 				"-c",
