@@ -27,16 +27,18 @@ local lsp_servers = {
 			pydocstyle = { enabled = false },
 			pyflakes = { enabled = false },
 			pylint = { enabled = false },
+			black = { enabled = false },
 			-- Enabled plugins for more features
 			ruff = {
 				enabled = true,
 				extendSelect = { "I", "S", "FIX" },
+				format = { "I001" },
 				unsafeFixes = true,
+				preview = true,
 			},
-			black = { enabled = true, preview = true },
 			jedi = { environment = "/usr/bin/python3" },
 			-- Rope auto-completer
-			rope_autoimport = { enabled = true },
+			-- rope_autoimport = { enabled = true },
 			-- rope_completion = { enabled = true },
 			-- jedi_completion = { enabled = false },
 		},
