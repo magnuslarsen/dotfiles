@@ -18,29 +18,31 @@ local lsp_servers = {
 		},
 	},
 	pylsp = {
-		plugins = {
-			-- Disabled plugins are provided by ruff!
-			autopep8 = { enabled = false },
-			flake8 = { enabled = false },
-			mccabe = { enabled = false },
-			pycodestyle = { enabled = false },
-			pydocstyle = { enabled = false },
-			pyflakes = { enabled = false },
-			pylint = { enabled = false },
-			black = { enabled = false },
-			-- Enabled plugins for more features
-			ruff = {
-				enabled = true,
-				extendSelect = { "I", "S", "FIX" },
-				format = { "I001" },
-				unsafeFixes = true,
-				preview = true,
+		pylsp = {
+			plugins = {
+				-- Disabled plugins are provided by ruff!
+				autopep8 = { enabled = false },
+				flake8 = { enabled = false },
+				mccabe = { enabled = false },
+				pycodestyle = { enabled = false },
+				pydocstyle = { enabled = false },
+				pyflakes = { enabled = false },
+				pylint = { enabled = false },
+				black = { enabled = false },
+				-- Enabled plugins for more features
+				ruff = {
+					enabled = true,
+					extendSelect = { "I", "S", "FIX" },
+					format = { "I001" },
+					unsafeFixes = true,
+					preview = true,
+				},
+				jedi = { environment = "/usr/bin/python3" },
+				-- Rope auto-completer
+				rope_autoimport = { enabled = true },
+				-- rope_completion = { enabled = true },
+				-- jedi_completion = { enabled = false },
 			},
-			jedi = { environment = "/usr/bin/python3" },
-			-- Rope auto-completer
-			-- rope_autoimport = { enabled = true },
-			-- rope_completion = { enabled = true },
-			-- jedi_completion = { enabled = false },
 		},
 	},
 	taplo = {},
