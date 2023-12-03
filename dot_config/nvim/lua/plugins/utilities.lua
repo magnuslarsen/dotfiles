@@ -1,5 +1,5 @@
 return {
-	-- Better comments
+	-- Better comment handling
 	{
 		"numToStr/Comment.nvim",
 		opts = {},
@@ -42,6 +42,7 @@ return {
 			require("scrollEOF").setup()
 		end,
 	},
+	-- Best incremental search
 	{
 		"sustech-data/wildfire.nvim",
 		keys = "<CR>",
