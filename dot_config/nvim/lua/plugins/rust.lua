@@ -12,6 +12,14 @@ return {
 					cmp = { enabled = true },
 				},
 			})
+
+			-- Add crates to nvim-cmp
+			local cmp = require("cmp")
+			local config = cmp.get_config()
+			table.insert(config.sources, {
+				name = "crates",
+			})
+			cmp.setup(config)
 		end,
 	},
 }

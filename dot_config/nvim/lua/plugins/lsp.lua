@@ -200,12 +200,6 @@ return {
 		event = { "LspAttach" },
 	},
 
-	-- Additional lua configuration, makes nvim stuff amazing!
-	{
-		"folke/neodev.nvim",
-		opts = {},
-		ft = { "lua" },
-	},
 
 	-- Lightbulb for Code Actions
 	{
