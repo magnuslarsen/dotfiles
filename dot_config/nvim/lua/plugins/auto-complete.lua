@@ -16,7 +16,6 @@ return {
 			"hrsh7th/cmp-calc",
 
 			-- More sources
-			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-cmdline",
 			"FelipeLema/cmp-async-path",
 			"hrsh7th/cmp-buffer",
@@ -78,13 +77,11 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "nvim_lua" },
 					{ name = "luasnip" },
 					{ name = "luasnip_choice" },
 					{ name = "calc" },
 					{ name = "async_path" },
 					{ name = "buffer" },
-					{ name = "crates" }
 				}),
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -125,7 +122,7 @@ return {
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline({}),
 				sources = cmp.config.sources({
-					{ name = "path" },
+					{ name = "async_path" },
 					{ name = "cmdline" },
 				}),
 			})
