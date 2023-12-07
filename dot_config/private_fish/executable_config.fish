@@ -5,8 +5,8 @@ fish_ssh_agent
 
 # FZF stuff
 function fzf_preview_dir_cmd_fun
-    if command --query exa
-        exa -lg --color=always $argv
+    if command --query eza
+        eza -lg --color=always --icons=always $argv
     else
         ls -l --color=always $argv
     end

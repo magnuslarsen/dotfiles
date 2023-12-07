@@ -11,7 +11,7 @@ return {
 	-- PGP support
 	{ "jamessan/vim-gnupg" },
 	-- Autodetect spacing
-	{ "Darazaki/indent-o-matic" },
+	{ "nmac427/guess-indent.nvim" },
 	-- Better Sorting
 	{
 		"sQVe/sort.nvim",
