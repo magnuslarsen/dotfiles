@@ -62,7 +62,7 @@ vim.filetype.add({
 	},
 })
 
--- Some keybinds are useful even without lsp_config activated (read: null-ls)
+-- Some keybinds are useful even without lsp_config activated (read: nvim-lint + conform.nvim)
 vim.keymap.set("n", "df", vim.diagnostic.goto_next)
 vim.keymap.set("n", "db", vim.diagnostic.goto_prev)
 vim.keymap.set({ "n", "v" }, "<leader>ff", function()
@@ -99,6 +99,12 @@ vim.keymap.set("v", "p", '"_dP', { silent = true }) -- keep copied text in buffe
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { silent = true }) -- stay centered
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true }) -- stay centered
 
+-- Toggle inlay-hints
+vim.keymap.set("n", "<leader>ti", function()
+	vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+end)
+
+-- `i` should start at correct indentation
 vim.keymap.set("n", "i", function()
 	if #vim.fn.getline(".") == 0 then
 		return [["_cc]]
