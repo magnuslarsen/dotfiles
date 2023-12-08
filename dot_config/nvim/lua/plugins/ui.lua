@@ -30,6 +30,10 @@ return {
 		priority = 1000,
 		config = function()
 			vim.cmd.colorscheme("dracula")
+
+			local dracula = require("dracula")
+			-- I like this the be white and readable
+			vim.api.nvim_set_hl(0, "LspInlayHint", { fg = dracula.colors().white })
 		end,
 	},
 	{
