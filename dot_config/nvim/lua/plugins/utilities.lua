@@ -50,4 +50,16 @@ return {
 			require("wildfire").setup()
 		end,
 	},
+	-- Markdown (Github style) markdown preview
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+		config = function()
+			-- I read markdown in light mode; write in dark mode
+			vim.g.mkdp_theme = "light"
+		end,
+	},
 }
