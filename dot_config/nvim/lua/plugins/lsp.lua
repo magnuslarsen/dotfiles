@@ -176,7 +176,12 @@ return {
 					end
 
 					if server_name == "rust_analyzer" then
-						-- We use rustaceanvim for this
+						-- We use rustaceanvim for this - so we only need to define settings here
+						vim.g.rustaceanvim = {
+							server = {
+								on_attach = on_attach,
+							},
+						}
 					else
 						require("lspconfig")[server_name].setup(ls_config)
 					end
@@ -199,7 +204,6 @@ return {
 		opts = {},
 		event = { "LspAttach" },
 	},
-
 
 	-- Lightbulb for Code Actions
 	{
