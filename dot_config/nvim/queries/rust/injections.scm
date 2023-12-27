@@ -7,7 +7,7 @@
 
     (arguments
       (raw_string_literal) @injection.content
-      (#offset! @injection.content 0 3 0 -3)
+      (#offset! @injection.content 0 3 0 -2)
       (#set! injection.language "sql")
     )
 )
@@ -43,7 +43,7 @@
 
     (token_tree
       (raw_string_literal) @injection.content
-      (#offset! @injection.content 0 3 0 -3)
+      (#offset! @injection.content 0 3 0 -2)
       (#set! injection.language "sql")
     )
 )

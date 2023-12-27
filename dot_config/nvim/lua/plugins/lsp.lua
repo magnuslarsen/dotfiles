@@ -46,7 +46,11 @@ local lsp_servers = {
 		},
 	},
 	taplo = {},
-	rust_analyzer = {},
+	rust_analyzer = {
+		["rust-analyzer"] = {
+			check = { command = "clippy" },
+		},
+	},
 }
 
 return {
@@ -180,6 +184,7 @@ return {
 						vim.g.rustaceanvim = {
 							server = {
 								on_attach = on_attach,
+								settings = lsp_servers[server_name],
 							},
 						}
 					else
