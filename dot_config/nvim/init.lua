@@ -47,6 +47,10 @@ vim.opt.writebackup = false
 vim.wo.number = true
 
 vim.filetype.add({
+	extension = {
+		-- Set filtype sls (saltstack) files
+		sls = "yaml",
+	},
 	pattern = {
 		-- Force filetype on Novozymes log files in the Debian changelog format
 		["~/zgit/adm/log/.*%.log"] = "debchangelog",
@@ -57,8 +61,6 @@ vim.filetype.add({
 		["~/zgit/sdma%-ansible/.*%.service"] = "systemd",
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
-		-- Set filtype sls (saltstack) files
-		[".*%.sls"] = "yaml",
 	},
 })
 
