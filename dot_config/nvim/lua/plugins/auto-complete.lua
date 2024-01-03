@@ -56,13 +56,13 @@ return {
 						behavior = cmp.ConfirmBehavior.Replace,
 						select = true,
 					}),
-					["<Tab>"] = cmp.mapping(function(fallback)
+					["<Tab>"] = cmp.mapping(function(_)
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
 						else
-							fallback()
+							require("neotab").tabout()
 						end
 					end, { "i", "s" }),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
@@ -135,5 +135,12 @@ return {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {},
+	},
+	{
+		"kawre/neotab.nvim",
+		event = "InsertEnter",
+		opts = {
+			tabkey = "",
+		},
 	},
 }
