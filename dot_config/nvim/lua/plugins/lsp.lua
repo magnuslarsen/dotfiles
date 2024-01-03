@@ -51,6 +51,7 @@ local lsp_servers = {
 			check = { command = "clippy" },
 		},
 	},
+	marksman = {},
 }
 
 return {
