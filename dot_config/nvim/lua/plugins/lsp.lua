@@ -260,6 +260,7 @@ return {
 					markdown = { "markdownlint" },
 					sh = { "shfmt" },
 					sql = { "sql_formatter" },
+					xml = { "xmllint" },
 					yaml = { "yamlfix" },
 					["*"] = { "injected" },
 				},
