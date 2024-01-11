@@ -39,9 +39,10 @@ local lsp_servers = {
 				},
 				jedi = { environment = "/usr/bin/python3" },
 				-- Rope auto-completer
-				rope_autoimport = { enabled = true },
-				-- rope_completion = { enabled = true },
-				-- jedi_completion = { enabled = false },
+				rope_autoimport = {
+					enabled = true,
+					memory = true,
+				},
 			},
 		},
 	},
@@ -251,21 +252,19 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-		opts = function()
-			return {
-				formatters_by_ft = {
-					fish = { "fish_indent" },
-					json = { "fixjson" },
-					lua = { "stylua" },
-					markdown = { "markdownlint" },
-					sh = { "shfmt" },
-					sql = { "sql_formatter" },
-					xml = { "xmllint" },
-					yaml = { "yamlfix" },
-					["*"] = { "injected" },
-				},
-			}
-		end,
+		opts = {
+			formatters_by_ft = {
+				fish = { "fish_indent" },
+				json = { "fixjson" },
+				lua = { "stylua" },
+				markdown = { "markdownlint" },
+				sh = { "shfmt" },
+				sql = { "sql_formatter" },
+				xml = { "xmllint" },
+				yaml = { "yamlfix" },
+				["*"] = { "injected" },
+			},
+		},
 		config = function(_, opts)
 			require("conform").setup(opts)
 			require("conform.formatters.yamlfix").env = {
