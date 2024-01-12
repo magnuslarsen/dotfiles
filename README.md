@@ -70,5 +70,5 @@ fc-cache -f && echo "Finished downloading Nerd Font"
 For PyLSP, additional tools needs to be installed, which is not done by Mason:
 
 ```vim
-:PylspInstall python-lsp-ruff rope
+:PylspInstall python-lsp-ruff rope ruff
 ```

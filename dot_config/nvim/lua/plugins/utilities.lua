@@ -53,13 +53,18 @@ return {
 	-- Markdown (Github style) markdown preview
 	{
 		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = "markdown",
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-		config = function()
-			-- I read markdown in light mode; write in dark mode
-			vim.g.mkdp_theme = "light"
+	},
+	{
+		"folke/todo-comments.nvim",
+		opts = {},
+		config = function(_, opts)
+			require("todo-comments").setup(opts)
+
+			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { silent = true })
 		end,
 	},
 }
