@@ -29,11 +29,17 @@ return {
 		"Mofiqul/dracula.nvim",
 		priority = 1000,
 		config = function()
-			vim.cmd.colorscheme("dracula")
-
 			local dracula = require("dracula")
-			-- I like this the be white and readable
-			vim.api.nvim_set_hl(0, "LspInlayHint", { fg = dracula.colors().white })
+			local colors = dracula.colors()
+
+			dracula.setup({
+				overrides = {
+					-- I like Inlay Hints to be white and readable
+					LspInlayHint = { fg = colors.white },
+				},
+			})
+
+			vim.cmd.colorscheme("dracula")
 		end,
 	},
 	{
