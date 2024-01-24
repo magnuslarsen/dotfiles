@@ -58,6 +58,7 @@ return {
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
+	-- Track TODO comments much better and prettier
 	{
 		"folke/todo-comments.nvim",
 		opts = {},
@@ -66,5 +67,15 @@ return {
 
 			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { silent = true })
 		end,
+	},
+	-- Highlight colors-codes so I can see them
+	{
+		"NvChad/nvim-colorizer.lua",
+		cmd = { "ColorizerToggle" },
+		opts = {
+			user_default_options = {
+				names = false, -- Don't care about this type of color; I can read
+			},
+		},
 	},
 }
