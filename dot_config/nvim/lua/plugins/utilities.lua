@@ -57,6 +57,10 @@ return {
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
+		config = function()
+			vim.g.mkdp_theme = "dark"
+			vim.g.mkdp_port = 8828
+		end,
 	},
 	-- Track TODO comments much better and prettier
 	{
