@@ -39,10 +39,10 @@ local lsp_servers = {
 				},
 				jedi = { environment = "/usr/bin/python3" },
 				-- Rope auto-completer
-				rope_autoimport = {
-					enabled = true,
-					memory = true,
-				},
+				-- rope_autoimport = {
+				-- 	enabled = true,
+				-- 	memory = true,
+				-- },
 			},
 		},
 	},

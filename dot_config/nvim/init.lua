@@ -114,3 +114,10 @@ vim.keymap.set("n", "i", function()
 		return "i"
 	end
 end, { expr = true })
+
+-- Open file on last edited line
+vim.api.nvim_create_autocmd("BufReadPost", {
+	desc = "Open file at the last position it was edited earlier",
+	pattern = "*",
+	command = 'silent! normal! g`"zv',
+})
