@@ -29,6 +29,7 @@ local lsp_servers = {
 				pyflakes = { enabled = false },
 				pylint = { enabled = false },
 				black = { enabled = false },
+				yapf = { enabled = false },
 				-- Enabled plugins for more features
 				ruff = {
 					enabled = true,
