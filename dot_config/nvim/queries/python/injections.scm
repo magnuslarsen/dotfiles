@@ -1,3 +1,15 @@
+; Doc-strings are RST
+(function_definition
+  (block
+    (expression_statement
+      (string
+          (string_content) @injection.content 
+          (#set! injection.language "rst")
+      )
+    )
+  )
+)
+
 ; Function calls from common SQL libraries
 (expression_statement
   (call
@@ -7,8 +19,8 @@
 
     (argument_list
       (string
-	(string_content) @injection.content
-	(#set! injection.language "sql")
+        (string_content) @injection.content
+        (#set! injection.language "sql")
       )
     )
   )

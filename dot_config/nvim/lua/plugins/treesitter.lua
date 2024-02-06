@@ -65,10 +65,12 @@ return {
 		},
 		opts = {
 			ensure_installed = {
+				"awk",
 				"bash",
 				"comment",
 				"diff",
 				"fish",
+				"jq",
 				"json",
 				"lua",
 				"make",
@@ -76,6 +78,7 @@ return {
 				"markdown_inline",
 				"python",
 				"query",
+				"rst",
 				"ruby",
 				"rust",
 				"sql",
