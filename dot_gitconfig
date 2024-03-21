@@ -14,6 +14,13 @@ conflictstyle = "zdiff3"
 
 [diff]
 colorMoved = "default"
+algorithm = "histogram"
+
+[rerere]
+enabled = true
+
+[commit]
+verbose = true
 
 [alias]
 mwps = "push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds"
