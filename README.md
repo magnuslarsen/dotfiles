@@ -9,7 +9,7 @@ This is mine, it probably doesn't fit your desires :-)
 on Arch, simply run:
 
 ```sh
-yay -S bat exa fd fish fzf git git-delta go jq kitty neovim nodejs npm python-pip riffdiff ripgrep starship tmux ttf-fira-code yay yq
+yay -S bat difftastic eza fd fish fzf git go jq kitty neovim nodejs npm python-pip ripgrep starship tmux ttf-fira-code yay yq
 ```
 
 ### Ubuntu
@@ -27,7 +27,7 @@ sudo apt install fish fonts-firacode git golang-go jq kitty neovim nodejs python
 python3 -m pip install pynvim yq
 ```
 
-`bat`, `exa`, `fd`, `fzf`, `riff`, `starship`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
+`bat`, `difftastic`, `eza`, `fd`, `fzf`, `starship`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
 
 ## Chezmoi
 
@@ -70,5 +70,5 @@ fc-cache -f && echo "Finished downloading Nerd Font"
 For PyLSP, additional tools needs to be installed, which is not done by Mason:
 
 ```vim
-:PylspInstall python-lsp-ruff rope ruff
+:PylspInstall python-lsp-ruff ruff
 ```
