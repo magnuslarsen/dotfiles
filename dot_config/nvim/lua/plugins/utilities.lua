@@ -100,6 +100,7 @@ return {
 		end,
 		keys = {
 			{ "<leader>go", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
+			{ "<leader>gb", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open git link" },
 		},
 	},
 }
