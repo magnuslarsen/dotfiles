@@ -82,4 +82,24 @@ return {
 			},
 		},
 	},
+	{
+		"linrongbin16/gitlinker.nvim",
+		cmd = "GitLink",
+		opts = {},
+		config = function()
+			require("gitlinker").setup({
+				router = {
+					browse = {
+						["^gitlab%.nzcorp%.net"] = require("gitlinker.routers").gitlab_browse,
+					},
+					blame = {
+						["^gitlab%.nzcorp%.net"] = require("gitlinker.routers").gitlab_blame,
+					},
+				},
+			})
+		end,
+		keys = {
+			{ "<leader>go", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
+		},
+	},
 }
