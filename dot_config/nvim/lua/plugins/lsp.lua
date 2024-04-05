@@ -121,6 +121,7 @@ return {
 				"shfmt",
 				"sql-formatter",
 				"stylua",
+				"systemdlint",
 				"yamlfix",
 			})
 			require("mason-tool-installer").setup({
@@ -282,17 +283,6 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		config = function()
-			require("lint").linters.systemd_analyze = {
-				cmd = "systemd-analyze",
-				args = { "verify" },
-				stdin = false,
-				stream = "stderr",
-				ignore_exitcode = true,
-				parser = require("lint.parser").from_errorformat("%f:%l: %m", {
-					source = "systemd_analyze",
-					severity = vim.diagnostic.severity.WARN,
-				}),
-			}
 			require("lint").linters.visudo = {
 				cmd = "visudo",
 				args = { "-cf", "-" },
@@ -309,7 +299,7 @@ return {
 				go = { "golangcilint" },
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
-				systemd = { "systemd_analyze" },
+				systemd = { "systemdlint" },
 				sudoers = { "visudo" },
 			}
 			require("lint").linters.markdownlint.args = {

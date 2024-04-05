@@ -82,6 +82,7 @@ return {
 			},
 		},
 	},
+	-- Open local files on remote
 	{
 		"linrongbin16/gitlinker.nvim",
 		cmd = "GitLink",
@@ -101,6 +102,16 @@ return {
 		keys = {
 			{ "<leader>go", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
 			{ "<leader>gb", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open git link" },
+		},
+	},
+	-- Extend CTRL-A/X with bools, dates, colors, ...
+	{
+		"nat-418/boole.nvim",
+		cmd = "Boole",
+		config = { mappings = { increment = nil, decrement = nil } },
+		keys = {
+			{ "<C-a>", "<cmd>Boole increment<cr>", mode = { "n" } },
+			{ "<C-x>", "<cmd>Boole decrement<cr>", mode = { "n" } },
 		},
 	},
 }
