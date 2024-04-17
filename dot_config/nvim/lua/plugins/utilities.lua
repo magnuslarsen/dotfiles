@@ -53,6 +53,30 @@ return {
 			vim.g.mkdp_port = 8828
 		end,
 	},
+	-- PlantUML (text) previewer
+	{
+		"https://gitlab.com/itaranto/plantuml.nvim",
+		commands = "PlantUML",
+		ft = "plantuml",
+		version = "*",
+		config = function()
+			require("plantuml").setup({
+				renderer = {
+					type = "image",
+					options = {
+						prog = "feh",
+						dark_mode = false,
+					},
+				},
+				render_on_write = true
+			})
+		end,
+	},
+	-- And oldschool syntax highlighting
+	{
+		"aklt/plantuml-syntax",
+		ft = "plantuml",
+	},
 	-- Track TODO comments much better and prettier
 	{
 		"folke/todo-comments.nvim",

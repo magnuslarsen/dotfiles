@@ -299,7 +299,7 @@ return {
 				go = { "golangcilint" },
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
-				systemd = { "systemdlint" },
+				systemd = { "systemd_analyze", "systemdlint" },
 				sudoers = { "visudo" },
 			}
 			require("lint").linters.markdownlint.args = {
