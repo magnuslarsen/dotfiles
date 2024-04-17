@@ -3,6 +3,26 @@ return {
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile" },
+		keys = {
+			{
+				"<leader>hd",
+				function()
+					require("gitsigns").preview_hunk()
+				end,
+			},
+			{
+				"<leader>hn",
+				function()
+					require("gitsigns").nav_hunk('next')
+				end,
+			},
+			{
+				"<leader>hp",
+				function()
+					require("gitsigns").nav_hunk('prev')
+				end,
+			},
+		},
 		opts = {
 			current_line_blame = true,
 			current_line_blame_formatter = "<author> - <author_time:%Y-%m-%d> - <summary>",

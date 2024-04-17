@@ -50,6 +50,12 @@ vim.filetype.add({
 	extension = {
 		-- Set filtype sls (saltstack) files
 		sls = "yaml",
+		-- Set filetype for PlantUML files
+		iuml = "plantuml",
+		plantuml = "plantuml",
+		pu = "plantuml",
+		puml = "plantuml",
+		wsd = "plantuml",
 	},
 	pattern = {
 		-- Force filetype on Novozymes log files in the Debian changelog format
