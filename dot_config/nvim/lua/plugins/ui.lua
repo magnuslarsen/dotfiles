@@ -13,13 +13,13 @@ return {
 			{
 				"<leader>hn",
 				function()
-					require("gitsigns").nav_hunk('next')
+					require("gitsigns").nav_hunk("next")
 				end,
 			},
 			{
 				"<leader>hp",
 				function()
-					require("gitsigns").nav_hunk('prev')
+					require("gitsigns").nav_hunk("prev")
 				end,
 			},
 		},
@@ -72,6 +72,26 @@ return {
 				theme = "dracula",
 				component_separators = "|",
 				section_separators = "",
+			},
+		},
+	},
+	-- Track TODO comments much better and prettier
+	{
+		"folke/todo-comments.nvim",
+		opts = {},
+		config = function(_, opts)
+			require("todo-comments").setup(opts)
+
+			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { silent = true })
+		end,
+	},
+	-- Highlight colors-codes so I can see them
+	{
+		"NvChad/nvim-colorizer.lua",
+		cmd = { "ColorizerToggle" },
+		opts = {
+			user_default_options = {
+				names = false, -- Don't care about this type of color; I can read
 			},
 		},
 	},

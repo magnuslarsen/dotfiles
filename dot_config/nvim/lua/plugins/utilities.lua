@@ -68,7 +68,7 @@ return {
 						dark_mode = false,
 					},
 				},
-				render_on_write = true
+				render_on_write = true,
 			})
 		end,
 	},
@@ -76,26 +76,6 @@ return {
 	{
 		"aklt/plantuml-syntax",
 		ft = "plantuml",
-	},
-	-- Track TODO comments much better and prettier
-	{
-		"folke/todo-comments.nvim",
-		opts = {},
-		config = function(_, opts)
-			require("todo-comments").setup(opts)
-
-			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { silent = true })
-		end,
-	},
-	-- Highlight colors-codes so I can see them
-	{
-		"NvChad/nvim-colorizer.lua",
-		cmd = { "ColorizerToggle" },
-		opts = {
-			user_default_options = {
-				names = false, -- Don't care about this type of color; I can read
-			},
-		},
 	},
 	-- Open local files on remote
 	{
@@ -111,12 +91,28 @@ return {
 					blame = {
 						["^gitlab%.nzcorp%.net"] = require("gitlinker.routers").gitlab_blame,
 					},
+					default_branch = {
+						["^gitlab%.nzcorp%.net"] = "https://gitlab.nzcorp.net/"
+							.. "{_A.USER}/"
+							.. "{_A.REPO}/blob/"
+							.. "{_A.DEFAULT_BRANCH}/"
+							.. "{_A.FILE}", -- no plain=1 here; we want the rendered version
+					},
+					current_branch = {
+						["^gitlab%.nzcorp%.net"] = "https://gitlab.nzcorp.net/"
+							.. "{_A.USER}/"
+							.. "{_A.REPO}/blob/"
+							.. "{_A.CURRENT_BRANCH}/"
+							.. "{_A.FILE}", -- no plain=1 here; we want the rendered version
+					},
 				},
 			})
 		end,
 		keys = {
-			{ "<leader>go", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open git link" },
-			{ "<leader>gb", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open git link" },
+			{ "<leader>go", "<cmd>GitLink!<cr>", mode = { "n", "v" } },
+			{ "<leader>gb", "<cmd>GitLink! blame<cr>", mode = { "n", "v" } },
+			{ "<leader>gl", "<cmd>GitLink! current_branch<cr>", mode = { "n", "v" } },
+			{ "<leader>gL", "<cmd>GitLink! default_branch<cr>", mode = { "n", "v" } },
 		},
 	},
 	-- Extend CTRL-A/X with bools, dates, colors, ...
