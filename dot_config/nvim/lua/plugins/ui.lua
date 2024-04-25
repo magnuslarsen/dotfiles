@@ -11,6 +11,12 @@ return {
 				end,
 			},
 			{
+				"<leader>hr",
+				function()
+					require("gitsigns").reset_hunk()
+				end,
+			},
+			{
 				"<leader>hn",
 				function()
 					require("gitsigns").nav_hunk("next")
