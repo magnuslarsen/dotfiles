@@ -76,6 +76,7 @@ return {
 				"make",
 				"markdown",
 				"markdown_inline",
+				"printf",
 				"python",
 				"query",
 				"rst",
@@ -91,6 +92,9 @@ return {
 				enable = true,
 				additional_vim_regex_highlighting = false,
 				disable = {},
+			},
+			indent = {
+				enabled = true,
 			},
 		},
 		config = function(_, opts)

@@ -5,7 +5,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
-			"L3MON4D3/LuaSnip",
+			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 			"saadparwaiz1/cmp_luasnip",
 			"L3MON4D3/cmp-luasnip-choice", -- choice-node autocomplete
 
