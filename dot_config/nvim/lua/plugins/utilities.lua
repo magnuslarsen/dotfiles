@@ -56,7 +56,7 @@ return {
 	-- PlantUML (text) previewer
 	{
 		"https://gitlab.com/itaranto/plantuml.nvim",
-		commands = "PlantUML",
+		cmd = "PlantUML",
 		ft = "plantuml",
 		version = "*",
 		config = function()
@@ -119,7 +119,7 @@ return {
 	{
 		"nat-418/boole.nvim",
 		cmd = "Boole",
-		config = { mappings = { increment = nil, decrement = nil } },
+		opts = { mappings = { increment = nil, decrement = nil } },
 		keys = {
 			{ "<C-a>", "<cmd>Boole increment<cr>", mode = { "n" } },
 			{ "<C-x>", "<cmd>Boole decrement<cr>", mode = { "n" } },
