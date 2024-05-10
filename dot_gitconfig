@@ -4,12 +4,15 @@ path = "~/.gitconfig_user"
 
 [core]
 editor = "nvim"
+pager = "riff"
+
+[interactive]
+diffFilter = "riff"
 
 [merge]
 conflictstyle = "zdiff3"
 
 [diff]
-external = "difft --display inline"
 colorMoved = "default"
 algorithm = "histogram"
 
