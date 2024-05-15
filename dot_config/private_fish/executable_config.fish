@@ -1,8 +1,5 @@
 set -gx fish_greeting
 
-set -gx GPG_TTY (tty)
-fish_ssh_agent
-
 # FZF stuff
 function fzf_preview_dir_cmd_fun
     if command --query eza
@@ -34,4 +31,12 @@ fish_add_path ~/.local/share/nvim/mason/bin
 
 if command --query starship
     starship init fish | source
+end
+
+# Setup ssh-agent and load keys as LAST step
+set -gx GPG_TTY (tty)
+fish_ssh_agent
+
+if test -d ~/.password-store/ssh/ -a (ls -1q ~/.password-store/ssh/ | wc -l) -gt 0
+    ssh-add-pass
 end

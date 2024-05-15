@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Exit early if we already have keys added
+if ssh-add -l >/dev/null; then
+	exit 0
+fi
+
+# SSH_ASKPASS needs to be an executable file...
+SSH_ASKPASS=$(mktemp -t ssh-askpass-XXXXXXXXXXXXXXX)
+chmod +x "$SSH_ASKPASS"
+
+export SSH_ASKPASS
+export DISPLAY=dummy
+
+# Then add all keys; overwriting the script with specific key
+# as SSH_ASKPASS does not pass arguments... <,<
+for key in $(find ~/.ssh/ -name "*.pub" | sed 's:\.pub$::'); do
+	basename_key=$(basename "$key")
+	cat >"$SSH_ASKPASS" <<EOF
+#!/usr/bin/env bash
+pass "ssh/$basename_key"
+EOF
+	ssh-add "$key" </dev/null
+done
+
+# Cleanup
+rm -f "${SSH_ASKPASS}"

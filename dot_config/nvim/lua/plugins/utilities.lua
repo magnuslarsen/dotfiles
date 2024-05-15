@@ -125,4 +125,6 @@ return {
 			{ "<C-x>", "<cmd>Boole decrement<cr>", mode = { "n" } },
 		},
 	},
+	-- Auto-detect ansible scripts, plus some nice tools
+	{ "mfussenegger/nvim-ansible" },
 }

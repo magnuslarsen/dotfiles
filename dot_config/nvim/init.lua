@@ -58,13 +58,8 @@ vim.filetype.add({
 		wsd = "plantuml",
 	},
 	pattern = {
-		-- Force filetype on Novozymes log files in the Debian changelog format
-		["~/zgit/adm/log/.*%.log"] = "debchangelog",
-		-- Set filetype to yaml.ansible for known Ansible repositories in order to run the LSP server
-		["~/zgit/sdma%-ansible/.*/.*%.ya?ml"] = { "yaml.ansible", { priority = 0 } },
-		["~/zgit/sdma%-ansible/inventory/.*%.ya?ml"] = { "yaml", { priority = 10 } },
 		-- Set systemd filetype for systemd files in yaml.ansible files
-		["~/zgit/sdma%-ansible/.*%.service"] = "systemd",
+		["~/zgit/ansible.*/.*%.service"] = "systemd",
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
 	},
