@@ -15,7 +15,7 @@ function _fzf_search_units --description "Search all systemd services. Replace t
 		    # useless statistics at the bottom, with arbitary amounts of lines.
 		    # Get the headers by searching again, and only grabbing the header line
                     --header ($systemctl_cmd | head -n1 | string trim -l) \
-                    --preview="SYSTEMD_COLORS=1 systemctl status -- {1}" \
+                    --preview="SYSTEMD_COLORS=1 systemctl status --no-pager -- {1}" \
                     --preview-window="bottom:15:wrap" \
                     $fzf_units_opts
     )
