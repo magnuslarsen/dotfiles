@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if type clip.exe >/dev/null; then
+	echo "$@" | clip.exe
+elif type wl-copy >/dev/null; then
+	echo "$@" | wl-copy
+elif type xclip >/dev/null; then
+	echo "$@" | xclip -selection clipboard
+elif type xsel >/dev/null; then
+	echo "$@" | xsel -i --clipboard
+fi
