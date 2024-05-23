@@ -53,8 +53,11 @@ run-shell ~/.tmux/plugins/tmux-thumbs/tmux-thumbs.tmux
 set-option -sg escape-time 10
 set-option -g focus-events on
 set-option -g default-terminal "screen-256color"
-# set-option -sa terminal-features ',xterm-kitty:RGB'
+{{ if contains "WSL2" .chezmoi.kernel.osrelease }}
 set-option -sa terminal-features ',xterm-256color:RGB'
+{{ else }}
+set-option -sa terminal-features ',xterm-kitty:RGB'
+{{ end }}
 
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
