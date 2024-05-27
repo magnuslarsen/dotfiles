@@ -8,7 +8,7 @@
 
 ; jq - the best tool
 (command
-  name: (command_name) @_cmd (#eq? @_cmd "jq")
+  name: (command_name) @_cmd (#any-of? @_cmd "jq" "gojq")
   argument: (raw_string) @injection.content
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "jq")
