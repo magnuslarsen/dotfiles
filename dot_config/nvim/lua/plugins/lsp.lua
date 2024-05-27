@@ -256,6 +256,7 @@ return {
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
+				bash = { "shfmt" },
 				fish = { "fish_indent" },
 				json = { "fixjson" },
 				lua = { "stylua" },
@@ -295,12 +296,13 @@ return {
 			}
 
 			require("lint").linters_by_ft = {
+				bash = { "shellcheck" },
 				fish = { "fish" },
 				go = { "golangcilint" },
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
-				systemd = { "systemdlint" },
 				sudoers = { "visudo" },
+				systemd = { "systemdlint" },
 			}
 			require("lint").linters.markdownlint.args = {
 				"-c",
