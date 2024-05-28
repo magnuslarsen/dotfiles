@@ -2,7 +2,7 @@ local lsp_servers = {
 	ansiblels = {
 		ansible = {
 			ansible = {
-				useFullyQualifiedCollectionNames = false,
+				useFullyQualifiedCollectionNames = true,
 			},
 		},
 	},
@@ -39,11 +39,6 @@ local lsp_servers = {
 					preview = true,
 				},
 				jedi = { environment = "/usr/bin/python3" },
-				-- Rope auto-completer
-				-- rope_autoimport = {
-				-- 	enabled = true,
-				-- 	memory = true,
-				-- },
 			},
 		},
 	},
@@ -54,6 +49,7 @@ local lsp_servers = {
 		},
 	},
 	marksman = {},
+	powershell_es = {},
 }
 
 return {
