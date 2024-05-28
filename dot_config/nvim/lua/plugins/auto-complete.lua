@@ -19,9 +19,6 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"FelipeLema/cmp-async-path",
 			"hrsh7th/cmp-buffer",
-
-			-- Adds a number of user-friendly snippets
-			"rafamadriz/friendly-snippets",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -30,7 +27,6 @@ return {
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 			-- luasnip configuration
-			require("luasnip.loaders.from_vscode").lazy_load()
 			require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
 			luasnip.config.setup({})
 			luasnip.config.set_config({
@@ -107,9 +103,6 @@ return {
 				end,
 			})
 
-			-- Include extended doc snippets
-			require("luasnip").filetype_extend("sh", { "shelldoc" })
-
 			-- Use buffer source for `/`
 			cmp.setup.cmdline("/", {
 				mapping = cmp.mapping.preset.cmdline({}),
@@ -141,6 +134,24 @@ return {
 		event = "InsertEnter",
 		opts = {
 			tabkey = "",
+		},
+	},
+	{
+		"danymat/neogen",
+		keys = {
+			{
+				"<leader>dg",
+				function()
+					require("neogen").generate()
+				end,
+			},
+		},
+		opts = {
+			enabled = true,
+			snippet_engine = "luasnip",
+			languages = {
+				python = { template = { annotation_convention = "reST" } },
+			},
 		},
 	},
 }
