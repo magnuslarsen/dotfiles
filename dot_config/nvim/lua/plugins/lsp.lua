@@ -261,6 +261,7 @@ return {
 				sql = { "sql_formatter" },
 				xml = { "xmllint" },
 				yaml = { "yamlfix" },
+				query = { "format-queries" },
 				["*"] = { "injected" },
 			},
 		},
