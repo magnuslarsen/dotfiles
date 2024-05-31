@@ -22,9 +22,8 @@
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "sql"))
 
-; For some reason, `after/queries` does not include my custom parsers
-; so include upstream parsers - above is not stable enough for upstream (yet anyway)
-; ref: https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/bash/injections.scm
+; From upstream
+; https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/bash/injections.scm
 ((comment) @injection.content
   (#set! injection.language "comment"))
 
