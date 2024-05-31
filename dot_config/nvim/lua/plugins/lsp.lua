@@ -49,7 +49,14 @@ local lsp_servers = {
 		},
 	},
 	marksman = {},
-	powershell_es = {},
+	powershell_es = {
+		powershell = {
+			codeFormatting = {
+				autoCorrectAliases = true,
+				useCorrectCasing = true,
+			},
+		},
+	},
 }
 
 return {
