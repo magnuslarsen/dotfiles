@@ -63,7 +63,7 @@ vim.filetype.add({
 	},
 	pattern = {
 		-- Set systemd filetype for systemd files in yaml.ansible files
-		["~/zgit/ansible.*/.*%.service"] = "systemd",
+		["~/zgit/.*ansible.*/.*%.service"] = "systemd",
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
 	},

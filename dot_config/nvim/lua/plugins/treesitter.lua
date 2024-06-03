@@ -79,6 +79,7 @@ return {
 				"printf",
 				"python",
 				"query",
+				"regex",
 				"rst",
 				"ruby",
 				"rust",
