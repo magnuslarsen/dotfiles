@@ -120,12 +120,13 @@ return {
 				"fixjson",
 				"golangci-lint",
 				"markdownlint",
+				"prettierd",
 				"shellcheck",
 				"shfmt",
 				"sql-formatter",
 				"stylua",
 				"systemdlint",
-				"yamlfix",
+				-- "yamlfix",
 			})
 			require("mason-tool-installer").setup({
 				auto_update = true,
@@ -267,7 +268,7 @@ return {
 				sh = { "shfmt" },
 				sql = { "sql_formatter" },
 				xml = { "xmllint" },
-				yaml = { "yamlfix" },
+				yaml = { "prettierd" },
 				query = { "format-queries" },
 				["*"] = { "injected" },
 			},
