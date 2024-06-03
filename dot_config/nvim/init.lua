@@ -94,7 +94,7 @@ vim.keymap.set("n", "K", show_documentation, { silent = true })
 
 -- Neat keybindings
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true }) -- remap space (due to now beingleader key)
-vim.keymap.set("v", "Y", [["+y"]]) -- copy to system clipboard
+vim.keymap.set("v", "Y", [["+y]]) -- copy to system clipboard
 vim.keymap.set({ "i", "v" }, "<C-c>", "<Esc>") -- remap CTRL+C to Esc
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true }) -- move visual line up
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true }) -- move visual line down
