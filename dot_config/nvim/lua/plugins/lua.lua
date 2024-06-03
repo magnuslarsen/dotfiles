@@ -1,20 +1,24 @@
 return {
 	{
-		"folke/neodev.nvim",
+		"folke/lazydev.nvim",
 		opts = {},
 		ft = { "lua" },
 	},
+	-- Completion source for require statements and module annotations
 	{
-		"hrsh7th/cmp-nvim-lua",
-		ft = { "lua" },
-		config = function()
-			-- Add cmp-nvim-lua to nvim-cmp
+		"hrsh7th/nvim-cmp",
+		opts = function()
+			-- Add lazydev to nvim-cmp
 			local cmp = require("cmp")
-			local config = cmp.get_config()
-			table.insert(config.sources, {
-				name = "nvim_lua",
+			local opts = cmp.get_config()
+
+			opts.sources = opts.sources or {}
+			table.insert(opts.sources, {
+				name = "lazydev",
+				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
 			})
-			cmp.setup(config)
+
+			return opts
 		end,
 	},
 }
