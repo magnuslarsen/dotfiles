@@ -70,8 +70,8 @@ vim.filetype.add({
 })
 
 -- Some keybinds are useful even without lsp_config activated (read: nvim-lint + conform.nvim)
-vim.keymap.set("n", "df", vim.diagnostic.goto_next)
-vim.keymap.set("n", "db", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<leader>df", function() vim.diagnostic.jump({ count = 1 }) end)
+vim.keymap.set("n", "<leader>db", function() vim.diagnostic.jump({ count = -1 }) end)
 vim.keymap.set({ "n", "v" }, "<leader>ff", function()
 	require("conform").format({ lsp_fallback = "always" })
 end)
@@ -108,7 +108,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true }) -- stay centered
 
 -- Toggle inlay-hints
 vim.keymap.set("n", "<leader>ti", function()
-	vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 end)
 
 -- `i` should start at correct indentation
