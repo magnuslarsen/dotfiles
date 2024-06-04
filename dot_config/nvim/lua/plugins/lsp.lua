@@ -138,25 +138,25 @@ return {
 			require("mason-lspconfig").setup(opts)
 
 			local on_attach = function(_, bufnr)
-				local nmap = function(keys, func, desc)
+				local map = function(mode, keys, func, desc)
 					if desc then
 						desc = "LSP: " .. desc
 					end
 
-					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+					vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
 				end
 				local telescope = require("telescope.builtin")
 
-				nmap("da", telescope.diagnostics, "[D]iagnists List [A]ll")
+				map("n", "da", telescope.diagnostics, "[D]iagnists List [A]ll")
 
-				nmap("gd", telescope.lsp_definitions, "[G]oto [D]efinition")
-				nmap("gr", telescope.lsp_references, "[G]oto [R]eferences")
-				nmap("gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
-				nmap("gt", telescope.lsp_type_definitions, "[G]oto [T]ype Definition")
+				map("n", "gd", telescope.lsp_definitions, "[G]oto [D]efinition")
+				map("n", "gr", telescope.lsp_references, "[G]oto [R]eferences")
+				map("n", "gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
+				map("n", "gt", telescope.lsp_type_definitions, "[G]oto [T]ype Definition")
 
-				nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+				map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-				nmap("gD", vim.lsp.buf.declaration, "[G]oto [^D]eclaration")
+				map("n", "gD", vim.lsp.buf.declaration, "[G]oto [^D]eclaration")
 			end
 
 			-- Make some pretty borders as well
