@@ -85,6 +85,7 @@ return {
 				"rust",
 				"sql",
 				"toml",
+				"twig",
 				"vimdoc",
 				"yaml",
 			},
