@@ -1,3 +1,5 @@
+; extends
+
 ; Doc-strings are RST
 (function_definition
   (block
@@ -34,24 +36,3 @@
     right: (string
       (string_content) @injection.content
       (#set! injection.language "json"))))
-
-; From upstream
-; https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/python/injections.scm
-(call
-  function: (attribute
-    object: (identifier) @_re)
-  arguments: (argument_list
-    .
-    (string
-      (string_content) @injection.content))
-  (#eq? @_re "re")
-  (#set! injection.language "regex"))
-
-((binary_operator
-  left: (string
-    (string_content) @injection.content)
-  operator: "%")
-  (#set! injection.language "printf"))
-
-((comment) @injection.content
-  (#set! injection.language "comment"))
