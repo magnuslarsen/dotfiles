@@ -23,15 +23,28 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local luasnip_types = require("luasnip.util.types")
 			local lspkind = require("lspkind")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-			luasnip.config.setup({})
-			luasnip.config.set_config({
-				history = true,
-				updateevents = "TextChanged,TextChangedI",
+			luasnip.config.setup({
 				autosnippets = false,
 				ft_func = require("luasnip.extras.filetype_functions").from_cursor,
+				history = true,
+				updateevents = "TextChanged,TextChangedI",
+
+				ext_opts = {
+					[luasnip_types.choiceNode] = {
+						active = {
+							virt_text = { { "●", "DiagnosticError" } },
+						},
+					},
+					[luasnip_types.insertNode] = {
+						active = {
+							virt_text = { { "●", "DiagnosticInfo" } },
+						},
+					},
+				},
 			})
 
 			-- luasnip configuration
