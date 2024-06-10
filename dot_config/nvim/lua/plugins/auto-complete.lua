@@ -26,8 +26,6 @@ return {
 			local lspkind = require("lspkind")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-			-- luasnip configuration
-			require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
 			luasnip.config.setup({})
 			luasnip.config.set_config({
 				history = true,
@@ -35,6 +33,9 @@ return {
 				autosnippets = false,
 				ft_func = require("luasnip.extras.filetype_functions").from_cursor,
 			})
+
+			-- luasnip configuration
+			require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/snippets" } })
 
 			cmp.setup({
 				snippet = {
@@ -48,10 +49,8 @@ return {
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete({}),
-					["<CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
-					}),
+					["<C-e>"] = cmp.mapping.abort(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping(function(_)
 						if cmp.visible() then
 							cmp.select_next_item()

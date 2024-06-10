@@ -16,23 +16,10 @@ local rep = require("luasnip.extras").rep
 
 -- Snippets go here
 return {
-	s(
-		"ifmain",
-		fmt(
-			[[
-def {}():
-	{}{}
-
-
-if __name__ == "__main__":
-	{}()
-	]],
-			{
-				i(1, "main"),
-				i(2, "pass"),
-				i(0),
-				rep(1),
-			}
-		)
-	),
+	s("shebang", {
+		t("#!/usr/bin/env "),
+		d(1, function()
+			return sn(nil, t({ vim.bo.filetype, "", "", "" }))
+		end),
+	}),
 }
