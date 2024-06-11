@@ -33,7 +33,7 @@ python3 -m pipx ensurepath
 pipx install yq
 
 # Build remaining packages that are not available on Ubuntu repos..
-cargo install bat eza fd-find hyperfine jaq riffdiff ripgrep starship tokei
+cargo install --locked bat eza fd-find hyperfine jaq riffdiff ripgrep starship tokei
 go install github.com/junegunn/fzf@latest
 ```
 
