@@ -11,7 +11,7 @@
 ; jq - the best tool
 (command
   name: (command_name) @_cmd
-  (#any-of? @_cmd "jq" "gojq")
+  (#any-of? @_cmd "gojq" "jaq" "jq" "tomlq" "xq" "yq")
   argument: (raw_string) @injection.content
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "jq"))
@@ -23,4 +23,3 @@
   argument: (raw_string) @injection.content
   (#offset! @injection.content 0 1 0 -1)
   (#set! injection.language "sql"))
-

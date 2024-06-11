@@ -124,7 +124,11 @@ fi
 export VISUAL=nvim
 export EDITOR=nvim
 
-[[ -f $HOME/.cargo/env ]] && . "$HOME/.cargo/env"
+# Cargo (rust) built packages
+[[ -f $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
+
+# Go built packages
+[[ -d $HOME/go/bin ]] && PATH="$HOME/go/bin:$PATH"
 
 export BAT_THEME=Dracula
 
