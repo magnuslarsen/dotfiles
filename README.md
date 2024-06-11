@@ -9,7 +9,7 @@ This is mine, it probably doesn't fit your desires :-)
 on Arch, simply run:
 
 ```sh
-yay -S bat difftastic eza fd fish fzf git go jq kitty neovim nodejs npm python-pip ripgrep starship tmux ttf-fira-code yay yq
+yay -S bat eza fd fish fzf git go gojq jq kitty neovim nodejs npm python-pip riff ripgrep starship tmux tokei ttf-fira-code yay yq
 ```
 
 ### Ubuntu
@@ -21,20 +21,29 @@ sudo add-apt-repository ppa:fish-shell/release-3
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo add-apt-repository ppa:git-core/ppa
 sudo add-apt-repository ppa:longsleep/golang-backports
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - # Gotta love nodesource
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - # gotta love nodesource
 
-sudo apt install fish fonts-firacode git golang-go jq kitty neovim nodejs python3-pip ripgrep tmux
-python3 -m pip install pynvim yq
+sudo apt install fish fonts-firacode git golang-go gojq jq kitty neovim nodejs python3-pip ripgrep tmux
+python3 -m pip install pynvim
+
+# Install Python "binaries" in pipx
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+
+pipx install yq
+
+# Build remaining packages that are not available on Ubuntu repos..
+cargo install bat eza fd-find hyperfine jaq riffdiff ripgrep starship tokei
+go install github.com/junegunn/fzf@latest
 ```
-
-`bat`, `difftastic`, `eza`, `fd`, `fzf`, `starship`, `kitty` (newer version), and `ripgrep` (newer version) are packages you gotta download manually :-)
 
 ## Chezmoi
 
 Chezmoi is managing all of these configs, initialize it like so:
 
 ```sh
-chezmoi init --apply https://github.com/magnuslarsen/dotfiles.git
+# assuming an ssh-key is setup
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply git@github.com:magnuslarsen/dotfiles.git
 ```
 
 ## Tmux
@@ -51,7 +60,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 Simply run:
 
 ```sh
-fisher update && chezmoi update --force
+rm ~/.config/fish/functions/fzf_configure_bindings.fish && fisher update && chezmoi update --force
 ```
 
 ## NerdFont

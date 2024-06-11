@@ -117,6 +117,7 @@ return {
 
 			local installable_tools = vim.tbl_keys(lsp_servers)
 			installable_tools = vim.list_extend(installable_tools, {
+				"ansible-lint",
 				"fixjson",
 				"golangci-lint",
 				"markdownlint",
@@ -289,6 +290,7 @@ return {
 		"mfussenegger/nvim-lint",
 		config = function()
 			require("lint").linters.visudo = {
+				name = "visudo",
 				cmd = "visudo",
 				args = { "-cf", "-" },
 				stdin = true,
