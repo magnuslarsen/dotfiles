@@ -101,4 +101,10 @@ return {
 			},
 		},
 	},
+	-- Make vim.ui.{select,input} prettier
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+		event = "VeryLazy"
+	},
 }
