@@ -7,7 +7,6 @@ return {
 			-- Snippet Engine & its associated nvim-cmp source
 			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 			"saadparwaiz1/cmp_luasnip",
-			"L3MON4D3/cmp-luasnip-choice", -- choice-node autocomplete
 
 			-- Adds LSP completion capabilities
 			"hrsh7th/cmp-nvim-lsp",
@@ -22,9 +21,12 @@ return {
 		},
 		config = function()
 			local cmp = require("cmp")
+
 			local luasnip = require("luasnip")
 			local luasnip_types = require("luasnip.util.types")
+
 			local lspkind = require("lspkind")
+
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 			luasnip.config.setup({
@@ -134,6 +136,11 @@ return {
 
 			-- autopairs
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+			-- choice node pop-up
+			vim.keymap.set("i", "<C-y>", function()
+				require("luasnip.extras.select_choice")()
+			end)
 		end,
 	},
 	{

@@ -40,12 +40,6 @@ local transform = function(text, info)
 			return c(info.index, {
 				t(string.format('fmt.Errorf("%s: %%v", %s)', info.func_name, info.err_name)),
 				t(info.err_name),
-				-- Be cautious with wrapping, it makes the error part of the API of the
-				-- function, see https://go.dev/blog/go1.13-errors#whether-to-wrap
-				t(string.format('fmt.Errorf("%s: %%w", %s)', info.func_name, info.err_name)),
-				-- Old style (pre 1.13, see https://go.dev/blog/go1.13-errors), using
-				-- https://github.com/pkg/errors
-				t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
 			})
 		else
 			return t("err")
@@ -119,7 +113,7 @@ end
 
 return {
 	-- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
-	s("iferr", {
+	s("iferreq", {
 		i(1, { "val" }),
 		t(", "),
 		i(2, { "err" }),
