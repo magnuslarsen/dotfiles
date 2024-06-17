@@ -119,7 +119,10 @@ return {
 			installable_tools = vim.list_extend(installable_tools, {
 				"ansible-lint",
 				"fixjson",
+				"gofumpt",
+				"goimports-reviser",
 				"golangci-lint",
+				"golines",
 				"markdownlint",
 				"prettierd",
 				"shellcheck",
@@ -262,6 +265,7 @@ return {
 			formatters_by_ft = {
 				bash = { "shfmt" },
 				fish = { "fish_indent" },
+				go = { "golines", "goimports-reviser" },
 				json = { "fixjson" },
 				lua = { "stylua" },
 				markdown = { "markdownlint" },
@@ -283,6 +287,9 @@ return {
 			}
 			require("conform").formatters.markdownlint = {
 				prepend_args = { "-c", vim.fn.expand("~/.config/markdownlint.json") },
+			}
+			require("conform").formatters["goimports-reviser"] = {
+				prepend_args = { "-rm-unused", "-set-alias" },
 			}
 		end,
 	},
