@@ -33,14 +33,6 @@ return {
 			require("scrollEOF").setup()
 		end,
 	},
-	-- Best incremental search
-	{
-		"sustech-data/wildfire.nvim",
-		keys = "<CR>",
-		config = function()
-			require("wildfire").setup()
-		end,
-	},
 	-- Markdown (Github style) markdown preview
 	{
 		"iamcco/markdown-preview.nvim",
