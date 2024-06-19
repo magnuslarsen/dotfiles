@@ -263,13 +263,13 @@ return {
 		"stevearc/conform.nvim",
 		opts = {
 			formatters_by_ft = {
-				bash = { "shfmt" },
+				bash = { "shellcheck", "shfmt" },
 				fish = { "fish_indent" },
 				go = { "golines", "goimports-reviser" },
 				json = { "fixjson" },
 				lua = { "stylua" },
 				markdown = { "markdownlint" },
-				sh = { "shfmt" },
+				sh = { "shellcheck", "shfmt" },
 				sql = { "sql_formatter" },
 				xml = { "xmllint" },
 				yaml = { "prettierd" },
