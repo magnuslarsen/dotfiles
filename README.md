@@ -9,7 +9,7 @@ This is mine, it probably doesn't fit your desires :-)
 on Arch, simply run:
 
 ```sh
-yay -S bat eza fd fish fzf git go gojq jq kitty neovim nodejs npm python-pip riff ripgrep starship tmux tokei ttf-fira-code yay yq
+yay -S bat chezmoi eza fd fish fzf git go gojq jaq jq kitty neovim nodejs npm python-pip python-pynvim riff ripgrep starship tmux tokei tokei ttf-fira-code yay yq
 ```
 
 ### Ubuntu
@@ -44,6 +44,9 @@ Chezmoi is managing all of these configs, initialize it like so:
 ```sh
 # assuming an ssh-key is setup
 sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply git@github.com:magnuslarsen/dotfiles.git
+
+# or preinstalled:
+chezmoi init --apply git@github.com:magnuslarsen/dotfiles.git
 ```
 
 ## Tmux
