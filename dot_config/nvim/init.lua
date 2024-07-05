@@ -50,8 +50,19 @@ vim.opt.undolevels = 1000
 vim.opt.writebackup = false
 vim.wo.number = true
 
+local function expand_jinja_filetypes()
+	local main_lang = vim.fn.expand("%:e:e:r")
+	if main_lang == "yml" then
+		main_lang = "yaml"
+	end
+	return main_lang .. ".twig"
+end
+
 vim.filetype.add({
 	extension = {
+		-- jinja looks a lot like twig; so let's use while jinja has no treesitter parses
+		j2 = expand_jinja_filetypes(),
+		jinja = expand_jinja_filetypes(),
 		-- Set filtype sls (saltstack) files
 		sls = "yaml",
 		-- Set filetype for PlantUML files

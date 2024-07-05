@@ -25,6 +25,9 @@ verbose = true
 [push]
 autoSetupRemote = true
 
+[pull]
+rebase = true
+
 [alias]
 mwps = "push -o merge_request.create -o merge_request.target=master -o merge_request.merge_when_pipeline_succeeds"
 st = "status"
