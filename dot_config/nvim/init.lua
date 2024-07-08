@@ -52,8 +52,8 @@ vim.wo.number = true
 
 local function expand_jinja_filetypes()
 	local main_lang = vim.fn.expand("%:e:e:r")
-	if main_lang == "yml" then
-		main_lang = "yaml"
+	if main_lang == "yml" or main_lang == "yaml" then
+		return "yaml"
 	end
 	return main_lang .. ".twig"
 end
