@@ -1,6 +1,12 @@
 # This is Git's per-user configuration file.
+[user]
+name = "Magnus Larsen"
+
 [include]
 path = "~/.gitconfig_user"
+
+[includeIf "hasconfig:remote.*.url:git@ssh.dev.azure.com:**/**"]
+path = "~/.gitconfig_work"
 
 [core]
 editor = "nvim"
