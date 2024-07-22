@@ -7,6 +7,8 @@ path = "~/.gitconfig_user"
 
 [includeIf "hasconfig:remote.*.url:git@ssh.dev.azure.com:**/**"]
 path = "~/.gitconfig_work"
+[includeIf "hasconfig:remote.*.url:git@dkcphhpcvirt014.topsoe.dk:**/**"]
+path = "~/.gitconfig_work"
 
 [core]
 editor = "nvim"

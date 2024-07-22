@@ -21,17 +21,17 @@ return {
 				end,
 			},
 			{
+				"r",
+				mode = { "o" },
+				function()
+					require("flash").remote()
+				end,
+			},
+			{
 				"R",
 				mode = { "n", "o", "x" },
 				function()
 					require("flash").treesitter()
-				end,
-			},
-			{
-				"r",
-				mode = { "o", "x" },
-				function()
-					require("flash").treesitter_search()
 				end,
 			},
 		},
