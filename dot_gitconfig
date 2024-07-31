@@ -7,7 +7,7 @@ path = "~/.gitconfig_user"
 
 [includeIf "hasconfig:remote.*.url:git@ssh.dev.azure.com:**/**"]
 path = "~/.gitconfig_work"
-[includeIf "hasconfig:remote.*.url:git@dkcphhpcvirt014.topsoe.dk:**/**"]
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.topsoe.dk:2424/**/**"]
 path = "~/.gitconfig_work"
 
 [core]
