@@ -223,7 +223,7 @@ return {
 
 	-- Lightbulb for Code Actions
 	{
-		"gh-liu/nvim-lightbulb",
+		"kosayoda/nvim-lightbulb",
 		opts = { autocmd = { enabled = true } },
 		event = { "LspAttach" },
 		init = function()

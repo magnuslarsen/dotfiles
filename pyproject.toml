@@ -1,0 +1,29 @@
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+exclude = ["docs"]
+line-length = 120
+lint.ignore = ["W191", "E111", "E114", "E117"]
+lint.select = [
+	"A",
+	"B",
+	"C4",
+	"E",
+	"F",
+	"FLY",
+	"FURB",
+	"I",
+	"PERF",
+	"RUF",
+	"SIM",
+	"UP",
+	"W",
+]
+target-version = "py310"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
