@@ -23,7 +23,7 @@ return {
 		event = { "BufRead Cargo.toml" },
 		config = function()
 			require("crates").setup({
-				src = {
+				completion = {
 					cmp = { enabled = true },
 				},
 			})
