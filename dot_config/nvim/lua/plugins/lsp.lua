@@ -180,15 +180,6 @@ return {
 						on_attach = on_attach,
 						settings = lsp_servers[server_name],
 					}
-					if server_name == "yamlls" then
-						ls_config = vim.tbl_deep_extend("force", ls_config, {
-							filetypes = vim.tbl_deep_extend(
-								"force",
-								require("lspconfig.server_configurations.yamlls").default_config.filetypes,
-								{ "yaml", "yaml.ansible" }
-							),
-						})
-					end
 
 					if server_name == "rust_analyzer" then
 						-- We use rustaceanvim for this - so we only need to define settings here
