@@ -62,6 +62,12 @@ return {
 				overrides = {
 					-- I like Inlay Hints to be white and readable
 					LspInlayHint = { fg = colors.white },
+					["@markup.heading.1.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.heading.2.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.heading.3.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.heading.4.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.heading.5.markdown"] = { fg = colors.pink, bold = true },
+					["@markup.heading.6.markdown"] = { fg = colors.pink, bold = true },
 				},
 			})
 
@@ -105,6 +111,6 @@ return {
 	{
 		"stevearc/dressing.nvim",
 		opts = {},
-		event = "VeryLazy"
+		event = "VeryLazy",
 	},
 }
