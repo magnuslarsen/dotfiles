@@ -311,6 +311,7 @@ return {
 			require("lint").linters.markdownlint.args = {
 				"-c",
 				vim.fn.expand("~/.config/markdownlint.json"),
+				"--stdin"
 			}
 
 			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged" }, {
