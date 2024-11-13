@@ -78,20 +78,20 @@ return {
 			require("gitlinker").setup({
 				router = {
 					browse = {
-						["^gitlab%.nzcorp%.net"] = require("gitlinker.routers").gitlab_browse,
+						["^gitlab%.topsoe%.dk"] = require("gitlinker.routers").gitlab_browse,
 					},
 					blame = {
-						["^gitlab%.nzcorp%.net"] = require("gitlinker.routers").gitlab_blame,
+						["^gitlab%.topsoe%.dk"] = require("gitlinker.routers").gitlab_blame,
 					},
 					default_branch = {
-						["^gitlab%.nzcorp%.net"] = "https://gitlab.nzcorp.net/"
+						["^gitlab%.topsoe%.dk"] = "https://gitlab.topsoe.dk/"
 							.. "{_A.USER}/"
 							.. "{_A.REPO}/blob/"
 							.. "{_A.DEFAULT_BRANCH}/"
 							.. "{_A.FILE}", -- no plain=1 here; we want the rendered version
 					},
 					current_branch = {
-						["^gitlab%.nzcorp%.net"] = "https://gitlab.nzcorp.net/"
+						["^gitlab%.topsoe%.dk"] = "https://gitlab.topsoe.dk/"
 							.. "{_A.USER}/"
 							.. "{_A.REPO}/blob/"
 							.. "{_A.CURRENT_BRANCH}/"

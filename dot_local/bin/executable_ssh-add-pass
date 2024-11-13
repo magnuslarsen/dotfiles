@@ -11,6 +11,7 @@ chmod +x "$SSH_ASKPASS"
 
 export SSH_ASKPASS
 export DISPLAY=dummy
+export XWAYLAND_DISPLAY=dummy
 
 # Then add all keys; overwriting the script with specific key
 # as SSH_ASKPASS does not pass arguments... <,<
