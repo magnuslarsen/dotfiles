@@ -1,3 +1,13 @@
+local get_venv = function()
+	local venv_path = os.getenv("VIRTUAL_ENV")
+
+	if venv_path ~= nil then
+		return venv_path .. "/bin/python3"
+	else
+		return "/usr/bin/python3"
+	end
+end
+
 local lsp_servers = {
 	ansiblels = {
 		ansible = {
@@ -38,7 +48,9 @@ local lsp_servers = {
 					unsafeFixes = true,
 					preview = true,
 				},
-				jedi = { environment = "/usr/bin/python3" },
+				jedi = {
+					environment = get_venv(),
+				},
 			},
 		},
 	},
@@ -311,7 +323,7 @@ return {
 			require("lint").linters.markdownlint.args = {
 				"-c",
 				vim.fn.expand("~/.config/markdownlint.json"),
-				"--stdin"
+				"--stdin",
 			}
 
 			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "TextChanged" }, {

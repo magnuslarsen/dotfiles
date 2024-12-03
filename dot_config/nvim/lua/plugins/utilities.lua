@@ -1,8 +1,13 @@
 return {
 	-- PGP support
-	{ "jamessan/vim-gnupg" },
+	{
+		"jamessan/vim-gnupg",
+	},
 	-- Autodetect spacing
-	{ "nmac427/guess-indent.nvim", config = true },
+	{
+		"nmac427/guess-indent.nvim",
+		config = true,
+	},
 	-- Better Sorting
 	{
 		"sQVe/sort.nvim",
@@ -118,5 +123,15 @@ return {
 		},
 	},
 	-- Auto-detect ansible scripts, plus some nice tools
-	{ "mfussenegger/nvim-ansible" },
+	{
+		"mfussenegger/nvim-ansible",
+	},
+	-- mini.nvim suite
+	{
+		"echasnovski/mini.ai",
+		version = false,
+		config = function()
+			require("mini.ai").setup()
+		end,
+	},
 }
