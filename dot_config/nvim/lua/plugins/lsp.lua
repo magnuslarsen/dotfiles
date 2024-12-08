@@ -17,8 +17,23 @@ local lsp_servers = {
 		},
 	},
 	gopls = {
+		analyses = {
+			shadow = true,
+			unusedwrite = true,
+			unusedvariable = true,
+		},
 		gofumpt = true,
+		hints = {
+			assignVariableTypes = true,
+			compositeLiteralFields = true,
+			compositeLiteralTypes = true,
+			constantValues = true,
+			functionTypeParameters = true,
+			parameterNames = true,
+			rangeVariableTypes = true,
+		},
 	},
+	templ = {},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
@@ -140,6 +155,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				"sql-formatter",
+				"sqlfluff",
 				"stylua",
 				"systemdlint",
 			})
@@ -318,6 +334,7 @@ return {
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
 				sudoers = { "visudo" },
+				sql = { "sqlfluff" },
 				systemd = { "systemdlint" },
 			}
 			require("lint").linters.markdownlint.args = {
