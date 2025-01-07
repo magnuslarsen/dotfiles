@@ -48,6 +48,9 @@ return {
 		config = function()
 			vim.g.mkdp_theme = "dark"
 			vim.g.mkdp_port = 8828
+			vim.g.mkdp_preview_options = {
+				uml = { server = "https://gitlab.topsoe.dk:6002" },
+			}
 		end,
 	},
 	-- PlantUML (text) previewer
@@ -129,9 +132,19 @@ return {
 	-- mini.nvim suite
 	{
 		"echasnovski/mini.ai",
+		dependencies = {
+			"echasnovski/mini.extra",
+		},
 		version = false,
 		config = function()
-			require("mini.ai").setup()
+			local gen_ai_spec = require("mini.extra").gen_ai_spec
+			require("mini.ai").setup({
+				custom_textobjects = {
+					D = gen_ai_spec.diagnostic(),
+					I = gen_ai_spec.indent(),
+					L = gen_ai_spec.line(),
+				},
+			})
 		end,
 	},
 }

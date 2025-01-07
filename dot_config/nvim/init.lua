@@ -80,7 +80,7 @@ vim.keymap.set("n", "<leader>db", function()
 	vim.diagnostic.jump({ count = -1, float = true })
 end)
 vim.keymap.set({ "n", "v" }, "<leader>ff", function()
-	require("conform").format({ lsp_format = "last" })
+	require("conform").format({ lsp_format = "last", timeout_ms = 2500 })
 end)
 
 -- Hover documentation

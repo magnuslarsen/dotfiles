@@ -38,8 +38,8 @@ local lsp_servers = {
 		},
 	},
 	templ = {},
-	html = {},
 	tailwindcss = {},
+	html = {},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
