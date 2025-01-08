@@ -25,6 +25,7 @@ require("lazy").setup({ import = "plugins" }, {
 
 -- all the vim options
 vim.g.nospell = true
+vim.g.omni_sql_no_default_maps = 0
 vim.o.completeopt = "menuone,noselect"
 vim.o.hlsearch = false
 vim.o.ignorecase = true

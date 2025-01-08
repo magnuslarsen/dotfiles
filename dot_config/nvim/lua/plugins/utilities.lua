@@ -53,24 +53,26 @@ return {
 			}
 		end,
 	},
-	-- PlantUML (text) previewer
+	-- PlantUML previewer
 	{
-		"https://gitlab.com/itaranto/plantuml.nvim",
-		cmd = "PlantUML",
-		ft = "plantuml",
+		"https://gitlab.com/itaranto/preview.nvim",
 		version = "*",
-		config = function()
-			require("plantuml").setup({
-				renderer = {
-					type = "image",
-					options = {
-						prog = "feh",
-						dark_mode = false,
-					},
+		cmd = "PreviewFile",
+		ft = "plantuml",
+		opts = {
+			previewers_by_ft = {
+				plantuml = {
+					name = "plantuml_png",
+					renderer = { type = "command", opts = { cmd = { "feh" } } },
 				},
-				render_on_write = true,
-			})
-		end,
+			},
+			previewers = {
+				plantuml_png = {
+					args = { "-pipe", "-tpng" },
+				},
+			},
+			render_on_write = true,
+		},
 	},
 	-- And oldschool syntax highlighting
 	{
