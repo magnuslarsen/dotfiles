@@ -184,7 +184,7 @@ return {
 				end
 				local telescope = require("telescope.builtin")
 
-				map("n", "da", telescope.diagnostics, "[D]iagnists List [A]ll")
+				map("n", "<leader>da", telescope.diagnostics, "[D]iagnists List [A]ll")
 
 				map("n", "gd", telescope.lsp_definitions, "[G]oto [D]efinition")
 				map("n", "gr", telescope.lsp_references, "[G]oto [R]eferences")
