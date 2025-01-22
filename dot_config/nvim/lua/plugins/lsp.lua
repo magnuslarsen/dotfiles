@@ -39,7 +39,13 @@ local lsp_servers = {
 	},
 	templ = {},
 	tailwindcss = {},
-	html = {},
+	html = {
+		html = {
+			format = {
+				enable = false,
+			},
+		},
+	},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
@@ -290,14 +296,16 @@ return {
 				bash = { "shellcheck", "shfmt" },
 				fish = { "fish_indent" },
 				go = { "golines", "goimports-reviser" },
+				html = { "html_beautify" },
 				json = { "fixjson" },
+				just = { "just" },
 				lua = { "stylua" },
 				markdown = { "markdownlint" },
+				query = { "format-queries" },
 				sh = { "shellcheck", "shfmt" },
 				sql = { "sql_formatter" },
 				xml = { "xmllint" },
 				yaml = { "prettierd" },
-				query = { "format-queries" },
 				["*"] = { "injected" },
 			},
 		},
@@ -340,6 +348,7 @@ return {
 				sh = { "shellcheck" },
 				sudoers = { "visudo" },
 				systemd = { "systemdlint" },
+				sql = { "sqruff" },
 			}
 			require("lint").linters.markdownlint.args = {
 				"-c",
