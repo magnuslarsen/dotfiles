@@ -109,9 +109,6 @@ return {
 				build = ":MasonUpdate",
 				config = true,
 			},
-
-			-- pretty icons
-			"onsails/lspkind.nvim",
 		},
 		init = function()
 			-- disable lsp watcher. Too slow on linux
@@ -131,6 +128,7 @@ return {
 			{ "b0o/SchemaStore.nvim" },
 			-- Automatic tool installation
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+			{ "saghen/blink.cmp" },
 		},
 		opts = function()
 			local o = {}
@@ -202,14 +200,8 @@ return {
 				map("n", "gD", vim.lsp.buf.declaration, "[G]oto [^D]eclaration")
 			end
 
-			-- Make some pretty borders as well
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-
-			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			-- blink.cmp supports additional completion capabilities, so broadcast that to servers
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			-- Ensure the servers above are installed
 			require("mason-lspconfig").setup_handlers({
@@ -252,15 +244,15 @@ return {
 	},
 
 	-- Lightbulb for Code Actions
-	{
-		"kosayoda/nvim-lightbulb",
-		opts = { autocmd = { enabled = true } },
-		event = { "LspAttach" },
-		init = function()
-			-- Make the bulb use a nerdfont icon instead of emoji
-			vim.fn.sign_define("LightBulbSign", { text = "󰌵" })
-		end,
-	},
+	-- {
+	-- 	"kosayoda/nvim-lightbulb",
+	-- 	opts = { autocmd = { enabled = true } },
+	-- 	event = { "LspAttach" },
+	-- 	init = function()
+	-- 		-- Make the bulb use a nerdfont icon instead of emoji
+	-- 		vim.fn.sign_define("LightBulbSign", { text = "󰌵" })
+	-- 	end,
+	-- },
 	-- Pretty previewer for Code Actions
 	{
 		"aznhe21/actions-preview.nvim",

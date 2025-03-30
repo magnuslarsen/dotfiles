@@ -21,20 +21,16 @@ return {
 	{
 		"saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
-		config = function()
-			require("crates").setup({
-				completion = {
-					cmp = { enabled = true },
-				},
-			})
-
-			-- Add crates to nvim-cmp
-			local cmp = require("cmp")
-			local config = cmp.get_config()
-			table.insert(config.sources, {
-				name = "crates",
-			})
-			cmp.setup(config)
-		end,
+		opts = {
+			lsp = {
+				enabled = true,
+				on_attach = function(client, bufnr)
+					-- FIXME: should be the lsp on_attach function
+				end,
+				actions = true,
+				completion = true,
+				hover = true,
+			},
+		},
 	},
 }
