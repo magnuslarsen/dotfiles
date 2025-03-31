@@ -244,15 +244,22 @@ return {
 	},
 
 	-- Lightbulb for Code Actions
-	-- {
-	-- 	"kosayoda/nvim-lightbulb",
-	-- 	opts = { autocmd = { enabled = true } },
-	-- 	event = { "LspAttach" },
-	-- 	init = function()
-	-- 		-- Make the bulb use a nerdfont icon instead of emoji
-	-- 		vim.fn.sign_define("LightBulbSign", { text = "󰌵" })
-	-- 	end,
-	-- },
+	{
+		"kosayoda/nvim-lightbulb",
+		opts = {
+			autocmd = {
+				enabled = true,
+			},
+			code_lenses = true,
+			sign = {
+				enabled = true,
+				text = "",
+				lens_text = "",
+				hl = "LightBulbSign",
+			},
+		},
+		event = { "LspAttach" },
+	},
 	-- Pretty previewer for Code Actions
 	{
 		"aznhe21/actions-preview.nvim",
