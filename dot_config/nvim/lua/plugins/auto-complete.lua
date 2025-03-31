@@ -41,24 +41,8 @@ return {
 			-- https://cmp.saghen.dev/configuration/keymap.html
 			keymap = {
 				preset = "enter",
-				["<Tab>"] = {
-					function(cmp)
-						if cmp.snippet_active() then
-							return cmp.snippet_forward()
-						else
-							return cmp.select_next()
-						end
-					end,
-				},
-				["<S-Tab>"] = {
-					function(cmp)
-						if cmp.snippet_active() then
-							return cmp.snippet_backward()
-						else
-							return cmp.select_prev()
-						end
-					end,
-				},
+				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 			},
 			appearance = {
 				nerd_font_variant = "mono",
@@ -139,10 +123,10 @@ return {
 		opts_extend = { "sources.default" },
 	},
 	{
-		"kawre/neotab.nvim",
+		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {
-			tabkey = "",
+			map_cr = false,
 		},
 	},
 	{
