@@ -1,4 +1,4 @@
-local function telescope_project_opts()
+local function fzf_project_opts()
 	local function is_ansible_repo()
 		local current_path = vim.fn.expand("%:p")
 		return string.match(current_path, "ansible")
@@ -27,77 +27,72 @@ end
 
 return {
 	{
-		"nvim-telescope/telescope.nvim",
-		-- branch = "0.1.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
-				config = function()
-					require("telescope").load_extension("fzf")
-				end,
-			},
-		},
+		"ibhagwan/fzf-lua",
 		keys = {
 			{
 				"fd",
 				function()
-					require("telescope.builtin").find_files(telescope_project_opts())
+					require("fzf-lua").files(fzf_project_opts())
 				end,
 			},
 			{
 				"<leader>fd",
 				function()
-					require("telescope.builtin").find_files()
+					require("fzf-lua").files()
 				end,
 			},
 			{
 				"rg",
 				function()
-					require("telescope.builtin").live_grep(telescope_project_opts())
+					require("fzf-lua").live_grep(fzf_project_opts())
 				end,
 			},
 			{
 				"<leader>rg",
 				function()
-					require("telescope.builtin").live_grep()
+					require("fzf-lua").live_grep()
 				end,
 			},
 			{
 				"gw",
 				function()
-					require("telescope.builtin").grep_string(telescope_project_opts())
+					require("fzf-lua").grep_cword(fzf_project_opts())
 				end,
 			},
 			{
 				"<leader>gw",
 				function()
-					require("telescope.builtin").grep_string()
+					require("fzf-lua").grep_cword()
 				end,
 			},
 			{
 				"<leader>rf",
 				function()
-					require("telescope.builtin").oldfiles()
+					require("fzf-lua").oldfiles()
 				end,
 			},
 			{
 				"<leader>ht",
 				function()
-					require("telescope.builtin").help_tags()
+					require("fzf-lua").helptags()
 				end,
 			},
 			{
 				"<leader>ss",
 				function()
-					require("telescope.builtin").spell_suggest()
+					require("fzf-lua").spell_suggest()
 				end,
 			},
 			{
 				"fb",
 				function()
-					require("telescope.builtin").buffers()
+					require("fzf-lua").buffers()
+				end,
+			},
+			{
+				"<leader>fl",
+				function()
+					require("fzf-lua").lsp_code_actions()
 				end,
 			},
 		},

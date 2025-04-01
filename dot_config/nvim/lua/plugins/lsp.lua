@@ -186,18 +186,18 @@ return {
 
 					vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
 				end
-				local telescope = require("telescope.builtin")
+				local fzf = require("fzf-lua")
 
-				map("n", "<leader>da", telescope.diagnostics, "[D]iagnists List [A]ll")
+				map("n", "<leader>da", fzf.diagnostics_workspace, "[D]iagnists List [A]ll")
 
-				map("n", "gd", telescope.lsp_definitions, "[G]oto [D]efinition")
-				map("n", "gr", telescope.lsp_references, "[G]oto [R]eferences")
-				map("n", "gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
-				map("n", "gt", telescope.lsp_type_definitions, "[G]oto [T]ype Definition")
+				map("n", "gd", fzf.lsp_definitions, "[G]oto [D]efinition")
+				map("n", "gr", fzf.lsp_references, "[G]oto [R]eferences")
+				map("n", "gi", fzf.lsp_implementations, "[G]oto [I]mplementation")
+				map("n", "gt", fzf.lsp_typedefs, "[G]oto [T]ype Definition")
+				map("n", "gD", fzf.lsp_declarations, "[G]oto [^D]eclaration")
 
 				map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-				map("n", "gD", vim.lsp.buf.declaration, "[G]oto [^D]eclaration")
 			end
 
 			-- blink.cmp supports additional completion capabilities, so broadcast that to servers
@@ -259,34 +259,6 @@ return {
 			},
 		},
 		event = { "LspAttach" },
-	},
-	-- Pretty previewer for Code Actions
-	{
-		"aznhe21/actions-preview.nvim",
-		keys = {
-			{
-				"<leader>fl",
-				function()
-					require("actions-preview").code_actions()
-				end,
-				mode = { "n", "v" },
-			},
-		},
-		opts = {
-			telescope = {
-				sorting_strategy = "ascending",
-				layout_strategy = "vertical",
-				layout_config = {
-					width = 0.8,
-					height = 0.9,
-					prompt_position = "top",
-					preview_cutoff = 20,
-					preview_height = function(_, _, max_lines)
-						return max_lines - 15
-					end,
-				},
-			},
-		},
 	},
 	{
 		"stevearc/conform.nvim",
