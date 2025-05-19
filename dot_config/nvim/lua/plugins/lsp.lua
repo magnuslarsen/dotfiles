@@ -104,7 +104,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			{
-				"williamboman/mason.nvim",
+				"mason-org/mason.nvim",
+				version = "v1.x",
 				cmd = { "Mason" },
 				build = ":MasonUpdate",
 				config = true,
@@ -121,7 +122,8 @@ return {
 		end,
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
+		version = "v1.x",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			-- SchemaStore support for yaml+json
@@ -197,7 +199,6 @@ return {
 				map("n", "gD", fzf.lsp_declarations, "[G]oto [^D]eclaration")
 
 				map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
 			end
 
 			-- blink.cmp supports additional completion capabilities, so broadcast that to servers
