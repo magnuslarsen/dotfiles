@@ -169,6 +169,7 @@ return {
 				"sql-formatter",
 				"stylua",
 				"systemdlint",
+				"tree-sitter-cli",
 			})
 			require("mason-tool-installer").setup({
 				auto_update = true,

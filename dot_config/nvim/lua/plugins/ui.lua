@@ -94,7 +94,7 @@ return {
 		config = function(_, opts)
 			require("todo-comments").setup(opts)
 
-			vim.keymap.set("n", "<leader>tt", "<cmd>TodoTelescope<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>tt", "<cmd>TodoFzfLua<CR>", { silent = true })
 		end,
 	},
 	-- Highlight colors-codes so I can see them
