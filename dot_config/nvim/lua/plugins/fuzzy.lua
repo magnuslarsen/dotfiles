@@ -1,4 +1,6 @@
 local function fzf_project_opts()
+	local root_dir = vim.lsp.buf.list_workspace_folders()[1]
+
 	local function is_ansible_repo()
 		local current_path = vim.fn.expand("%:p")
 		return string.match(current_path, "ansible")
@@ -10,14 +12,13 @@ local function fzf_project_opts()
 		elseif string.match(current_path, "playbook") then
 			return string.gsub(current_path, "^(.*/playbooks/).*", "%1")
 		else
-			return ""
+			return root_dir
 		end
 	end
 	if is_ansible_repo() then
 		return { cwd = get_ansible_role_path() }
 	end
 
-	local root_dir = vim.lsp.buf.list_workspace_folders()[1]
 	if root_dir then
 		return { cwd = root_dir }
 	end
