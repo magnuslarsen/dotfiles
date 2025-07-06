@@ -1,0 +1,43 @@
+{
+  "timeStamp": 1751792812830,
+  "version": "1.64.0",
+  "userSettings": {
+    "advancedUserEnabled": true,
+    "importedLists": [],
+    "popupPanelSections": 31
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-unbreak",
+    "easylist",
+    "easyprivacy",
+    "LegitimateURLShortener",
+    "adguard-spyware-url",
+    "urlhaus-1",
+    "curben-phishing",
+    "plowe-0",
+    "adguard-cookies",
+    "ublock-cookies-adguard",
+    "fanboy-thirdparty_social",
+    "adguard-mobile-app-banners",
+    "adguard-other-annoyances",
+    "adguard-popup-overlays",
+    "adguard-widgets",
+    "ublock-annoyances",
+    "CHN-0",
+    "NOR-0"
+  ],
+  "hiddenSettings": {},
+  "whitelist": [
+    "chrome-extension-scheme",
+    "moz-extension-scheme"
+  ],
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false\nno-csp-reports: * true",
+  "userFilters": "! Sign-in with Google\n||accounts.google.com/gsi/*\n\n! YT Homepage - Smaller Thumbnails\nwww.youtube.com##ytd-rich-grid-renderer:style(--ytd-rich-grid-items-per-row: 4 !important;) \n\n! YT Homepage and Subscriptions (Grid View) - Hide the Shorts section\nyoutube.com##[is-shorts]\n! YT Menu - Hide the Shorts button\nwww.youtube.com###guide [title=\"Shorts\"], .ytd-mini-guide-entry-renderer[title=\"Shorts\"]\n! YT Search - Hide Shorts\nwww.youtube.com##ytd-search ytd-video-renderer:has([overlay-style=\"SHORTS\"])\n! YT Search, Channels, Subscriptions (List View) and Sidebar/Below Player Recommendations - Hide the Shorts sections\nwww.youtube.com##ytd-reel-shelf-renderer\n! YT Channels - Hide the Shorts tab\nwww.youtube.com##[tab-title=\"Shorts\"]\n! YT Subscriptions - Hide Shorts - Grid View\nwww.youtube.com##ytd-browse[page-subtype=\"subscriptions\"] ytd-grid-video-renderer:has([overlay-style=\"SHORTS\"])\n! YT Subscriptions - Hide Shorts - List View\nwww.youtube.com##ytd-browse[page-subtype=\"subscriptions\"] ytd-video-renderer:has([overlay-style=\"SHORTS\"])\n! YT Subscriptions - New Layout - Hide Shorts\nwww.youtube.com##ytd-browse[page-subtype=\"subscriptions\"] ytd-rich-item-renderer:has([overlay-style=\"SHORTS\"])\n! YT Sidebar - Hide Shorts\nwww.youtube.com###related ytd-compact-video-renderer:has([overlay-style=\"SHORTS\"])\n\n! YT Mobile - Hide the Shorts Menu button\nm.youtube.com##ytm-pivot-bar-item-renderer:has(>.pivot-shorts)\n! YT Mobile - Hide the Shorts sections\nm.youtube.com##ytm-reel-shelf-renderer\nm.youtube.com##ytm-rich-section-renderer:has([d^=\"M17.77,10.32l-1.2\"])\n! YT Mobile - Hide Shorts in search results\nm.youtube.com##ytm-search ytm-video-with-context-renderer:has([data-style=\"SHORTS\"])\n! YT Mobile - Hide the Shorts button on Channels\nm.youtube.com##[tab-title=\"Shorts\"]\n\n! YT Search - keep only videos (no shorts) and channels\nyoutube.com##ytd-search ytd-item-section-renderer>#contents>:is(:not(ytd-video-renderer,ytd-channel-renderer,yt-showing-results-for-renderer,[icon-name=\"promo-full-height:EMPTY_SEARCH\"]),ytd-video-renderer:has([aria-label=\"Shorts\"])),ytd-secondary-search-container-renderer"
+}
