@@ -1,5 +1,5 @@
 {
-  "timeStamp": 1751792812830,
+  "timeStamp": 1751793542761,
   "version": "1.64.0",
   "userSettings": {
     "advancedUserEnabled": true,
@@ -22,6 +22,7 @@
     "plowe-0",
     "adguard-cookies",
     "ublock-cookies-adguard",
+    "adguard-social",
     "fanboy-thirdparty_social",
     "adguard-mobile-app-banners",
     "adguard-other-annoyances",
