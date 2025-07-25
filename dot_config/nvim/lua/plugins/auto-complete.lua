@@ -53,6 +53,11 @@ return {
 					["<CR>"] = { "accept_and_enter", "fallback" },
 				},
 				completion = {
+					list = {
+						selection = {
+							preselect = false,
+						},
+					},
 					menu = {
 						auto_show = function()
 							return vim.fn.getcmdtype() == ":"
@@ -69,9 +74,7 @@ return {
 				list = {
 					selection = {
 						auto_insert = true,
-						preselect = function()
-							return not require("blink.cmp").snippet_active({ direction = 1 })
-						end,
+						preselect = false,
 					},
 				},
 				menu = {
