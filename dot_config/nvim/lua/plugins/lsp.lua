@@ -268,8 +268,8 @@ return {
 			formatters_by_ft = {
 				bash = { "shellcheck", "shfmt" },
 				fish = { "fish_indent" },
-				go = { "golines", "goimports-reviser" },
-				html = { "html_beautify" },
+				go = { "gofumpt", "golines", "goimports-reviser" },
+				-- html = { "html_beautify" },
 				json = { "fixjson" },
 				just = { "just" },
 				lua = { "stylua" },

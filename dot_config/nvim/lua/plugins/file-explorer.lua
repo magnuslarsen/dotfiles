@@ -18,7 +18,7 @@ return {
 		},
 		dependencies = {
 			-- https://www.reddit.com/r/neovim/comments/1duf3w7/comment/lbgbc6a/
-			"echasnovski/mini.icons",
+			"nvim-mini/mini.icons",
 			opts = {},
 			lazy = true,
 			specs = {

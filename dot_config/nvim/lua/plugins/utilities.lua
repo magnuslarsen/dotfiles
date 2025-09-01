@@ -133,9 +133,9 @@ return {
 	},
 	-- mini.nvim suite
 	{
-		"echasnovski/mini.ai",
+		"nvim-mini/mini.ai",
 		dependencies = {
-			"echasnovski/mini.extra",
+			"nvim-mini/mini.extra",
 		},
 		version = false,
 		config = function()
@@ -150,7 +150,7 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.align",
+		"nvim-mini/mini.align",
 		version = false,
 		config = function()
 			require("mini.align").setup()

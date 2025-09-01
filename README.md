@@ -18,23 +18,23 @@ Canonical being a pain in the ass, you have to do this:
 
 ```sh
 sudo add-apt-repository ppa:fish-shell/release-3
-sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo add-apt-repository ppa:git-core/ppa
 sudo add-apt-repository ppa:longsleep/golang-backports
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - # gotta love nodesource
 
-sudo apt install fish fonts-firacode git golang-go gojq jq kitty neovim nodejs python3-pip ripgrep tmux
-python3 -m pip install pynvim
+sudo apt install fish fonts-firacode git gojq golang-go jq kitty nodejs pipx python3-pip ripgrep tmux
 
 # Install Python "binaries" in pipx
-python3 -m pip install --user pipx
-python3 -m pipx ensurepath
+pipx ensurepath
 
-pipx install yq
+pipx install pynvim yq
 
 # Build remaining packages that are not available on Ubuntu repos..
-cargo install --locked bat eza fd-find hyperfine jaq riffdiff ripgrep starship tokei
+cargo install --locked bat cargo-deb cargo-sweep fd-find hyperfine jaq presenterm rainfrog riffdiff ripgrep sqruff starship tokei
 go install github.com/junegunn/fzf@latest
+
+# Fetch the latest version of neovim
+curl -qs $(curl -s https://api.github.com/repos/neovim/neovim/releases | jq -r '.[] | select(.tag_name == "nightly") | .assets[] | select(.name == "nvim-linux-x86_64.tar.gz") | .browser_download_url') -O - | gunzip - | tar xf -
 ```
 
 ## Chezmoi
