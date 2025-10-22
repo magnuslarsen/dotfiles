@@ -46,7 +46,7 @@ set -g @thumbs-upcase-command 'xdg-open {}'
 set -g @thumbs-position off_left
 set -g @thumbs-unique enabled
 set -g @thumbs-reverse enabled
-set -g @thumbs-regexp-1 '\S+\.service' # match systemd services
+set -g @thumbs-regexp-1 '[\/\w\-]+\.service' # match systemd services
 run-shell ~/.tmux/plugins/tmux-thumbs/tmux-thumbs.tmux
 
 

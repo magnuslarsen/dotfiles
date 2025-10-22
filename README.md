@@ -32,9 +32,6 @@ pipx install pynvim yq
 # Build remaining packages that are not available on Ubuntu repos..
 cargo install --locked bat cargo-deb cargo-sweep fd-find hyperfine jaq presenterm rainfrog riffdiff ripgrep sqruff starship tokei
 go install github.com/junegunn/fzf@latest
-
-# Fetch the latest version of neovim
-curl -qs $(curl -s https://api.github.com/repos/neovim/neovim/releases | jq -r '.[] | select(.tag_name == "nightly") | .assets[] | select(.name == "nvim-linux-x86_64.tar.gz") | .browser_download_url') -O - | gunzip - | tar xf -
 ```
 
 ## Chezmoi
