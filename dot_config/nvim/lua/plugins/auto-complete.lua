@@ -33,6 +33,7 @@ return {
 					require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/snippets" } })
 				end,
 			},
+			{ "joelazar/blink-calc" },
 		},
 		version = "1.*",
 		---@module 'blink.cmp'
@@ -107,7 +108,7 @@ return {
 			},
 			snippets = { preset = "luasnip" },
 			sources = {
-				default = { "lsp", "snippets", "path", "buffer" },
+				default = { "lsp", "snippets", "path", "buffer", "calc" },
 				providers = {
 					cmdline = {
 						min_keyword_length = function(ctx)
@@ -117,6 +118,10 @@ return {
 							end
 							return 0
 						end,
+					},
+					calc = {
+						name = "Calc",
+						module = "blink-calc",
 					},
 				},
 			},

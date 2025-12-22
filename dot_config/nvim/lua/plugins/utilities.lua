@@ -1,19 +1,17 @@
 return {
-	-- PGP support
-	{
-		"jamessan/vim-gnupg",
-	},
 	-- Autodetect spacing
 	{
 		"nmac427/guess-indent.nvim",
 		config = true,
+		lazy = false,
 	},
 	-- Better Sorting
 	{
 		"sQVe/sort.nvim",
 		opts = {},
 		cmd = { "Sort" },
-	}, -- Block split-/joining
+	},
+	-- Block split-/joining
 	{
 		"Wansmer/treesj",
 		keys = { "<leader>j", "<leader>m", "<leader>s" },
