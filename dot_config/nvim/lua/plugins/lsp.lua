@@ -1,104 +1,30 @@
-local get_venv = function()
-	local venv_path = os.getenv("VIRTUAL_ENV")
+---@param args vim.api.keyset.create_autocmd.callback_args
+local on_attach = function(args)
+	local map = function(mode, keys, func, desc)
+		if desc then
+			desc = "LSP: " .. desc
+		end
 
-	if venv_path ~= nil then
-		return venv_path .. "/bin/python3"
-	else
-		return "/usr/bin/python3"
+		vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = desc })
+	end
+	local fzf = require("fzf-lua")
+
+	map("n", "<leader>da", fzf.diagnostics_workspace, "[D]iagnists List [A]ll")
+
+	map("n", "gd", fzf.lsp_definitions, "[G]oto [D]efinition")
+	map("n", "gr", fzf.lsp_references, "[G]oto [R]eferences")
+	map("n", "gi", fzf.lsp_implementations, "[G]oto [I]mplementation")
+	map("n", "gt", fzf.lsp_typedefs, "[G]oto [T]ype Definition")
+	map("n", "gD", fzf.lsp_declarations, "[G]oto [^D]eclaration")
+
+	map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+
+	local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+	if client:supports_method("textDocument/rename") then
+		-- TODO: support rename from https://github.com/nvim-treesitter/nvim-treesitter-locals
+		map("n", "<leader>rn", vim.lsp.buf.rename, "[R]e[N]ame")
 	end
 end
-
-local lsp_servers = {
-	ansiblels = {
-		ansible = {
-			ansible = {
-				useFullyQualifiedCollectionNames = true,
-			},
-		},
-	},
-	gopls = {
-		gopls = {
-			gofumpt = true,
-			completeUnimported = true,
-			analyses = {
-				shadow = true,
-				unusedwrite = true,
-				unusedvariable = true,
-				unusedparams = true,
-			},
-			["ui.inlayhint.hints"] = {
-				assignVariableTypes = true,
-				compositeLiteralFields = true,
-				compositeLiteralTypes = true,
-				constantValues = true,
-				functionTypeParameters = true,
-				parameterNames = true,
-				rangeVariableTypes = true,
-			},
-		},
-	},
-	templ = {},
-	tailwindcss = {},
-	html = {
-		html = {
-			format = {
-				enable = false,
-			},
-		},
-	},
-	lua_ls = {
-		Lua = {
-			workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
-			telemetry = { enable = false },
-			diagnostics = { globals = { "vim" } },
-			format = { enable = false },
-		},
-	},
-	pylsp = {
-		pylsp = {
-			plugins = {
-				-- Disabled plugins are provided by ruff!
-				autopep8 = { enabled = false },
-				flake8 = { enabled = false },
-				mccabe = { enabled = false },
-				pycodestyle = { enabled = false },
-				pydocstyle = { enabled = false },
-				pyflakes = { enabled = false },
-				pylint = { enabled = false },
-				black = { enabled = false },
-				yapf = { enabled = false },
-				-- Enabled plugins for more features
-				ruff = {
-					enabled = true,
-					extendSelect = { "I", "S", "PTH" },
-					format = { "I001" },
-					unsafeFixes = true,
-					preview = true,
-				},
-				jedi = {
-					environment = get_venv(),
-				},
-			},
-		},
-	},
-	taplo = {},
-	rust_analyzer = {
-		["rust-analyzer"] = {
-			check = { command = "clippy" },
-		},
-	},
-	marksman = {},
-	powershell_es = {
-		powershell = {
-			codeFormatting = {
-				autoCorrectAliases = true,
-				useCorrectCasing = true,
-				openBraceOnSameLine = true,
-				newLineAfterOpenBrace = true,
-			},
-		},
-	},
-}
 
 return {
 	{
@@ -107,7 +33,6 @@ return {
 		dependencies = {
 			{
 				"mason-org/mason.nvim",
-				version = "v1.x",
 				cmd = { "Mason" },
 				build = ":MasonUpdate",
 				config = true,
@@ -125,7 +50,6 @@ return {
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
-		version = "v1.x",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			-- SchemaStore support for yaml+json
@@ -135,28 +59,12 @@ return {
 			{ "saghen/blink.cmp" },
 		},
 		opts = function()
-			local o = {}
-			lsp_servers = vim.tbl_extend("force", lsp_servers, {
-				yamlls = {
-					redhat = { telemetry = { enabled = false } },
-					yaml = {
-						schemaStore = { enable = false, url = "" },
-						schemas = require("schemastore").yaml.schemas(),
-						customTags = { "!vault", "!lambda" },
-						validate = true,
-						completion = true,
-						format = { enabled = false }, -- we use yamlfix for formatting
-					},
-				},
-				jsonls = {
-					json = {
-						schemas = require("schemastore").json.schemas(),
-						validate = { enable = true },
-					},
-				},
-			})
+			local installable_tools = vim.iter(vim.api.nvim_get_runtime_file("after/lsp/*.lua", true))
+				:map(function(file)
+					return vim.fn.fnamemodify(file, ":t:r")
+				end)
+				:totable()
 
-			local installable_tools = vim.tbl_keys(lsp_servers)
 			installable_tools = vim.list_extend(installable_tools, {
 				"ansible-lint",
 				"fixjson",
@@ -177,65 +85,32 @@ return {
 				auto_update = true,
 				ensure_installed = installable_tools,
 			})
-
-			return o
 		end,
 		config = function(_, opts)
 			require("mason-lspconfig").setup(opts)
 
-			local on_attach = function(_, bufnr)
-				local map = function(mode, keys, func, desc)
-					if desc then
-						desc = "LSP: " .. desc
-					end
+			vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+				once = true,
+				callback = function()
+					-- Extend neovim's client capabilities with the completion ones.
+					vim.lsp.config("*", {
+						capabilities = require("blink.cmp").get_lsp_capabilities(nil, true),
+					})
 
-					vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
-				end
-				local fzf = require("fzf-lua")
+					local servers = vim.iter(vim.api.nvim_get_runtime_file("after/lsp/*.lua", true))
+						:map(function(file)
+							return vim.fn.fnamemodify(file, ":t:r")
+						end)
+						:totable()
 
-				map("n", "<leader>da", fzf.diagnostics_workspace, "[D]iagnists List [A]ll")
-
-				map("n", "gd", fzf.lsp_definitions, "[G]oto [D]efinition")
-				map("n", "gr", fzf.lsp_references, "[G]oto [R]eferences")
-				map("n", "gi", fzf.lsp_implementations, "[G]oto [I]mplementation")
-				map("n", "gt", fzf.lsp_typedefs, "[G]oto [T]ype Definition")
-				map("n", "gD", fzf.lsp_declarations, "[G]oto [^D]eclaration")
-
-				map({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-			end
-
-			-- blink.cmp supports additional completion capabilities, so broadcast that to servers
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-			-- Ensure the servers above are installed
-			require("mason-lspconfig").setup_handlers({
-				function(server_name)
-					local ls_config = {
-						capabilities = capabilities,
-						on_attach = on_attach,
-						settings = lsp_servers[server_name],
-					}
-
-					if server_name == "rust_analyzer" then
-						-- We use rustaceanvim for this - so we only need to define settings here
-						vim.g.rustaceanvim = {
-							server = {
-								on_attach = on_attach,
-								settings = lsp_servers[server_name],
-							},
-						}
-					else
-						require("lspconfig")[server_name].setup(ls_config)
-					end
+					vim.lsp.enable(servers)
 				end,
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
+				once = true,
 				callback = function(args)
-					local caps = vim.lsp.get_client_by_id(args.data.client_id).server_capabilities
-					if caps.renameProvider then
-						vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = true })
-					end
+					on_attach(args)
 				end,
 			})
 		end,
@@ -337,5 +212,19 @@ return {
 				end,
 			})
 		end,
+	},
+	-- rust Cargo.toml support
+	{
+		"saecki/crates.nvim",
+		event = { "BufRead Cargo.toml" },
+		opts = {
+			lsp = {
+				enabled = true,
+				on_attach = on_attach,
+				actions = true,
+				completion = true,
+				hover = true,
+			},
+		},
 	},
 }
