@@ -93,6 +93,8 @@ local lsp_servers = {
 			codeFormatting = {
 				autoCorrectAliases = true,
 				useCorrectCasing = true,
+				openBraceOnSameLine = true,
+				newLineAfterOpenBrace = true,
 			},
 		},
 	},
