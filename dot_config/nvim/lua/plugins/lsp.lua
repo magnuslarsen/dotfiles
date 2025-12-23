@@ -146,9 +146,6 @@ return {
 		},
 		config = function(_, opts)
 			require("conform").setup(opts)
-			require("conform.formatters.yamlfix").env = {
-				YAMLFIX_WHITELINES = 1,
-			}
 			require("conform").formatters.sql_formatter = {
 				prepend_args = { "-c", vim.fn.expand("~/.config/sql_formatter.json") },
 			}
@@ -183,7 +180,7 @@ return {
 				sh = { "shellcheck" },
 				sudoers = { "visudo" },
 				systemd = { "systemdlint" },
-				sql = { "sqruff" },
+				sql = { "sqruff", "squawk" },
 			}
 			require("lint").linters.markdownlint.args = {
 				"-c",
