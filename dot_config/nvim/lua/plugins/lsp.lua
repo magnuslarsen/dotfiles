@@ -29,7 +29,7 @@ end
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
+		lazy = false,
 		dependencies = {
 			{
 				"mason-org/mason.nvim",
@@ -50,7 +50,7 @@ return {
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		lazy = false,
 		dependencies = {
 			-- SchemaStore support for yaml+json
 			{ "b0o/SchemaStore.nvim" },
@@ -89,22 +89,8 @@ return {
 		config = function(_, opts)
 			require("mason-lspconfig").setup(opts)
 
-			vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
-				once = true,
-				callback = function()
-					-- Extend neovim's client capabilities with the completion ones.
-					vim.lsp.config("*", {
-						capabilities = require("blink.cmp").get_lsp_capabilities(nil, true),
-					})
-
-					local servers = vim.iter(vim.api.nvim_get_runtime_file("after/lsp/*.lua", true))
-						:map(function(file)
-							return vim.fn.fnamemodify(file, ":t:r")
-						end)
-						:totable()
-
-					vim.lsp.enable(servers)
-				end,
+			vim.lsp.config("*", {
+				capabilities = require("blink.cmp").get_lsp_capabilities(nil, true),
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
