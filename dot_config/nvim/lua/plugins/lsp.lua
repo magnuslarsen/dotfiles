@@ -67,7 +67,6 @@ return {
 
 			installable_tools = vim.list_extend(installable_tools, {
 				"ansible-lint",
-				"fixjson",
 				"gofumpt",
 				"goimports-reviser",
 				"golangci-lint",
@@ -77,6 +76,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				"sql-formatter",
+				"sqruff",
 				"stylua",
 				"systemdlint",
 				"tree-sitter-cli",
@@ -130,18 +130,16 @@ return {
 		opts = {
 			formatters_by_ft = {
 				bash = { "shellcheck", "shfmt" },
-				fish = { "fish_indent" },
 				go = { "gofumpt", "golines", "goimports-reviser" },
 				-- html = { "html_beautify" },
 				json = { "json_repair" },
-				just = { "just" },
 				lua = { "stylua" },
 				markdown = { "markdownlint" },
 				sh = { "shellcheck", "shfmt" },
 				sql = { "sql_formatter" },
 				xml = { "xmllint" },
 				yaml = { "prettierd" },
-				["*"] = { "injected" },
+				["*"] = { "injected", "trim_whitespace" },
 			},
 		},
 		config = function(_, opts)
@@ -174,7 +172,6 @@ return {
 
 			require("lint").linters_by_ft = {
 				bash = { "shellcheck" },
-				fish = { "fish" },
 				go = { "golangcilint" },
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
