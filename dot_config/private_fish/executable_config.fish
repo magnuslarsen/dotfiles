@@ -40,3 +40,10 @@ fish_ssh_agent
 if test -d ~/.password-store/ssh/ -a (ls -1q ~/.password-store/ssh/ | wc -l) -gt 0
     ssh-add-pass
 end
+
+# Restore "old" fish keybinds (emacs style)
+bind alt-backspace backward-kill-word
+bind ctrl-alt-h backward-kill-word
+bind ctrl-backspace backward-kill-token
+bind alt-delete kill-word
+bind ctrl-delete kill-token

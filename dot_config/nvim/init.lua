@@ -71,8 +71,6 @@ vim.filetype.add({
 		wsd = "plantuml",
 	},
 	pattern = {
-		-- Set systemd filetype for systemd files in yaml.ansible files
-		["~/zgit/.*ansible.*/.*%.service"] = "systemd",
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
 	},
@@ -148,3 +146,25 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ timeout = 500 })
 	end,
 })
+
+-- Systemd file types
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	desc = "Set filetype to systemd for systemd unit files",
+	group = vim.api.nvim_create_augroup("systemd-filetypes", { clear = true }),
+	pattern = {
+		"*.service",
+		"*.mount",
+		"*.device",
+		"*.nspawn",
+		"*.target",
+		"*.timer",
+		"*.path",
+		"*.slice",
+		"*.socket",
+	},
+	callback = function()
+		local bufnr = vim.api.nvim_get_current_buf()
+		vim.bo[bufnr].filetype = "systemd"
+	end,
+})
+

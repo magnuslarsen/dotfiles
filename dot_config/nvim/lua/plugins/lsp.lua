@@ -35,7 +35,7 @@ return {
 				"mason-org/mason.nvim",
 				cmd = { "Mason" },
 				build = ":MasonUpdate",
-				config = true,
+				opts = {},
 			},
 		},
 		init = function()
@@ -58,7 +58,10 @@ return {
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 			{ "saghen/blink.cmp" },
 		},
-		opts = function()
+		opts = {},
+		config = function(_, opts)
+			require("mason-lspconfig").setup(opts)
+
 			local installable_tools = vim.iter(vim.api.nvim_get_runtime_file("after/lsp/*.lua", true))
 				:map(function(file)
 					return vim.fn.fnamemodify(file, ":t:r")
@@ -71,6 +74,7 @@ return {
 				"goimports-reviser",
 				"golangci-lint",
 				"golines",
+				"json-repair",
 				"markdownlint",
 				"prettierd",
 				"shellcheck",
@@ -78,16 +82,12 @@ return {
 				"sql-formatter",
 				"sqruff",
 				"stylua",
-				"systemdlint",
 				"tree-sitter-cli",
 			})
 			require("mason-tool-installer").setup({
 				auto_update = true,
 				ensure_installed = installable_tools,
 			})
-		end,
-		config = function(_, opts)
-			require("mason-lspconfig").setup(opts)
 
 			vim.lsp.config("*", {
 				capabilities = require("blink.cmp").get_lsp_capabilities(nil, true),
@@ -176,7 +176,6 @@ return {
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
 				sudoers = { "visudo" },
-				systemd = { "systemdlint" },
 				sql = { "sqruff", "squawk" },
 			}
 			require("lint").linters.markdownlint.args = {
