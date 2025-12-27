@@ -36,6 +36,7 @@ return {
 				cmd = { "Mason" },
 				build = ":MasonUpdate",
 				opts = {},
+				-- opts = { registries = { "github:magnuslarsen/mason-registry" } },
 			},
 		},
 		init = function()
@@ -81,6 +82,7 @@ return {
 				"shfmt",
 				"sql-formatter",
 				"sqruff",
+				"squawk",
 				"stylua",
 				"tree-sitter-cli",
 			})
