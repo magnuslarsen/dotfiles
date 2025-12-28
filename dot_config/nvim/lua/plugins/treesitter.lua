@@ -63,8 +63,8 @@ return {
 				desc = "Auto-start treesitter",
 				group = vim.api.nvim_create_augroup("treesitter-auto-start", { clear = true }),
 				callback = function(event)
-					if vim.tbl_contains(ts.get_available(), event.match) then
-						local lang = vim.treesitter.language.get_lang(event.match) or event.match
+					local lang = vim.treesitter.language.get_lang(event.match) or event.match
+					if vim.tbl_contains(ts.get_available(), lang) then
 						ts.install(lang):wait(5000)
 						vim.treesitter.start(event.buf)
 						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
