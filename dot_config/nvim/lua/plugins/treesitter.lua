@@ -67,7 +67,7 @@ return {
 					if vim.tbl_contains(ts.get_available(), lang) then
 						ts.install(lang):wait(5000)
 						vim.treesitter.start(event.buf)
-						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+						vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
 					end
 				end,
 			})
