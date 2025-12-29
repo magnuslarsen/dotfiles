@@ -84,6 +84,7 @@ return {
 				"sqruff",
 				"squawk",
 				"stylua",
+				"systemdlint",
 				"tree-sitter-cli",
 			})
 			require("mason-tool-installer").setup({
@@ -177,8 +178,9 @@ return {
 				go = { "golangcilint" },
 				markdown = { "markdownlint" },
 				sh = { "shellcheck" },
-				sudoers = { "visudo" },
 				sql = { "sqruff", "squawk" },
+				sudoers = { "visudo" },
+				systemd = { "systemdlint" },
 			}
 			require("lint").linters.markdownlint.args = {
 				"-c",
