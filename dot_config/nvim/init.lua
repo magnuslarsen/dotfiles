@@ -58,17 +58,35 @@ vim.wo.number = true
 
 vim.filetype.add({
 	extension = {
-		-- jinja looks a lot like twig; so let's use while jinja has no treesitter parses
+		-- jinja looks a lot like twig; so let's use that, as jinja does not have a treesitter parser
 		j2 = "twig",
 		jinja = "twig",
-		-- Set filtype sls (saltstack) files
-		sls = "yaml",
-		-- Set filetype for PlantUML files
+		-- PlantUML files
 		iuml = "plantuml",
 		plantuml = "plantuml",
 		pu = "plantuml",
 		puml = "plantuml",
 		wsd = "plantuml",
+		-- systemd unit files
+		service = "systemd",
+		socket = "systemd",
+		timer = "systemd",
+		mount = "systemd",
+		automount = "systemd",
+		swap = "systemd",
+		target = "systemd",
+		path = "systemd",
+		slice = "systemd",
+		scope = "systemd",
+		device = "systemd",
+		-- Podman Quadlet files
+		container = "systemd",
+		volume = "systemd",
+		network = "systemd",
+		kube = "systemd",
+		pod = "systemd",
+		build = "systemd",
+		image = "systemd",
 	},
 	pattern = {
 		-- Set filetype on Glab issue notes (comments)
@@ -146,25 +164,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ timeout = 500 })
 	end,
 })
-
--- Systemd file types
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-	desc = "Set filetype to systemd for systemd unit files",
-	group = vim.api.nvim_create_augroup("systemd-filetypes", { clear = true }),
-	pattern = {
-		"*.service",
-		"*.mount",
-		"*.device",
-		"*.nspawn",
-		"*.target",
-		"*.timer",
-		"*.path",
-		"*.slice",
-		"*.socket",
-	},
-	callback = function()
-		local bufnr = vim.api.nvim_get_current_buf()
-		vim.bo[bufnr].filetype = "systemd"
-	end,
-})
-
