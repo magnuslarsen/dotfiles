@@ -91,6 +91,8 @@ vim.filetype.add({
 	pattern = {
 		-- Set filetype on Glab issue notes (comments)
 		["ISSUE_NOTE_EDITMSG.*"] = "markdown",
+		-- Ansible inventory
+		[".*/ansible%-main/.*%.yml"] = "yaml.ansible",
 	},
 })
 

@@ -17,10 +17,10 @@ yay -S bat chezmoi eza fd fish fzf git go gojq jaq jq kitty neovim nodejs npm py
 Canonical being a pain in the ass, you have to do this:
 
 ```sh
-sudo add-apt-repository ppa:fish-shell/release-3
+sudo add-apt-repository ppa:fish-shell/release-4
 sudo add-apt-repository ppa:git-core/ppa
 sudo add-apt-repository ppa:longsleep/golang-backports
-curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - # gotta love nodesource
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash - # gotta love nodesource
 
 sudo apt install fish fonts-firacode git gojq golang-go jq kitty nodejs pipx python3-pip ripgrep tmux
 

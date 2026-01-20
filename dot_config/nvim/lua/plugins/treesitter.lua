@@ -22,7 +22,6 @@ return {
 				"ini",
 				"jq",
 				"json",
-				"jsonc",
 				"just",
 				"lua",
 				"markdown",

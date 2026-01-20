@@ -59,7 +59,13 @@ return {
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 			{ "saghen/blink.cmp" },
 		},
-		opts = {},
+		opts = {
+			automatic_enable = {
+				exclude = {
+					"sqruff",
+				},
+			},
+		},
 		config = function(_, opts)
 			require("mason-lspconfig").setup(opts)
 
@@ -202,7 +208,7 @@ return {
 		opts = {
 			lsp = {
 				enabled = true,
-				on_attach = on_attach,
+				-- on_attach = on_attach,
 				actions = true,
 				completion = true,
 				hover = true,
