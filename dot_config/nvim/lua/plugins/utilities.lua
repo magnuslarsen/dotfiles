@@ -9,7 +9,6 @@ return {
 	{
 		"sQVe/sort.nvim",
 		opts = {},
-		cmd = { "Sort" },
 	},
 	-- Block split-/joining
 	{
@@ -50,32 +49,6 @@ return {
 				uml = { server = "https://gitlab.topsoe.dk:6002" },
 			}
 		end,
-	},
-	-- PlantUML previewer
-	{
-		"https://gitlab.com/itaranto/preview.nvim",
-		version = "*",
-		cmd = "PreviewFile",
-		ft = "plantuml",
-		opts = {
-			previewers_by_ft = {
-				plantuml = {
-					name = "plantuml_png",
-					renderer = { type = "command", opts = { cmd = { "feh" } } },
-				},
-			},
-			previewers = {
-				plantuml_png = {
-					args = { "-pipe", "-tpng" },
-				},
-			},
-			render_on_write = true,
-		},
-	},
-	-- And oldschool syntax highlighting
-	{
-		"aklt/plantuml-syntax",
-		ft = "plantuml",
 	},
 	-- Open local files on remote
 	{
