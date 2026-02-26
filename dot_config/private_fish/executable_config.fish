@@ -1,16 +1,15 @@
 set -gx fish_greeting
 
+alias opencode="npx -y opencode-ai@latest"
+#alias fzf="sk --algo frizbee"
+
 # FZF stuff
 function fzf_preview_dir_cmd_fun
-    if command --query eza
-        eza -lg --color=always --icons=always $argv
-    else
-        ls -l --color=always $argv
-    end
+    ls -l --color=always $argv
 end
 
-set -U fzf_preview_file_cmd preview
-set -U fzf_preview_dir_cmd fzf_preview_dir_cmd_fun
+set -g fzf_preview_file_cmd preview
+set -g fzf_preview_dir_cmd fzf_preview_dir_cmd_fun
 set fzf_history_time_format %d-%m-%y
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 set fzf_diff_highlighter riff --no-pager --color on
@@ -33,14 +32,6 @@ if command --query starship
     starship init fish | source
 end
 
-# Setup ssh-agent and load keys as LAST step
-set -gx GPG_TTY (tty)
-fish_ssh_agent
-
-if test -d ~/.password-store/ssh/ -a (ls -1q ~/.password-store/ssh/ | wc -l) -gt 0
-    ssh-add-pass
-end
-
 # Restore "old" fish keybinds (emacs style)
 bind alt-backspace backward-kill-word
 bind ctrl-alt-h backward-kill-word
@@ -48,4 +39,10 @@ bind ctrl-backspace backward-kill-token
 bind alt-delete kill-word
 bind ctrl-delete kill-token
 
-alias opencode="npx -y opencode-ai@latest"
+# Setup ssh-agent and load keys as LAST step
+set -gx GPG_TTY (tty)
+fish_ssh_agent
+
+if test -d ~/.password-store/ssh/ -a (ls -1q ~/.password-store/ssh/ | wc -l) -gt 0
+    ssh-add-pass
+end

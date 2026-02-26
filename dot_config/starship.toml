@@ -4,6 +4,8 @@ $directory\
 $git_branch\
 $git_state\
 $status\
+$python\
+$jobs\
 $character
 """
 
@@ -30,6 +32,14 @@ style_user = "#8be9fd"
 [status]
 disabled = false
 format = '[\[$status\]]($style)'
+
+[jobs]
+symbol = '⚙️'
+
+[python]
+format = '[${symbol}]($style)'
+detect_extensions = []
+detect_files = []
 
 [directory]
 truncate_to_repo = false
