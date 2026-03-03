@@ -31,7 +31,7 @@ return {
 		"ibhagwan/fzf-lua",
 		opts = {
 			fzf_bin = "sk",
-			fzf_opts = { ["--algo"] = "frizbee" },
+			fzf_opts = { ["--algo"] = "arinae" },
 		},
 		keys = {
 			{
