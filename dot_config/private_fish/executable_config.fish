@@ -27,6 +27,8 @@ end
 
 # Include (nvim) Mason installed binaries
 fish_add_path ~/.local/share/nvim/mason/bin
+# ..and neovim from bob
+fish_add_path ~/.local/share/bob/nightly/bin
 
 if command --query starship
     starship init fish | source
