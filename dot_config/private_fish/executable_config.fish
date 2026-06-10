@@ -1,6 +1,7 @@
 set -gx fish_greeting
 
 alias opencode="npx -y opencode-ai@latest"
+alias skills="npx -y skills@latest"
 #alias fzf="sk --algo frizbee"
 
 # FZF stuff

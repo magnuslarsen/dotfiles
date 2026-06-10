@@ -19,14 +19,6 @@ return {
 			require("treesj").setup({})
 		end,
 	},
-	-- Surround text with chars easily
-	{
-		"kylechui/nvim-surround",
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({})
-		end,
-	},
 	-- Fix scrolloff at EOF
 	{
 		"Aasim-A/scrollEOF.nvim",
@@ -125,6 +117,20 @@ return {
 		version = false,
 		config = function()
 			require("mini.align").setup()
+		end,
+	},
+	{
+		"nvim-mini/mini.surround",
+		opts = {
+			mappings = {
+				add = "ys",
+				delete = "ds",
+				replace = "cs",
+			},
+			search_method = "cover_or_next",
+		},
+		config = function(_, opts)
+			require("mini.surround").setup(opts)
 		end,
 	},
 }
